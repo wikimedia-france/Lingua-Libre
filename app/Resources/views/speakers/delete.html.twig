@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Supprimer locuteur :</h1>
+	
+	<p>Êtes-vous sûr de vouloir supprimer le locuteur « {{ speaker.getName() }} » ?</p>
+
+	{{ form_start(form) }}
+	<table>
+		<tr><td></td><td>{{ form_widget(form.save) }}</td>
+	</table>
+	{{ form_end(form) }}
+
+{% endblock %}
+

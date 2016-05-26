@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Éditer enregistrement sonore :</h1>
+
+	<audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio>
+
+	{{ form_start(form) }}
+	<table class="nice">
+		<tr><th>Locuteur</th><td>{{ form_widget(form.speaker) }}</td></tr>
+		<tr><th>Langue</th><td>{{ form_widget(form.lang) }}</td></tr>
+		<tr><th>Texte</th><td>{{ form_widget(form.text) }}</td></tr>
+		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
+	</table>
+	{{ form_end(form) }}
+
+{% endblock %}
+

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	{% if error %}
+		<div>Login ou mot de passe incorrect !</div>
+	{% endif %}
+
+	<form method="post" class="login">
+		<table class="nice">
+			<tr>
+				<th><label for="username">Login</label></th>
+				<td><input type="text" id="username" name="_username" value="{{ last_username }}" /></td>
+			</tr>
+			<tr>
+				<th><label for="password">Mot de passe</label></th>
+				<td><input type="password" id="password" name="_password" /></td>
+			</tr>
+			<tr>
+				<th colspan="2"><button type="submit">Se connecter</button></th>
+			</tr>
+		</table>
+	</form>
+	<a href="{{ path("usersAdd") }}">S’inscrire</a>
+
+{% endblock %}

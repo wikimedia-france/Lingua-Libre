@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Liste des messages :</h1>
+
+
+	<table class="nice">
+		<tr><th>User</th><th>Date</th><th>Titre</th><th>Texte</th></tr>
+		{% for message in messages %}
+		<tr>
+			<td>{{ message.getUser().getUsername() }}</td>
+			<td>{{ message.getDate()|date("d/m/Y")}}</td>
+			<td><a href="messages/{{ message.getId() }}">{{ message.getTitle() }}</a></td>
+			<td>{{ message.getBody() }}</td>
+			{% if is_granted('ROLE_ADMIN') %}<td><a href="messages/delete/{{ message.getId() }}">Supprimer</a></td>{% endif %}
+		</tr>
+		{% endfor %}
+	</table>
+
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<h1>Nouveau message :</h1>
+		{{ form_start(form) }}
+		<table>
+			<tr><th>{{ form_label(form.title) }}</th><td>{{ form_widget(form.title) }}</td></tr>
+			<tr><th>{{ form_label(form.body) }}</th><td>{{ form_widget(form.body) }}</td></tr>
+			<tr><td></td><td>{{ form_widget(form.save) }}</td>
+		</table>
+		{{ form_end(form) }}
+	{% endif %}
+
+{% endblock %}
+

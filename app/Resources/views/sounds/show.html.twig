@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Enregistrement :</h1>
+
+	<table class="nice">
+		<tr><th>Locuteur</th><td>{% if sound.getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getSpeaker().getId()}) }}'>{{ sound.getSpeaker().getName() }}</a>{% else %}-{% endif %}</td></tr>
+		<tr><th>Langue</th><td>{{ sound.getLang().getTitle() }}</td></tr>
+		<tr><th>Texte</th><td>{{ sound.getText() }}</td></tr>
+		<tr><th>Date</th><td>{{ sound.getCreated()|date("d/m/Y")}}</td></tr>
+		<tr><th></th><td><audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio></td></tr>
+		<tr><th>Utilisateur</th><td>{% if sound.getUser() %}<a href="{{ path("usersShow", {"id": sound.getUser().getId() }) }}">{{ sound.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
+		{% if sound.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("soundsUpdate", {"id": sound.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundsDelete", {"id": sound.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
+	</table>
+
+{% endblock %}
+

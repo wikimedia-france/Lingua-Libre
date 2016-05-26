@@ -1,0 +1,21 @@
+security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        db_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+
+    firewalls:
+        main:
+            anonymous: ~
+            provider: db_provider
+            form_login: 
+                login_path: login
+                check_path: login
+            logout:
+                path: /logout
+                target: /

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Locuteur</h1>
+
+	<table class="nice">
+		<tr><th>Nom</th><td>{{ speaker.getName() }}</td></tr>
+		<tr><th>Sexe</th><td>{{ speaker.getSexSymbol() }} ({{ speaker.getSexTitle() }})</td></tr>
+		<tr><th>Habitation</th><td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td></tr>
+		<tr><th>Naissance</th><td>{{ speaker.getBirth()|date("d/m/Y") }}</td></tr>
+		<tr><th>Description</th><td>{{ speaker.getDescription() }}</td></tr>
+		<tr><th>Utilisateur</th><td>{% if speaker.getUser() %}<a href="{{ path("usersShow", {"id": speaker.getUser().getId() }) }}">{{ speaker.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
+		{% if speaker.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("speakersUpdate", {"id": speaker.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakersDelete", {"id": speaker.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
+	</table>
+
+	<h2>Langues</h2>
+
+	{% if speaker.getLanguages()|length > 0 %}
+		<table class="nice">
+		<tr>
+			<th></th>
+			<th>Variante</th>
+			<th>Lieu d’acquisition</th>
+			<th>Niveau</th>
+			<th>Description</th>
+		</tr>
+		{% for sl in speaker.getLanguages() %}
+			<tr>
+				<th>{{ sl.getLanguage().getTitle() }}</th>
+				<td>{{ sl.getDialect() }}</td>
+				<td>{{ sl.getTown() }} {% if sl.getCountry() %}({{ sl.getCountry() }}){% endif %}</td>
+				<td>{{ sl.getLevel() }}</td>
+				<td>{{ sl.getDescription() }}</td>
+				{% if speaker.editableBy(user) %}<th><a href="{{ path("speakerLanguagesUpdate", {"id": sl.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakerLanguagesDelete", {"id": sl.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
+			</tr>
+		{% endfor %}
+			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("speakerLanguagesAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
+
+		</table>
+	{% else %}
+		<p>Pas de langue définie pour le moment.
+		{% if speaker.editableBy(user) %}<a href="{{ path("speakerLanguagesAdd", {"id": speaker.getId() }) }}">En définir une</a>.{% endif %}
+		</p>
+	{% endif %}
+	
+
+
+{% endblock %}
+

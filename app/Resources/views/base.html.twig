@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" media="screen, projection, print" href="{{ asset('css/style.css') }}" />
+		<title>{% block title %}Lingua Libre{% endblock %}</title>
+		{% block stylesheets %}{% endblock %}
+		{% block javascript %}{% endblock %}
+		<link rel="icon" type="image/x-icon" href="{{ asset('img/favicon_32.png') }}" />
+	</head>
+	<body>
+		<ul class="bar">
+			<li class="barItem"><a href="{{ path('home') }}"><img src="{{ asset('img/home_60.png') }}" title="Page d’accueil"></a></li>
+			Lingua Libre – <i>l’outil d’enregistrement audio libre</i>
+			<div class="account barItem">
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<a onclick="toggle_visibility(document.getElementById('accountPopup'));">{{ app.user.username|capitalize }}</a>
+				<ul id="accountPopup" style="display: none">
+					<li><a href="{{ path('logout') }}">Déconnexion</a></li>
+				</ul>
+				{% else %}
+				<a href="{{ path('login') }}">Connexion</a>
+				{% endif %}
+			</div>
+		</ul>
+
+		<ul class="menu">
+			<li><a href="{{ path("sounds") }}">Bibliothèque</a></li>
+			<li><a href="{{ path("about") }}">À propos</a></li>
+			<li><a href="{{ path("contact") }}">Contact</a></li>
+
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<hr/>
+			<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
+			<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
+			<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
+				{% if is_granted('ROLE_ADMIN') %}
+				<hr/>
+				<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>
+				{% endif %}
+			{% endif %}
+		</ul>
+
+		<div class="page">
+			{% block body %}{% endblock %}
+		</div>
+		{% block javascripts %}
+		<script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,171 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	font-family: "Linux Libertine",Georgia,Times,serif;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+li {
+	margin: 7px;
+}
+
+h3, h1, h4, h5, h6 {
+	color: #00a99d;
+}
+
+h1 {
+	margin: 5px 0;
+	text-size: 20px;
+}
+
+h2 {
+	color: #00a99d;
+}
+
+textarea {
+	width: 300px;
+	height: 60px;
+}
+
+table.nice {
+	margin: 10px;
+}
+
+table.nice th {
+	background-color: #f0f0f8;
+	color: gray;
+	padding: 5px 10px;
+	font-weight: bold;
+}
+
+table.nice td {
+	border: 5px solid #e1e1e1;
+	padding: 5px 10px;
+}
+
+div.account {
+	float: right;
+	position: relative;
+}
+
+div.account ul {
+	background-color: #3c3c3c;
+	border: 1px solid #222;
+	padding: 5px;
+	margin: 4px 0 0 0;
+	position: absolute;
+	min-width: 100px;
+	right: 0;
+}
+
+div.account ul li {
+	padding: 5px;
+	margin: 0;
+	text-align: center;
+	list-style-type: none;
+}
+
+div.account ul li:hover {
+	background-color: #666;
+}
+
+ul.bar {
+	padding: 0 15px;
+	color: #eee;
+	margin: 0;
+	background-color: #3c3c3c;
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), 0px -1px 2px 0px rgba(255, 255, 255, 0.5);
+}
+
+ul.bar a {
+	color: inherit;
+}
+
+.barItem {
+	padding: 5px;
+	color: #eee;
+	border-bottom: 3px solid #3c3c3c;
+}
+
+.barItem:hover {
+	border-bottom: 3px solid #00a99d;
+}
+
+ul.bar li.barItem {
+	list-style-type: none;
+	display: inline-block;
+}
+
+ul.menu {
+	margin: 20px;
+	float: left;
+	width: 250px;
+	color: #eee;
+	padding: 10px;
+	background-color: #3c3c3c;
+}
+
+ul.menu li {
+	list-style-type: none;
+	margin: 12px 4px;
+	border-left: 4px solid #3c3c3c;
+}
+
+ul.menu li:hover {
+	border-left: 4px solid #00a99d;
+}
+
+ul.menu a {
+	color: inherit;
+}
+
+div.page {
+	position: absolute;
+	left: 300px;
+	padding: 10px;
+	margin: 10px;
+}
+
+input.lang {
+	width: 50px;
+}
+
+a img:hover {
+	opacity: 0.7;
+}
+
+form.login table {
+	margin: 10px auto;
+	border: 1px solid black;
+	padding: 5px;
+}
+
+select.country {
+	width: 100px;
+}
+
+span.lingualibre {
+	font-weight: bold;
+}
+
+p.quotation {
+	margin: 5px 150px;
+	text-align: center;
+}
+
+p.letsbegin {
+	text-align: center;
+}
+
+div.toolbar {
+	display: table-cell;
+}
+
+th.tools {
+	text-align: right;
+}

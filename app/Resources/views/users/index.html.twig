@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Utilisateurs</h1>
+
+
+	<table class="nice">
+		<tr><th>Login</th><th>E-mail</th><th>Inscription</th><th>Admin</th></tr>
+		{% for user in users %}
+		<tr>
+			<td><a href="{{ path("usersShow", {"id": user.getId() }) }}">{{ user.getUsername()|capitalize }}</a></td>
+			<td>{{ user.getEmail() }}</td>
+			<td>{{ user.getCreated()|date("d/m/Y")}}</td>
+			<td>{% if user.getIsAdmin() %}Oui{% else %}Non{% endif %}</td>
+			{% if user.editableBy(auth) %}<th><a href="{{ path("usersUpdate", {"id": user.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th>{% endif %}
+		</tr>
+		{% endfor %}
+		<tr><th><a href="{{ path("usersAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
+
+	</table>
+
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Éditer locuteur :</h1>
+
+	{{ form_start(form) }}
+	<table class="nice">
+		<tr><th>Nom</th><td>{{ form_widget(form.name) }}</td></tr>
+		<tr><th>Sexe</th><td>{{ form_widget(form.sex) }}</td></tr>
+		<tr><th>Naissance</th><td>{{ form_widget(form.birth) }}</td></tr>
+		<tr><th>Habitation</th><td>{{ form_widget(form.livingCountry, { 'attr': {'class': 'country'} }) }}{{ form_widget(form.livingCity) }}</td></tr>
+		<tr><th>Description</th><td>{{ form_widget(form.description) }}</td></tr>
+		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
+	</table>
+	{{ form_end(form) }}
+
+{% endblock %}
+

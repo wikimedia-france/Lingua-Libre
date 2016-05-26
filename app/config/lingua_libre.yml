@@ -1,0 +1,5 @@
+parameters:
+    audio_path: "%kernel.root_dir%/../web/audio/"
+    audio_cache_path: "%kernel.root_dir%/../var/audio/"
+
+

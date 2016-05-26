@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Supprimer enregistrement</h1>
+	
+	<p>Êtes-vous sûr de vouloir supprimer cet enregistrement ?</p>
+
+	<audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio>
+
+	{{ form_start(form) }}
+	<table>
+		<tr><td>{{ form_widget(form.save) }} <a href="{{ path("soundsShow", {"id": sound.getId() }) }}">Annuler</a></td></tr>
+	</table>
+	{{ form_end(form) }}
+
+{% endblock %}
+

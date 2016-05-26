@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Liste des utilisateurs :</h1>
+
+	<table class="nice">
+		<tr><th>User</th><th>Name</th><th>Sex</th><th>Living</th><th>Birthdate</th><th>Description</th></tr>
+		{% for speaker in speakers %}
+		<tr>
+			<td>{{ speaker.getUser() ? speaker.getUser().getUsername() : "-"}}</td>
+			<td>{{ speaker.getName() }}</td>
+			<td>{{ speaker.getSexSymbol() }}</td>
+			<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
+			<td>{{ speaker.getBirth()|date("d/m/Y") }}</td>
+			<td>{{ speaker.getDescription() }}</td>
+			<td>{% if speaker.editableBy(user) %}<a href="{{ path("speakersUpdate", {"id": speaker.getId() }) }}">Éditer</a> | <a href="{{ path("speakersDelete", {"id": speaker.getId() }) }}">Supprimer</a>{% endif %}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<a href="{{ path("speakersAdd") }}">Ajouter</a>
+
+{% endblock %}
+

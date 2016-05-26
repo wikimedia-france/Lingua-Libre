@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>
+	{% if auth and auth.getId() == user.getId() %}
+		Mon compte
+	{% else %}
+		Compte de « {{ user.getUsername()|capitalize }} »
+	{% endif %}
+
+	{% if user.editableBy(auth) %}
+	<h2>Paramètres</h2>
+	<table class="nice">
+		<tr><th>E-mail</th><td>{{ user.getEmail() }}</td></tr>
+		<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
+		<tr><th colspan="2" class="tools"><a href="{{ path("usersUpdate", {"id":user.getId()}) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th></tr>
+	</table>
+	<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
+	{% endif %}
+
+
+	<h2>Locuteurs</h2>
+	{% if user.getSpeakers()|length > 0 %}
+
+		<table class="nice">
+			<tr><th>Nom</th><th>Sexe</th><th>Habitation</th></tr>
+			{% for speaker in user.getSpeakers() %}
+			<tr>
+				<td><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}">{{ speaker.getName() }}</a></td>
+				<td>{{ speaker.getSexSymbol() }}</td>
+				<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
+				<th><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
+			</tr>
+			{% endfor %}
+			{% if user.editableBy(auth) %}<tr><th><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
+		</table>
+	{% else %}
+		<p>Pas de locuteur défini pour le moment.
+		{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
+		</p>
+	{% endif %}
+
+{% endblock %}
+
