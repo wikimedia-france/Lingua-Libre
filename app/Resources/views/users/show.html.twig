@@ -7,6 +7,7 @@
 	{% else %}
 		Compte de « {{ user.getUsername()|capitalize }} »
 	{% endif %}
+	</h1>
 
 	{% if user.editableBy(auth) %}
 	<h2>Paramètres</h2>
