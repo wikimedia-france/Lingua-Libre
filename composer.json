@@ -29,6 +29,9 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/console": "^3.1"
     },
+
+
+
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
