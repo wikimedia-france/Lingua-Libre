@@ -26,6 +26,7 @@
 			formData.append("user", {{ user.getId() }});
 			formData.append("sound", widget.getSound().getBlob());
 			formData.append("text", widget.getText());
+			formData.append("description", widget.getDescription());
 			formData.append("speaker", document.getElementById("speaker").value);
 			formData.append("lang", document.getElementById("lang").value);
 
