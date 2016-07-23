@@ -32,7 +32,7 @@ class SpeakerLanguage
 	/**
 	 * @ORM\Column(type="string", length=3, nullable=true)
 	 */
-	private $level;
+	private $profileType;
 
 	/**
 	 * @ORM\Column(type="string", length=128, nullable=true)
@@ -113,27 +113,27 @@ class SpeakerLanguage
 	}
 
 	/**
-	 * Set level
+	 * Set profileType
 	 *
-	 * @param string $level
+	 * @param string $profileType
 	 *
 	 * @return SpeakerLanguage
 	 */
-	public function setLevel($level)
+	public function setProfileType($profileType)
 	{
-		$this->level = $level;
+		$this->profileType = $profileType;
 
 		return $this;
 	}
 
 	/**
-	 * Get level
+	 * Get profileType
 	 *
 	 * @return string
 	 */
-	public function getLevel()
+	public function getProfileType()
 	{
-		return $this->level;
+		return $this->profileType;
 	}
 
 	/**
@@ -232,29 +232,26 @@ class SpeakerLanguage
 		return $this->country;
 	}
 
-	public static function levelValues()
+	public static function profileTypeValues()
 	{
 		return array(
-			"NAT" => "Langue maternelle",
-			"A1" => "A1",
-			"A2" => "A2",
-			"B1" => "B1",
-			"B2" => "B2",
-			"C1" => "C1",
-			"C2" => "C2"
+			"NAT" => "Natif (langue maternelle)",
+			"A" => "Apprenant débutant (A1-A2)",
+			"B" => "Niveau moyen (B1-B2)",
+			"C" => "Bon niveau (C1-C2)"
 		);
 	}
 
-	public static function levelChoices()
+	public static function profileTypeChoices()
 	{
-		return array_flip(self::levelValues());
+		return array_flip(self::profileTypeValues());
 	}
 
 	public function export()
 	{
 		$result = array();
 		$result["lang"] = $this->getLanguage()->getCode();
-		if ($this->getLevel()) $result["level"] = $this->getLevel();
+		if ($this->getProfileType()) $result["profileType"] = $this->getProfileType();
 		if ($this->getCountry()) $result["country"] = $this->getCountry();
 		if ($this->getTown()) $result["town"] = $this->getTown();
 		if ($this->getDialect()) $result["dialect"] = $this->getDialect();
