@@ -151,6 +151,17 @@ select.country {
 
 span.lingualibre {
 	font-weight: bold;
+	color: #00a99d;
+}
+
+span.project {
+	font-weight: bold;
+	color: #AA7D3A;
+}
+
+span.partner {
+	font-weight: bold;
+	color: #AA533A;
 }
 
 p.quotation {
@@ -169,9 +180,15 @@ div.toolbar {
 th.tools {
 	text-align: right;
 }
+
 div.partner {
 	text-align: center;	
 }
+
 div.partner img {
 	margin: 10px;
+}
+
+div.contact {
+	text-align: center;
 }
