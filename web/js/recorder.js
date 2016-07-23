@@ -1,4 +1,5 @@
 var Recorder = function() {
+	this.audioContext = new window.AudioContext();
 	this.bufferLen = 1024;
 	this.stream = null;
 	this.buffers = [];
@@ -11,8 +12,12 @@ Recorder.prototype.onaudioprocess = function(e) {
 	var samples = e.inputBuffer.getChannelData(0);
 
 	this.buffers.push(samples);
-	if ("onchanged" in this) this.onchanged();
+	this.changed();
 //	console.log(samples[0]);
+};
+
+Recorder.prototype.changed = function() {
+	if ("onchanged" in this) this.onchanged();
 };
 
 Recorder.prototype.initStream = function(stream) {
@@ -27,7 +32,7 @@ Recorder.prototype.initStream = function(stream) {
 }
 
 Recorder.prototype.getSamplerate = function() {
-	return 44100;
+	return this.audioContext.sampleRate;
 }
 
 Recorder.prototype.getLength = function() {
@@ -53,8 +58,13 @@ Recorder.prototype.getSound = function() {
 	return new Sound(this.audioContext.sampleRate, this.getSamples());
 }
 
-Recorder.prototype.start = function() {
+Recorder.prototype.clear = function() {
 	this.buffers = [];
+	this.changed();
+}
+
+Recorder.prototype.start = function() {
+	this.clear();
 	this.state = true;
 	this.audioInput.connect(this.node);
 }
@@ -66,12 +76,11 @@ Recorder.prototype.stop = function() {
 }
 
 Recorder.prototype.init = function(callback) {
+	navigator.getUserMediaFct = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+	if (!navigator.getUserMediaFct) return null;
 
-	this.audioContext = new window.AudioContext();
-
-	if (!navigator.getUserMedia) return null;
 	var recorder = this;
-	navigator.getUserMedia(
+	navigator.getUserMediaFct(
 		{"audio": true, "video": false},
 
 		function(localMediaStream) {

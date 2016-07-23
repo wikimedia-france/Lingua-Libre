@@ -172,7 +172,7 @@ class Sound
 	public function getVirtualFilename()
 	{
 		$text = $this->getText();
-		$maxsize = 16;
+		$maxsize = 32;
 		if (strlen($text) > $maxsize) {
 			$text = substr($text, 0, $maxsize)."…";
 		}

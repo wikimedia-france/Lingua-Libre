@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception; 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SoundsController extends Controller
@@ -84,6 +85,11 @@ class SoundsController extends Controller
 
 			$sound = new Sound();
 			$sound->setText($request->request->get("text"));
+			
+			$description = $request->request->get("description");
+			if ($description) $sound->setDescription($description);
+
+			$sound->setDescription($request->request->get("text"));
 			$sound->setUser($user);
 			$sound->setFilename($filename);
 			$sound->setSpeaker($speaker);
@@ -112,6 +118,7 @@ class SoundsController extends Controller
 		$form = $this->createFormBuilder($sound)
 			->add('lang', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
 			->add('text', TextType::class)
+			->add('description', TextareaType::class)
 			->add('speaker', EntityType::class, array('class' => 'AppBundle:Speaker', 'choice_label' => 'name', "choices" => $sound->getUser()->getSpeakers()))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();

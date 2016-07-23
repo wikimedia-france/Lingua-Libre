@@ -102,6 +102,10 @@ SoundWidget.prototype.getText = function() {
 	return this.nodeText.value;
 }
 
+SoundWidget.prototype.getDescription = function() {
+	return this.nodeDescription.value;
+}
+
 SoundWidget.prototype.send = function() {
 	this.sendCb(this);
 }
