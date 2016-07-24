@@ -3,11 +3,17 @@ body {
 	padding: 0;
 	background: #fff;
 	font-family: "Linux Libertine",Georgia,Times,serif;
+	color:#3C3C3C;
 }
 
 a {
 	text-decoration: none;
 	cursor: pointer;
+	color:#00A99D;
+}
+
+a:hover {
+	color:#3C3C3C;
 }
 
 li {
@@ -195,4 +201,19 @@ div.partner img {
 
 div.contact {
 	text-align: center;
+}
+
+.imagepart {
+	float:left;
+	margin-right:15px;
+	max-width:200px;
+	max-height:150px;
+}
+
+.lienpart{
+	margin-left:30px;
+}
+
+.lienpart::before { 
+  content: "↪ ";
 }
