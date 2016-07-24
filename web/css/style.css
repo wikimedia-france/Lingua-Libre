@@ -156,12 +156,30 @@ span.lingualibre {
 
 span.project {
 	font-weight: bold;
-	color: #AA7D3A;
+	color: #aa7d3a;
 }
 
 span.partner {
 	font-weight: bold;
-	color: #AA533A;
+	color: #aa533a;
+}
+
+span.creativeCommons {
+	font-weight: bold;
+}
+
+td.licence {
+	max-width: 600px;
+}
+
+div.licenceBloc {
+	height: 200px;
+	overflow: auto;
+	padding: 10px;
+	background-color: #FFBD5B;
+}
+
+div.licence {
 }
 
 p.quotation {

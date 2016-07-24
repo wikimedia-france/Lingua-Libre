@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use DateTime;
 use AppBundle\Entity\Speaker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SpeakersController extends Controller
 {
@@ -62,12 +64,17 @@ class SpeakersController extends Controller
 			->add('livingCountry', CountryType::class, array("required" => false))
 			->add('birth', BirthdayType::class, array("format" => "dd/MM/yyyy"))
 			->add('description', TextareaType::class, array("required" => false))
+			->add('hasSigned', CheckboxType::class, array('label' => 'J\'accepte la licence','required' => false,"mapped" => false))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
+			$hasSigned = $form->get("hasSigned")->getData();
+			if($hasSigned == true){
+				$speaker->sethasSignedDate(new DateTime());
+			}
 			$speaker->setUser($user);
 			$em->persist($speaker);
 			$em->flush();

@@ -31,7 +31,7 @@ class Speaker
 	private $name;
 
 	/**
-	 * @ORM\Column(type="string", length=25, nullable=true)
+	 * @ORM\Column(type="string", length=50, nullable=true)
 	 */
 	private $livingCity;
 
@@ -62,6 +62,10 @@ class Speaker
 	 */
 	private $languages;
 
+	/**
+	 * @ORM\Column(type="date")
+	 */
+	private $hasSignedDate;
 
 	/**
 	 * Get id
@@ -265,6 +269,30 @@ class Speaker
 	public function getBirth()
 	{
 		return $this->birth;
+	}
+
+	/**
+	 * Set hasSignedDate
+	 *
+	 * @param \DateTime $hasSignedDate
+	 *
+	 * @return Speaker
+	 */
+	public function setHasSignedDate($hasSignedDate)
+	{
+		$this->hasSignedDate = $hasSignedDate;
+
+		return $this;
+	}
+
+	/**
+	 * Get hasSignedDate
+	 *
+	 * @return \DateTime
+	 */
+	public function getHasSignedDate()
+	{
+		return $this->hasSignedDate;
 	}
 
 	/**
