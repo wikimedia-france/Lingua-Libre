@@ -13,6 +13,38 @@
 		<tr><th>Utilisateur</th><td>{% if sound.getUser() %}<a href="{{ path("usersShow", {"id": sound.getUser().getId() }) }}">{{ sound.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
 		{% if sound.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("soundsUpdate", {"id": sound.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundsDelete", {"id": sound.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
 	</table>
+	
+	<h2>Commentaires</h2>
+	
+	<table class="nice">
+	{% for sc in sound.getComments() %}
+	
+		
+		{% if sc.getVisibility() == true or (sc.getVisibility() == false and sc.editableBy(user)) %}
+		
+			{% if sc.getVisibility() == false %}
+				<tr class="privatecom">
+			{% else %}
+				<tr>
+			{% endif %}	
+			
+				<th>Par {{ sc.getUser().getUsername() }}<br />le {{ sc.getDatetime()|date("d/m/Y") }}</th>
+				<td>{{ sc.getText() }}</td>
+				
+				{% if sc.editableBy(user) %}<th class="tools"><a href="{{ path("soundCommentsUpdate", {"id": sc.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundCommentsDelete", {"id": sc.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
+			</tr>
+			
+		{% endif %}	
+			
+			
+			
+		{% endfor %}
+		{% if user != null %}
+		<tr><th class="tools"><a href="{{ path("soundCommentsAdd", {"id": sound.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
+		{% endif %}
+	</table>
+	
+	
 
 {% endblock %}
 

@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity
@@ -30,7 +31,7 @@ class SoundComment
 	private $sound;
 
 	/**
-	 * @ORM\Column(type="string", length=2, nullable=false)
+	 * @ORM\Column(type="boolean", length=1, nullable=false)
 	 */
 	private $visibility;
 
@@ -39,8 +40,14 @@ class SoundComment
 	 */
 	private $datetime;
 
+	public function __construct()
+	{
+		$this->datetime = new DateTime(); 
+		$this->soundComments = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
 	/**
-	 * @ORM\Column(type="text", length=128, nullable=false)
+	 * @ORM\Column(type="text", length=10000, nullable=false)
 	 */
 	private $text;
 
@@ -101,8 +108,11 @@ class SoundComment
 	{
 		return $this->user;
 	}
-	
-	
+
+	public function editableBy($user)
+	{
+		return $this->user->editableBy($user);
+	}
 
 	/**
 	 * Set datetime
@@ -129,30 +139,6 @@ class SoundComment
 	}
 
 	/**
-	 * Set visibility
-	 *
-	 * @param string $visibility
-	 *
-	 * @return SoundComment
-	 */
-	public function setVisibility($visibility)
-	{
-		$this->visibility = $visibility;
-
-		return $this;
-	}
-
-	/**
-	 * Get visibility
-	 *
-	 * @return string
-	 */
-	public function getVisibility()
-	{
-		return $this->visibility;
-	}
-
-	/**
 	 * Set text
 	 *
 	 * @param text $text
@@ -176,25 +162,39 @@ class SoundComment
 		return $this->text;
 	}
 
-	public static function visibilityValues()
-	{
-		return array(
-			"PU" => "Public",
-			"PR" => "Privé"
-		);
-	}
-
-	public static function visibilityChoices()
-	{
-		return array_flip(self::visibilityValues());
-	}
+	
 
 	public function export()
 	{
 		$result = array();
 		if ($this->getVisibility()) $result["visibility"] = $this->getVisibility();
-		if ($this->getTxt()) $result["txt"] = $this->getTxt();
+		if ($this->getTxt()) $result["text"] = $this->getTxt();
 		if ($this->getDatetime()) $result["datetime"] = $this->getDatetime();
 		return $result;
 	}
+
+
+    /**
+     * Set visibility
+     *
+     * @param boolean $visibility
+     *
+     * @return SoundComment
+     */
+    public function setVisibility($visibility)
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    /**
+     * Get visibility
+     *
+     * @return boolean
+     */
+    public function getVisibility()
+    {
+        return $this->visibility;
+    }
 }

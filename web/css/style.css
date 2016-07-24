@@ -181,6 +181,10 @@ th.tools {
 	text-align: right;
 }
 
+.privatecom td{
+	background-color:#E1E1E1;
+}
+
 div.partner {
 	text-align: center;	
 }
