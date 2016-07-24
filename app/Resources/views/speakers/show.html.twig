@@ -30,7 +30,7 @@
 				<th>{{ sl.getLanguage().getTitle() }}</th>
 				<td>{{ sl.getDialect() }}</td>
 				<td>{{ sl.getTown() }} {% if sl.getCountry() %}({{ sl.getCountry() }}){% endif %}</td>
-				<td>{{ sl.getLevel() }}</td>
+				<td>{{ sl.getProfileType() }}</td>
 				<td>{{ sl.getDescription() }}</td>
 				{% if speaker.editableBy(user) %}<th><a href="{{ path("speakerLanguagesUpdate", {"id": sl.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakerLanguagesDelete", {"id": sl.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
 			</tr>

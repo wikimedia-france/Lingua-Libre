@@ -44,7 +44,7 @@ class SpeakerLanguagesController extends Controller
 
 		$form = $this->createFormBuilder($sl)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
-			->add('level', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::levelChoices()))
+			->add('profileType', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
 			->add('dialect', TextType::class, array("required" => false))
 			->add('town', TextType::class, array("required" => false))
@@ -82,7 +82,7 @@ class SpeakerLanguagesController extends Controller
 		$sl = new SpeakerLanguage();
 		$form = $this->createFormBuilder($sl)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
-			->add('level', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::levelChoices()))
+			->add('profileType', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
 			->add('town', TextType::class, array("required" => false))
 			->add('country', CountryType::class, array("required" => false))

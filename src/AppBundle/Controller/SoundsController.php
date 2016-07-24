@@ -79,7 +79,7 @@ class SoundsController extends Controller
 			
 			$filename = dechex(crc32(rand(0, 32000))).".wav";
 			$file = $request->files->get("sound");
-			if (!$file) throw new Exception("no file sent");
+			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
 			$file->move($this->container->getParameter('audio_path'), $filename);
 

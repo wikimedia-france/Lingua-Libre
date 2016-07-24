@@ -36,7 +36,7 @@ class Sound
 	protected $filename;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string")
 	 */
 	protected $text;
 
@@ -51,6 +51,11 @@ class Sound
 	 */
 	protected $description;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="SoundComment", mappedBy="sound")
+	 */
+	protected $comments;
+
 	/** 
 	 * @ORM\Column(type="datetime")
 	 */
@@ -60,6 +65,7 @@ class Sound
 	{
 		$this->description = "";
 		$this->created = new DateTime(); 
+		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
@@ -255,6 +261,49 @@ class Sound
 	{
 		return !$this->getUser() || $user && ($this->getUser()->getId() == $user->getId() || $user->getIsAdmin());
 	}
+	
+	
+	
+	/**
+	 * Add comment
+	 *
+	 * @param \AppBundle\Entity\SoundComment $comment
+	 *
+	 * @return Sound
+	 */
+	public function addComment(\AppBundle\Entity\SoundComment $comment)
+	{
+		$this->comments[] = $comment;
+
+		return $this;
+	}
+
+	/**
+	 * Remove comment
+	 *
+	 * @param \AppBundle\Entity\SoundComment $comment
+	 */
+	public function removeComment(\AppBundle\Entity\SoundComment $comment)
+	{
+		$this->comments->removeElement($comment);
+	}
+
+	/**
+	 * Get comments
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getComments()
+	{
+		return $this->comments;
+	}
+
+	public function getDefaultComment()
+	{
+		return count($this->comments) > 0 ? $this->comments[0] : false;
+	}
+	
+	
 
 	public function export()
 	{
