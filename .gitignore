@@ -1,0 +1,11 @@
+*.iml
+.DS_Store
+*.cache
+*.lock
+web/bundles/
+vendor/
+var/
+*.swp
+bin/symfony_requirements
+web/config.php
+
