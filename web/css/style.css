@@ -228,10 +228,25 @@ div.contact {
 	max-height:150px;
 }
 
+.imagepartDroite {
+	float:right;
+	margin-left:15px;
+	max-width:200px;
+	max-height:150px;
+}
+
 .lienpart{
 	margin-left:30px;
 }
 
 .lienpart::before { 
+  content: "↪ ";
+}
+
+.listepart li {
+	list-style-type:none;
+}
+
+.listepart li::before { 
   content: "↪ ";
 }
