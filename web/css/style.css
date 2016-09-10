@@ -107,6 +107,10 @@ ul.bar li.barItem {
 	display: inline-block;
 }
 
+div.contact {
+	text-align: center;
+}
+
 ul.menu {
 	margin: 20px;
 	float: left;
@@ -182,10 +186,18 @@ div.licenceBloc {
 	height: 200px;
 	overflow: auto;
 	padding: 10px;
-	background-color: #FFBD5B;
+	background-color: #E1E1E1;
 }
 
 div.licence {
+}
+
+div.partner {
+	text-align: center;	
+}
+
+div.partner img {
+	margin: 10px;
 }
 
 p.quotation {
@@ -209,44 +221,32 @@ th.tools {
 	background-color:#E1E1E1;
 }
 
-div.partner {
-	text-align: center;	
-}
-
-div.partner img {
-	margin: 10px;
-}
-
-div.contact {
-	text-align: center;
-}
-
-.imagepart {
+img.imagepart {
 	float:left;
 	margin-right:15px;
 	max-width:200px;
 	max-height:150px;
 }
 
-.imagepartDroite {
+img.imagepartDroite {
 	float:right;
 	margin-left:15px;
 	max-width:200px;
 	max-height:150px;
 }
 
-.lienpart{
+a.lienpart{
 	margin-left:30px;
 }
 
-.lienpart::before { 
+a.lienpart::before { 
   content: "↪ ";
 }
 
-.listepart li {
+ul.listepart li {
 	list-style-type:none;
 }
 
-.listepart li::before { 
+ul.listepart li::before { 
   content: "↪ ";
 }

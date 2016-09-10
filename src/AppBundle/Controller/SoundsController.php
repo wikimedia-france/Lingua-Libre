@@ -37,9 +37,19 @@ class SoundsController extends Controller
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Sound');
 		$sound = $repository->find($id);
 		if (!$sound) throw $this->createNotFoundException('No sound found for id '.$id);
+		
+		$comments = $sound->getComments();
+		
+		foreach ($comments as $key => $comment) {
+			if((!$comment->getVisibility() ) and (!$comment->editableBy($this->getUser()))) {
+				unset ($comments[$key]);
+			}		
+		}
+		
 
 		return $this->render('sounds/show.html.twig', array(
 			"sound" => $sound,
+			"comments" => $comments,
 			"user" => $this->getUser()
 		));
 	}

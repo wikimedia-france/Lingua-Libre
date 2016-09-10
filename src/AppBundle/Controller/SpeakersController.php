@@ -25,6 +25,7 @@ class SpeakersController extends Controller
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findAll();
 
 		return $this->render('speakers/index.html.twig', array(
+			"auth" => $this->getUser(),
 			"speakers" => $speakers,
 			"user" => $this->getUser()
 		));

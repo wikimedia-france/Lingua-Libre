@@ -25,7 +25,7 @@ class Speaker
 	private $user;
 
 	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
+	 * @ORM\Column(type="string", length=25, unique=false)
 	 * @Assert\NotBlank()
 	 */
 	private $name;

@@ -16,11 +16,24 @@
 	
 	<h2>Commentaires</h2>
 	
+	{% if comments|length==0 %}
+	
+	<p>Aucun commentaire à afficher.</p>
+	
+	{% endif %}
+	
+	
+	{% if comments|length>0 or user != null %}
+	
 	<table class="nice">
-	{% for sc in sound.getComments() %}
+	
+	
+		{% for sc in comments %}
 	
 		
-		{% if sc.getVisibility() == true or (sc.getVisibility() == false and sc.editableBy(user)) %}
+		
+		
+			
 		
 			{% if sc.getVisibility() == false %}
 				<tr class="privatecom">
@@ -34,15 +47,18 @@
 				{% if sc.editableBy(user) %}<th class="tools"><a href="{{ path("soundCommentsUpdate", {"id": sc.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundCommentsDelete", {"id": sc.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
 			</tr>
 			
-		{% endif %}	
+		
 			
 			
 			
 		{% endfor %}
-		{% if user != null %}
+		
+	{% if user != null %}
 		<tr><th class="tools"><a href="{{ path("soundCommentsAdd", {"id": sound.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
-		{% endif %}
+	{% endif %}
 	</table>
+		
+	{% endif %}
 	
 	
 
