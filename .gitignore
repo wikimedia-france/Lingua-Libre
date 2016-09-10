@@ -1,0 +1,8 @@
+*.iml
+*.cache
+*.lock
+web/bundles/
+vendor/
+var/
+*.swp
+
