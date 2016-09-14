@@ -23,6 +23,7 @@ div.listing {
 	padding: 10px;
 	height: 400px;
 	overflow: auto;
+	resize: both;
 }
 
 div.listing > div.item {
