@@ -161,17 +161,14 @@ select.country {
 
 span.lingualibre {
 	font-weight: bold;
-	color: #00a99d;
 }
 
 span.project {
 	font-weight: bold;
-	color: #aa7d3a;
 }
 
 span.partner {
 	font-weight: bold;
-	color: #aa533a;
 }
 
 span.creativeCommons {
@@ -187,9 +184,6 @@ div.licenceBloc {
 	overflow: auto;
 	padding: 10px;
 	background-color: #E1E1E1;
-}
-
-div.licence {
 }
 
 div.partner {
@@ -217,30 +211,30 @@ th.tools {
 	text-align: right;
 }
 
-.privatecom td{
-	background-color:#E1E1E1;
+.privatecom td {
+	background-color: #e1e1e1;
 }
 
 img.imagepart {
-	float:left;
-	margin-right:15px;
-	max-width:200px;
-	max-height:150px;
+	float: left;
+	margin-right: 15px;
+	max-width: 200px;
+	max-height: 150px;
 }
 
 img.imagepartDroite {
-	float:right;
-	margin-left:15px;
-	max-width:200px;
-	max-height:150px;
+	float: right;
+	margin-left: 15px;
+	max-width: 200px;
+	max-height: 150px;
 }
 
-a.lienpart{
-	margin-left:30px;
+a.lienpart {
+	margin-left: 30px;
 }
 
 a.lienpart::before { 
-  content: "↪ ";
+	content: "↪ ";
 }
 
 ul.listepart li {
@@ -248,5 +242,5 @@ ul.listepart li {
 }
 
 ul.listepart li::before { 
-  content: "↪ ";
+	content: "↪ ";
 }
