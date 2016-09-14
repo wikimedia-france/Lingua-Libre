@@ -142,8 +142,8 @@ class SoundsController extends Controller
 
 		$form = $this->createFormBuilder($sound)
 			->add('lang', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
-			->add('text', TextType::class, array("required" => false))
-			->add('description', TextareaType::class, array())
+			->add('text', TextType::class)
+			->add('description', TextareaType::class, array(), array("required" => false))
 			->add('speaker', EntityType::class, array('class' => 'AppBundle:Speaker', 'choice_label' => 'name', "choices" => $sound->getUser()->getSpeakers()))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
