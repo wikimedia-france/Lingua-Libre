@@ -32,16 +32,17 @@
 			<li><a href="{{ path("contact") }}">Contact</a></li>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<hr/>
-			<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
-			<li><a href="{{ path('speakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
-			<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
-			<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
-				{% if is_granted('ROLE_ADMIN') %}
 				<hr/>
-				<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>
+				<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
+				<li><a href="{{ path('speakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
+				<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
+				<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
+				<li><a href="{{ path('soundsAddListing') }}">Enregistrement par listing</a></li>
+				{% if is_granted('ROLE_ADMIN') %}
+					<hr/>
+					<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>
 				{% endif %}
-			{% endif %}
+				{% endif %}
 		</ul>
 
 		<div class="page">
