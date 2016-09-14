@@ -7,50 +7,62 @@
 
 {% block javascript %}
 	{{ parent() }}
-	<script type="text/javascript" src="{{ asset('js/helpers.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/recorder.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/player.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/ajax.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/buffer.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/buffers.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/sound.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/soundWidget.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/player.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/recorder.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/recorderWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/ajax.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/audioAuthWidget.js') }}"></script>
+
 	<script type="text/javascript">
-		initApi();
+			var App = function() {
+				this.nodeSpeaker = document.getElementById("speaker");
+				this.nodeLang = document.getElementById("lang");
+				this.targetUrl = "{{ path('soundsApi') }}";
+				this.ajax = new Ajax();
+				this.audioAuthWidget = new AudioAuthWidget();
+				this.node = this.audioAuthWidget.node;
+				this.init();
+			};
 
-		function send(widget) {
-			var ajax = new Ajax();
+			App.prototype.init = function() {
+				var self = this;
 
-			var target = "{{ path('soundsApi') }}";
+				this.audioAuthWidget.onenabled = function(stream) {
+					var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
+					this.appendChild(recorderWidget.node);
+				};
 
-			var formData = new FormData();
-			formData.append("user", {{ user.getId() }});
-			formData.append("sound", widget.getSound().getBlob());
-			formData.append("text", widget.getText());
-			formData.append("description", widget.getDescription());
-			formData.append("speaker", document.getElementById("speaker").value);
-			formData.append("lang", document.getElementById("lang").value);
+				this.setDefaultLang();
+			};
 
-			ajax.querySendData(target, "post", formData, function(result) {
-				console.log(JSON.stringify(result));
-				if (result) {
-					widget.destroy();
-				}
-			}, false);
-		}
+			App.prototype.send = function send(sound, meta, doneCb) {
+				var formData = new FormData();
+				formData.append("user", {{ user.getId() }});
+				formData.append("sound", widget.getSound().getBlob());
+				formData.append("text", widget.getText());
+				formData.append("description", widget.getDescription());
+				formData.append("speaker", document.getElementById("speaker").value);
+				formData.append("lang", document.getElementById("lang").value);
 
-		function setDefaultLang() {
-			speaker = document.getElementById("speaker");
-			lang = speaker.childNodes[speaker.selectedIndex].getAttribute("lang");
-			if (lang) document.getElementById("lang").value = lang;
-		}
+				ajax.querySendData(target, "post", formData, function(result) {
+					console.log(JSON.stringify(result));
+					doneCb(result);
+				}, false);
 
-		window.onload = function() {
-			container = document.getElementById("container");
-			if (container) {
-				widget = new RecorderWidget(send);
-				container.appendChild(widget.node);
-				setDefaultLang();
-			}
+			};
+
+			App.prototype.setDefaultLang = function() {
+				var lang = this.nodeSpeaker.childNodes[this.nodeSpeaker.selectedIndex].getAttribute("lang");
+				if (lang) this.nodeLang.value = lang;
+			};
+
+			window.onload = function() {
+				document.body.appendChild(new App().node);
+			};
 		}
 	</script>
 {% endblock %}
