@@ -18,52 +18,47 @@
 	<script type="text/javascript" src="{{ asset('js/audioAuthWidget.js') }}"></script>
 
 	<script type="text/javascript">
-			var App = function() {
-				this.nodeSpeaker = document.getElementById("speaker");
-				this.nodeLang = document.getElementById("lang");
-				this.targetUrl = "{{ path('soundsApi') }}";
-				this.ajax = new Ajax();
-				this.audioAuthWidget = new AudioAuthWidget();
-				this.node = this.audioAuthWidget.node;
-				this.init();
+		var App = function() {
+			this.nodeSpeaker = document.getElementById("speaker");
+			this.nodeLang = document.getElementById("lang");
+			this.targetUrl = "{{ path('soundsApi') }}";
+			this.ajax = new Ajax();
+			this.audioAuthWidget = new AudioAuthWidget();
+			this.node = this.audioAuthWidget.node;
+			this.init();
+		};
+
+		App.prototype.init = function() {
+			var self = this;
+			this.audioAuthWidget.onenabled = function(stream) {
+			var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
+			this.appendChild(recorderWidget.node);
 			};
+			this.setDefaultLang();
+		};
 
-			App.prototype.init = function() {
-				var self = this;
+		App.prototype.send = function send(sound, meta, doneCb) {
+			var formData = new FormData();
+			formData.append("user", {{ user.getId() }});
+			formData.append("sound", sound.getBlob());
+			formData.append("text", meta.transcript);
+			formData.append("description", meta.description);
+			formData.append("speaker", document.getElementById("speaker").value);
+			formData.append("lang", document.getElementById("lang").value);
+			this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
+				console.log(JSON.stringify(result));
+				doneCb(result);
+			}, false);
+		};
 
-				this.audioAuthWidget.onenabled = function(stream) {
-					var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
-					this.appendChild(recorderWidget.node);
-				};
+		App.prototype.setDefaultLang = function() {
+			var lang = this.nodeSpeaker.childNodes[this.nodeSpeaker.selectedIndex].getAttribute("lang");
+			if (lang) this.nodeLang.value = lang;
+		};
 
-				this.setDefaultLang();
-			};
-
-			App.prototype.send = function send(sound, meta, doneCb) {
-				var formData = new FormData();
-				formData.append("user", {{ user.getId() }});
-				formData.append("sound", widget.getSound().getBlob());
-				formData.append("text", widget.getText());
-				formData.append("description", widget.getDescription());
-				formData.append("speaker", document.getElementById("speaker").value);
-				formData.append("lang", document.getElementById("lang").value);
-
-				ajax.querySendData(target, "post", formData, function(result) {
-					console.log(JSON.stringify(result));
-					doneCb(result);
-				}, false);
-
-			};
-
-			App.prototype.setDefaultLang = function() {
-				var lang = this.nodeSpeaker.childNodes[this.nodeSpeaker.selectedIndex].getAttribute("lang");
-				if (lang) this.nodeLang.value = lang;
-			};
-
-			window.onload = function() {
-				document.body.appendChild(new App().node);
-			};
-		}
+		window.onload = function() {
+			document.getElementById("container").appendChild(new App().node);
+		};
 	</script>
 {% endblock %}
 
