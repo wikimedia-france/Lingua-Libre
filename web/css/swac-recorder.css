@@ -23,7 +23,6 @@ div.listing {
 	padding: 10px;
 	height: 400px;
 	overflow: auto;
-	resize: both;
 }
 
 div.listing > div.item {
@@ -48,6 +47,7 @@ div.listing > div.sent {
 }
 
 div.listingRecorder {
+	resize: both;
 	border: 3px solid lightgray;
 	background-color: #eee;
 }
