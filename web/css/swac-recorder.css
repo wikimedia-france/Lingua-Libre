@@ -21,7 +21,8 @@ div.listing {
 	background-color: #fff;
 	font-size: 180%;
 	padding: 10px;
-	height: 400px;
+	min-height: 400px;
+	resize: both;
 	overflow: auto;
 }
 
@@ -47,7 +48,6 @@ div.listing > div.sent {
 }
 
 div.listingRecorder {
-	resize: both;
 	border: 3px solid lightgray;
 	background-color: #eee;
 }
