@@ -1,21 +1,25 @@
 var Sound = function(sampleRate, samples) {
 	this.sampleRate = sampleRate;
 	this.samples = samples;
-}
+};
 
 Sound.prototype.set = function(samples) {
 	this.samples = samples;
-}
+};
 
 DataView.prototype.writeString = function(offset, str) {
 	for (var i = 0; i < str.length; i++){
 		this.setUint8(offset + i, str.charCodeAt(i));
 	}
-}
+};
+
+Sound.prototype.getSampleRate = function() {
+	return this.sampleRate;
+};
 
 Sound.prototype.getBlob = function() {
 	return new Blob([this.encodeWAVE()], {"type": "audio/wav"});
-}
+};
 
 Sound.prototype.encodeWAVE = function() {
 	var buffer = new ArrayBuffer(44 + this.samples.length * 2);

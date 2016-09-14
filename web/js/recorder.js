@@ -1,27 +1,28 @@
-var Recorder = function() {
+var Recorder = function(stream) {
+	this.buffers = new Buffers(44100);
 	this.audioContext = new window.AudioContext();
-	this.bufferLen = 1024;
+	this.bufferLen = 2048;
 	this.stream = null;
-	this.buffers = [];
 	this.state = false;
-}
+	this.initStream(stream);
+};
 
 Recorder.prototype.onaudioprocess = function(e) {
 	if (!this.state) return;
 
 	var samples = e.inputBuffer.getChannelData(0);
-
-	this.buffers.push(samples);
-	this.changed();
-//	console.log(samples[0]);
+	var buffer = new Buffer(samples);
+	this.buffers.push(buffer);
+	this.changed(buffer);
 };
 
-Recorder.prototype.changed = function() {
-	if ("onchanged" in this) this.onchanged();
+Recorder.prototype.changed = function(buffer) {
+	if ("onchanged" in this) this.onchanged(buffer);
 };
 
 Recorder.prototype.initStream = function(stream) {
 	this.audioInput = this.audioContext.createMediaStreamSource(stream);
+	this.buffers.setSamplerate(this.audioContext.sampleRate);
 
 	this.node = this.audioContext.createScriptProcessor(this.bufferLen, 1, 0);
 
@@ -29,70 +30,34 @@ Recorder.prototype.initStream = function(stream) {
 	this.node.onaudioprocess = function(e) {
 		recorder.onaudioprocess(e);
 	};
-}
-
-Recorder.prototype.getSamplerate = function() {
-	return this.audioContext.sampleRate;
-}
-
-Recorder.prototype.getLength = function() {
-	var result = 0;
-	for (var i = 0; i < this.buffers.length; i++) {
-		result += this.buffers[i].length;
-	}
-	return result;
-}
-
-Recorder.prototype.getSamples = function() {
-	var result = new Float32Array(this.getLength());
-	var offset = 0;
-	for (var i = 0; i < this.buffers.length; i++) {
-		var buffer = this.buffers[i];
-		result.set(buffer, offset);
-		offset += buffer.length;
-	}
-	return result;
-}
-
-Recorder.prototype.getSound = function() {
-	return new Sound(this.audioContext.sampleRate, this.getSamples());
-}
+};
 
 Recorder.prototype.clear = function() {
-	this.buffers = [];
-	this.changed();
-}
+	this.buffers.clear();
+	this.changed(null);
+};
+
+Recorder.prototype.setState = function(value) {
+	this.state = value;
+	if ("onstatechanged" in this) this.onstatechanged(value);
+};
 
 Recorder.prototype.start = function() {
 	this.clear();
-	this.state = true;
+	this.setState(true);
 	this.audioInput.connect(this.node);
-}
+};
 
 Recorder.prototype.stop = function() {
 	this.audioInput.disconnect(this.node);
-	this.state = false; 
-//	console.log(this.getLength());
-}
+	this.setState(false);
+};
 
-Recorder.prototype.init = function(callback) {
-	navigator.getUserMediaFct = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-	if (!navigator.getUserMediaFct) return null;
+Recorder.prototype.startStop = function() {
+	if (this.state)
+		this.stop();
+	else
+		this.start();
+};
 
-	var recorder = this;
-	navigator.getUserMediaFct(
-		{"audio": true, "video": false},
-
-		function(localMediaStream) {
-			recorder.initStream(localMediaStream);
-			callback(true);
-		},
-
-		function(err) {
-			console.log("The following error occured: " + err);
-			callback(false);
-		}
-	);
-	return true;
-}
 
