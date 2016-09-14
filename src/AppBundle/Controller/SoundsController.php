@@ -73,7 +73,7 @@ class SoundsController extends Controller
 	/**
 	* @Route("/sounds/addListing", name="soundsAddListing")
 	*/
-	public function addAction()
+	public function addListingAction()
 	{
 		$user = $this->getUser();
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
