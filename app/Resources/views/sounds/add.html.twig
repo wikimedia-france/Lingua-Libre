@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="{{ asset('css/soundWidget.css') }}" rel="stylesheet" />
+	<link href="{{ asset('css/swac-recorder.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block javascript %}
@@ -31,8 +31,8 @@
 		App.prototype.init = function() {
 			var self = this;
 			this.audioAuthWidget.onenabled = function(stream) {
-			var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
-			this.appendChild(recorderWidget.node);
+				var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
+				this.appendChild(recorderWidget.node);
 			};
 			this.setDefaultLang();
 		};
@@ -56,8 +56,10 @@
 			if (lang) this.nodeLang.value = lang;
 		};
 
+		var app = null;
 		window.onload = function() {
-			document.getElementById("container").appendChild(new App().node);
+			app = new App();
+			document.getElementById("container").appendChild(app.node);
 		};
 	</script>
 {% endblock %}
@@ -71,7 +73,7 @@
 			<tr>
 				<th>Locuteur</th>
 				<td>
-					<select id="speaker" onchange="setDefaultLang()">{% for speaker in speakers %}<option value="{{ speaker.getId() }}" {% if speaker.getDefaultLanguage() %}lang="{{ speaker.getDefaultLanguage().getLanguage().getId() }}"{% endif %}>{{ speaker.getName() }}</option>{% endfor %}</select>
+					<select id="speaker" onchange="app.setDefaultLang()">{% for speaker in speakers %}<option value="{{ speaker.getId() }}" {% if speaker.getDefaultLanguage() %}lang="{{ speaker.getDefaultLanguage().getLanguage().getId() }}"{% endif %}>{{ speaker.getName() }}</option>{% endfor %}</select>
 				</td>
 				<th>
 					<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter un locuteur"/></a>
