@@ -37,10 +37,45 @@ class SpeakersController extends Controller
 	public function showAction($id)
 	{
 		$speaker = $this->getDoctrine()->getRepository('AppBundle:Speaker')->find($id);
+		if (!$speaker) throw $this->createNotFoundException('No speaker found for id '.$id);
 
 		return $this->render('speakers/show.html.twig', array(
 			"speaker" => $speaker,
 			"user" => $this->getUser()
+		));
+	}
+
+	/**
+	* @Route("/speakers/{id}/license", name="speakersLicense")
+	*/
+	public function licenseAction(Request $request, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$speaker = $em->getRepository('AppBundle:Speaker')->find($id);
+		if (!$speaker) throw $this->createNotFoundException('No speaker found for id '.$id);
+
+		$form = $this->createFormBuilder()
+			->add('signed', CheckboxType::class, array('required' => false, "mapped" => false))
+			->add('save', SubmitType::class, array('label' => 'Ok'))
+			->getForm();
+
+		//Enregistrement
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
+			if ($form->get("signed")->getData()) {
+				$speaker->setSignedDate(new DateTime());
+				$em->persist($speaker);
+				$em->flush();
+			}
+			return $this->redirectToRoute('speakersShow', array("id" => $speaker->getId()));
+		}
+
+		$token = $this->get('security.token_storage')->getToken();
+		return $this->render('speakers/license.html.twig', array(
+			"speaker" => $speaker,
+			"form" => $form->createView(),
+			"token" => $token
 		));
 	}
 
@@ -65,16 +100,15 @@ class SpeakersController extends Controller
 			->add('livingCountry', CountryType::class, array("required" => false))
 			->add('birth', BirthdayType::class, array("format" => "dd/MM/yyyy"))
 			->add('description', TextareaType::class, array("required" => false))
-			->add('hasSigned', CheckboxType::class, array('label' => 'J\'accepte la licence','required' => false,"mapped" => false))
+			->add('signed', CheckboxType::class, array('required' => false, "mapped" => false))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
-			$hasSigned = $form->get("hasSigned")->getData();
-			if($hasSigned == true){
-				$speaker->sethasSignedDate(new DateTime());
+			if($form->get("signed")->getData() == true){
+				$speaker->setSignedDate(new DateTime());
 			}
 			$speaker->setUser($user);
 			$em->persist($speaker);

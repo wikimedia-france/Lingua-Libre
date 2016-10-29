@@ -63,9 +63,9 @@ class Speaker
 	private $languages;
 
 	/**
-	 * @ORM\Column(type="date")
+	 * @ORM\Column(type="date", nullable=true)
 	 */
-	private $hasSignedDate;
+	private $signedDate;
 
 	/**
 	 * Get id
@@ -272,27 +272,27 @@ class Speaker
 	}
 
 	/**
-	 * Set hasSignedDate
+	 * Set signedDate
 	 *
-	 * @param \DateTime $hasSignedDate
+	 * @param \DateTime $signedDate
 	 *
 	 * @return Speaker
 	 */
-	public function setHasSignedDate($hasSignedDate)
+	public function setSignedDate($signedDate)
 	{
-		$this->hasSignedDate = $hasSignedDate;
+		$this->signedDate = $signedDate;
 
 		return $this;
 	}
 
 	/**
-	 * Get hasSignedDate
+	 * Get signedDate
 	 *
 	 * @return \DateTime
 	 */
-	public function getHasSignedDate()
+	public function getSignedDate()
 	{
-		return $this->hasSignedDate;
+		return $this->signedDate;
 	}
 
 	/**
