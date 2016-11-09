@@ -106,7 +106,7 @@ class SoundsController extends Controller
 			if (!$language) throw new Exception('No language found');
 			
 			//Copy file
-			$filename = $user->getId()."-".dechex(crc32($text))."-".rand(0, 32000).".wav";
+			$filename = $speaker->getId()."-".dechex(crc32($text))."-".rand(0, 32000).".wav";
 			$file = $request->files->get("sound");
 			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
