@@ -24,48 +24,16 @@
 		<script type="text/javascript">
 			var app = null;
 			window.onload = function() {
-				studio = new Studio("/api/sounds");
-				studio.addSpeaker(new Speaker(2, "Nicolas Vion", [new Lang(13, "Allemand")]));
+				studio = new Studio(5, "/api/sounds", "/users/5/addSpeaker");
+				studio.addSpeaker(new Speaker(2, "Nicolas Vion", [new Lang(16, "Breton")]));
+				studio.addSpeaker(new Speaker(2, "Olivier Fraysse", [new Lang(13, "Allemand"), new Lang(17, "Français")]));
 				studio.update();
-				document.getElementById("container").appendChild(studio.node);
+				document.body.appendChild(studio.node);
 			};
 		</script>
 		<link rel="icon" type="image/x-icon" href="img/favicon_32.png" />
 	</head>
 	<body>
-		<h1>Studio d’enregistrement</h1>
-		<table class="nice">
-			<tr>
-				<th>Locuteur</th>
-				<td>
-					<select id="speaker">
-						<option value="2" lang="17">Nicolas Vion</option>
-						<option value="37" >Olivier Fraysse</option>
-					</select>
-				</td>
-				<th>
-					<a href="/users/5/addSpeaker"><img src="/img/add_24.png" title="Ajouter un locuteur"/></a>
-				</th>
-			</tr>
-			<tr>
-				<th>Langue</th>
-				<td>
-					<select id="lang">
-						<option value="">- Veuillez choisir une langue -</option>
-						<option value="13">Allemand</option>
-						<option value="14">Alsacien</option>
-						<option value="15">Anglais</option>
-						<option value="16">Breton</option>
-						<option value="17">Français</option>
-						<option value="18">Suédois</option>
-						<option value="19">Occitan</option>
-						<option value="20">Francique</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-
-		<div id="container"></div>
 	</body>
 </html>
 
