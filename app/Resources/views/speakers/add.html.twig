@@ -13,8 +13,8 @@
 		<tr><th>Licence</th><td class="licence">
 			<div class="licenceHeader">Les sons enregistrés grâce au projet <span class="linguaLibre">Lingua Libre</span> seront publié sous une <a href="">licence libre</a>. Merci de prendre le temps de la lire.</div>
 			<div class="licenceBloc">
-				{% include 'speakers/licence.html.twig' %}
-				<div><big>{{ form_label(form.hasSigned) }}</big>{{ form_widget(form.hasSigned) }}
+				{% include 'speakers/license.html.inc.twig' %}
+				<div><big>J’accepte la licence</big>{{ form_widget(form.signed) }}
 				<p><small>*Vous pouvez approuver la licence plus tard, mais vous devez le faire avant de commencer les enregistrements.</small></p>
 				</div>
 			</div>
