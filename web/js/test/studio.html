@@ -7,6 +7,7 @@
 		<base href="../../"/>
 		<link rel="stylesheet" type="text/css" media="screen, projection, print" href="css/style.css" />
 		<link href="css/swac-recorder.css" rel="stylesheet" />
+		<link rel="icon" type="image/x-icon" href="img/favicon_32.png" />
 					
 		<script type="text/javascript" src="js/ajax.js"></script>
 		<script type="text/javascript" src="js/swac-recorder/buffer.js"></script>
@@ -25,13 +26,18 @@
 			var app = null;
 			window.onload = function() {
 				studio = new Studio(5, "/api/sounds", "/users/5/addSpeaker");
-				studio.addSpeaker(new Speaker(2, "Nicolas Vion", [new Lang(16, "Breton")]));
-				studio.addSpeaker(new Speaker(2, "Olivier Fraysse", [new Lang(13, "Allemand"), new Lang(17, "Français")]));
-				studio.update();
+				studio.setSpeakers([
+					{"id": 2, "name": "Nicolas Vion", "langs": [
+						{"id": 12, "title": "Breton"},
+					]},
+					{"id": 2, "name": "Olivier Fraysse", "langs": [
+						{"id": 13, "title": "Allemand"},
+						{"id": 17, "title": "Français"}
+					]}
+				]);
 				document.body.appendChild(studio.node);
 			};
 		</script>
-		<link rel="icon" type="image/x-icon" href="img/favicon_32.png" />
 	</head>
 	<body>
 	</body>

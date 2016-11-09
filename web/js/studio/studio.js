@@ -53,21 +53,39 @@ Studio.prototype.showLangs = function(langs) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
 	this.langsNode.appendChild(this.createOption(document.createTextNode("- Veuillez choisir une langue -")), null);
-	for(var i = 0; i < langs.length; i++) {
-		var lang = langs[i];
-		this.langsNode.appendChild(this.createOption(document.createTextNode(lang.title), lang));
+	this.langsNode.disabled = !langs;
+	if (langs) {
+		for(var i = 0; i < langs.length; i++) {
+			var lang = langs[i];
+			this.langsNode.appendChild(this.createOption(document.createTextNode(lang.title), lang));
 
+		}
 	}
 };
 
+Studio.prototype.setSpeakers  = function(arr) {
+	for (var i = 0; i < arr.length; i++) {
+		var speaker = new Speaker();
+		speaker.set(arr[i]);
+		this.addSpeaker(speaker);
+	}
+	this.update();
+};
+
 Studio.prototype.setSpeaker = function(speaker) {
-	this.showLangs(speaker.langs);
+	this.showLangs(speaker ? speaker.langs : null);
+};
+
+Studio.prototype.currentSpeaker = function() {
+	return this.speakersNode.options[this.speakersNode.selectedIndex].data;
+};
+
+Studio.prototype.currentLang = function() {
+	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
 Studio.prototype.onchangeSpeaker = function(e) {
-	var option = this.speakersNode.options[this.speakersNode.selectedIndex];
-	var speaker = option.data;
-	this.setSpeaker(speaker);
+	this.setSpeaker(this.currentSpeaker());
 };
 
 Studio.prototype.createIcon = function(src, title, href) {
@@ -109,6 +127,7 @@ Studio.prototype.init = function() {
 		var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
 		this.appendChild(recorderWidget.node);
 	};
+	this.setSpeaker(null);
 
 };
 
@@ -117,13 +136,17 @@ Studio.prototype.update = function() {
 };
 
 Studio.prototype.send = function send(sound, meta, doneCb) {
+	var speaker = this.currentSpeaker();
+	var lang = this.currentLang();
+	if (!lang || !speaker) return;
+	
 	var formData = new FormData();
 	formData.append("user", this.userId);
 	formData.append("sound", sound.getBlob());
 	formData.append("text", meta.transcript);
 	formData.append("description", meta.description);
-	formData.append("speaker", document.getElementById("speaker").value);
-	formData.append("lang", document.getElementById("lang").value);
+	formData.append("speaker", speaker.id);
+	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
 		doneCb(result);
