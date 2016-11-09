@@ -68,6 +68,16 @@ Cutter.prototype.addBufferWaiting = function(buffer) {
 };
 
 Cutter.prototype.isValid = function() {
+	var from = this.recordFrom();
+	if (from < this.marginBefore)
+		return false;
+
+	if (this.recordTo() - from < this.minimalLength)
+		return false;
+
+	if (this.saturated)
+		return false;
+
 	return true;
 };
 

@@ -2,6 +2,7 @@ var ListingWidget = function() {
 	this.node = document.createElement("div");
 	this.items = [];
 	this.current = null;
+	this.recording = false;
 	this.init();
 };
 
@@ -145,7 +146,8 @@ ListingWidgetItem.prototype.init = function() {
 ListingWidgetItem.prototype.setCurrent = function(state) {
 	this.current = state;
 	this.node.className = this.getClassName();
-	if (state && document.activeElement != this.node) this.node.focus(); 
+	if (state && document.activeElement != this.node) this.node.focus();
+//	if (this.parent.recording) this.node.scrollIntoView(true);
 };
 
 ListingWidgetItem.prototype.getClassName = function() {

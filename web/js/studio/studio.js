@@ -143,7 +143,7 @@ Studio.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("user", this.userId);
 	formData.append("sound", sound.getBlob());
 	formData.append("text", meta.transcript);
-	formData.append("description", meta.description);
+	if ("description" in meta) formData.append("description", meta.description);
 	formData.append("speaker", speaker.id);
 	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {

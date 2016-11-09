@@ -33,6 +33,11 @@ ListingRecorderWidget.prototype.init = function() {
 	this.node.onkeydown = function(e) { return self.onkeydown(e) };
 
 	this.recorder.cutter.onsave = function(buffers) { return self.save(buffers); };
+	this.recorder.onstatechange = function(state) { self.setState(state) };
+};
+
+ListingRecorderWidget.prototype.setState = function(state) {
+	this.listing.recording = state;
 };
 
 ListingRecorderWidget.prototype.save = function(buffers) {

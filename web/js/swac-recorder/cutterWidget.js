@@ -51,5 +51,6 @@ CutterWidget.prototype.setState = function(value) {
 	this.view.setRecording(value);
 	this.nodeButton.firstChild.nodeValue = value ? "⏹" : "⏺";
 	this.nodeButton.className = value ? "stop" : "record";
+	if ("onstatechange" in this) this.onstatechange(value);
 };
 
