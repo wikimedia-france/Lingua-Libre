@@ -9,7 +9,6 @@ Speaker.prototype.addLang = function(lang) {
 };
 
 Speaker.prototype.setLangs = function(arr) {
-console.log("length" + arr.length);
 	for (var i = 0; i < arr.length; i++) {
 		var lang = new Lang();
 		lang.set(arr[i]);

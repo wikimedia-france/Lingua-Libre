@@ -124,11 +124,10 @@ Studio.prototype.init = function() {
 
 	var self = this;
 	this.audioAuthWidget.onenabled = function(stream) {
-		var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
-		this.appendChild(recorderWidget.node);
+		var multiRecorder = new MultiRecorder(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
+		this.appendChild(multiRecorder.node);
 	};
 	this.setSpeaker(null);
-
 };
 
 Studio.prototype.update = function() {
