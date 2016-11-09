@@ -10,7 +10,7 @@ AudioAuthWidget.prototype.init = function() {
 	this.node.className = "audioAuth";
 
 	var p = document.createElement("p");
-	p.appendChild(document.createTextNode("Impossible d’accèder à l’interface audio !"));
+	p.appendChild(document.createTextNode("Impossible d’accèder à l’interface audio ! Peut-être n’avez-vous pas branché de microphone…"));
 	p.className = "error";
 	this.nodeDisabled.appendChild(p);
 
