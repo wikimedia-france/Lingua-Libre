@@ -93,6 +93,9 @@ class SoundsController extends Controller
 		try {
 			$em = $this->getDoctrine();
 
+			//Get vars
+			$text = $request->request->get("text");
+			
 			$user = $em->getRepository('AppBundle:User')->find($request->request->get("user"));
 			if (!$user) throw new Exception('No user found');
 
@@ -102,19 +105,22 @@ class SoundsController extends Controller
 			$language = $em->getRepository('AppBundle:Language')->find($request->request->get("lang"));
 			if (!$language) throw new Exception('No language found');
 			
-			$filename = dechex(crc32(rand(0, 32000))).".wav";
+			//Copy file
+			$filename = $user->getId()."-".dechex(crc32($text))."-".rand(0, 32000).".wav";
 			$file = $request->files->get("sound");
 			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
-			$file->move($this->container->getParameter('audio_path'), $filename);
+			$path = $this->container->getParameter('audio_path');
+			if (file_exists($path."/".$filename)) throw new Exception("Filename already used!");
+			$file->move($path, $filename);
 
+			//Create sound object
 			$sound = new Sound();
-			$sound->setText($request->request->get("text"));
+			$sound->setText($text);
 			
 			$description = $request->request->get("description");
 			if ($description) $sound->setDescription($description);
 
-			$sound->setDescription($request->request->get("text"));
 			$sound->setUser($user);
 			$sound->setFilename($filename);
 			$sound->setSpeaker($speaker);
