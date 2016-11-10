@@ -73,22 +73,6 @@ class SoundsController extends Controller
 	}
 
 	/**
-	* @Route("/sounds/addListing", name="soundsAddListing")
-	*/
-	public function addListingAction()
-	{
-		$user = $this->getUser();
-		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		$languages = $this->getDoctrine()->getRepository('AppBundle:Language')->findAll();
-
-		return $this->render('sounds/addListing.html.twig', array(
-			"user" => $user,
-			"speakers" => $speakers,
-			"languages" => $languages
-		));
-	}
-
-	/**
 	* @Route("/api/sounds", name="soundsApi")
 	*/
 	public function postAction(Request $request)

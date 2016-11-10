@@ -2,11 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" type="text/css" media="screen, projection, print" href="{{ asset('css/style.css') }}" />
 		<title>{% block title %}Lingua Libre{% endblock %}</title>
-		{% block stylesheets %}{% endblock %}
-		{% block javascript %}{% endblock %}
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/favicon_32.png') }}" />
+
+		{% block stylesheets %}
+			<link rel="stylesheet" type="text/css" media="screen, projection, print" href="{{ asset('css/style.css') }}" />
+		{% endblock %}
+
+		{% block javascript %}
+			<script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
+		{% endblock %}
 	</head>
 	<body>
 		<ul class="bar">
@@ -37,7 +42,6 @@
 				<li><a href="{{ path('speakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
 				<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
 				<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
-				<li><a href="{{ path('soundsAddListing') }}">Enregistrement par listing</a></li>
 				{% if is_granted('ROLE_ADMIN') %}
 					<hr/>
 					<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>
@@ -48,8 +52,5 @@
 		<div class="page">
 			{% block body %}{% endblock %}
 		</div>
-		{% block javascripts %}
-		<script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
-		{% endblock %}
 	</body>
 </html>
