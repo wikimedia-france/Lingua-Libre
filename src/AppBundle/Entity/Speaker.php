@@ -385,7 +385,7 @@ class Speaker
 		{
 			$table[] = $language->export();
 		}
-		$result["languages"] = $table;
+		$result["sls"] = $table;
 		return $result;
 	}
 }

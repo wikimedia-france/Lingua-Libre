@@ -28,61 +28,70 @@ class Language
 	 */
 	private $code;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Language
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
+	/**
+	 * Set title
+	 *
+	 * @param string $title
+	 *
+	 * @return Language
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	/**
+	 * Get title
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
 
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Language
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
+	/**
+	 * Set code
+	 *
+	 * @param string $code
+	 *
+	 * @return Language
+	 */
+	public function setCode($code)
+	{
+		$this->code = $code;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
+	/**
+	 * Get code
+	 *
+	 * @return string
+	 */
+	public function getCode()
+	{
+		return $this->code;
+	}
+	
+	public function export()
+	{
+		$result = array();
+		$result["id"] = $this->getId();
+		$result["code"] = $this->getCode();
+		$result["title"] = $this->getTitle();
+		return $result;
+	}
 }

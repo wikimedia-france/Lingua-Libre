@@ -1,7 +1,7 @@
-var Studio = function(userId, targetUrl, addSpeakerUrl) {
+var Studio = function(userId, targetUrl, addSpeakerNode) {
 		this.targetUrl = targetUrl;
 		this.userId = userId;
-		this.addSpeakerUrl = addSpeakerUrl;
+		this.addSpeakerNode = addSpeakerNode;
 		this.speakers = [];
 		
 		this.ajax = new Ajax();
@@ -49,14 +49,14 @@ Studio.prototype.showSpeakers = function(speakers) {
 	}
 };
 
-Studio.prototype.showLangs = function(langs) {
+Studio.prototype.showSls = function(sls) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
 	this.langsNode.appendChild(this.createOption(document.createTextNode("- Veuillez choisir une langue -")), null);
-	this.langsNode.disabled = !langs;
-	if (langs) {
-		for(var i = 0; i < langs.length; i++) {
-			var lang = langs[i];
+	this.langsNode.disabled = !sls;
+	if (sls) {
+		for(var i = 0; i < sls.length; i++) {
+			var lang = sls[i].lang;
 			this.langsNode.appendChild(this.createOption(document.createTextNode(lang.title), lang));
 
 		}
@@ -73,7 +73,7 @@ Studio.prototype.setSpeakers  = function(arr) {
 };
 
 Studio.prototype.setSpeaker = function(speaker) {
-	this.showLangs(speaker ? speaker.langs : null);
+	this.showSls(speaker ? speaker.sls : null);
 };
 
 Studio.prototype.currentSpeaker = function() {
@@ -104,9 +104,7 @@ Studio.prototype.createForm = function() {
 	table.className = "nice";
 
 	var tr = this.createRow(document.createTextNode("Locuteur"), this.speakersNode);
-	var th = document.createElement("th");
-	th.appendChild(this.createIcon("img/add_24.png", "Ajouter un locuteur", this.addSpeakerUrl));
-	tr.appendChild(th);
+	if (this.addSpeakerNode) tr.appendChild(this.addSpeakerNode);
 	table.appendChild(tr);
 	
 	table.appendChild(this.createRow(document.createTextNode("Langue"), this.langsNode));

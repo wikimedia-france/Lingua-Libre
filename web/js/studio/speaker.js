@@ -1,23 +1,23 @@
-var Speaker = function(id, name, langs) {
+var Speaker = function(id, name, sls) {
 	this.id = id;
 	this.name = name;
-	this.langs = langs ? langs : [];
+	this.sls = sls ? sls : [];
 };
 
-Speaker.prototype.addLang = function(lang) {
-	this.langs.push(lang);
+Speaker.prototype.addSl = function(sl) {
+	this.sls.push(sl);
 };
 
-Speaker.prototype.setLangs = function(arr) {
+Speaker.prototype.setSls = function(arr) {
 	for (var i = 0; i < arr.length; i++) {
-		var lang = new Lang();
-		lang.set(arr[i]);
-		this.addLang(lang);		
+		var sl = new Sl();
+		sl.set(arr[i]);
+		this.addSl(sl);		
 	}
 };
 
 Speaker.prototype.set = function(item) {
 	this.id = item.id;
 	this.name = item.name;
-	this.setLangs(item.langs);
+	this.setSls(item.sls);
 };

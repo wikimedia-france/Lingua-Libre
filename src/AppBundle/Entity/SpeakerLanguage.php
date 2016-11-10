@@ -250,7 +250,8 @@ class SpeakerLanguage
 	public function export()
 	{
 		$result = array();
-		$result["lang"] = $this->getLanguage()->getCode();
+		$result["id"] = $this->getId();
+		$result["lang"] = $this->getLanguage()->export();
 		if ($this->getProfileType()) $result["profileType"] = $this->getProfileType();
 		if ($this->getCountry()) $result["country"] = $this->getCountry();
 		if ($this->getTown()) $result["town"] = $this->getTown();

@@ -59,13 +59,16 @@ class SoundsController extends Controller
 	public function addAction()
 	{
 		$user = $this->getUser();
+
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		$languages = $this->getDoctrine()->getRepository('AppBundle:Language')->findAll();
+		$data = array();
+		foreach($speakers as $speaker) {
+			$data[] = $speaker->export();
+		}
 
 		return $this->render('sounds/add.html.twig', array(
 			"user" => $user,
-			"speakers" => $speakers,
-			"languages" => $languages
+			"speakers_data" => $data,
 		));
 	}
 
