@@ -13,21 +13,29 @@ MultiRecorder.prototype.setContent = function(node) {
 	this.recorderNode.appendChild(node);
 };
 
+MultiRecorder.prototype.createMenu = function() {
+	var self = this;
+	var ul = document.createElement("ul");
+	ul.className = "tabs";
+
+	var li = document.createElement("li");
+	li.appendChild(document.createTextNode("Enregistrement manuel"));
+	li.onclick = function() { self.setContent(self.recorderWidget.node) };
+	ul.appendChild(li);
+
+	var li = document.createElement("li");
+	li.appendChild(document.createTextNode("Enregistrement par listing"));
+	li.onclick = function() { self.setContent(self.listingEditor.node) };
+	ul.appendChild(li);
+
+	return ul;
+};
+
 MultiRecorder.prototype.init = function() {
 	var self = this;
 
-	var a = document.createElement("a");
-	a.appendChild(document.createTextNode("Enregistrement manuel"));
-	a.onclick = function() { self.setContent(self.recorderWidget.node) };
-	this.node.appendChild(a);
-
-	this.node.appendChild(document.createTextNode(" | "));
-
-	var a = document.createElement("a");
-	a.appendChild(document.createTextNode("Enregistrement par listing"));
-	a.onclick = function() { self.setContent(self.listingEditor.node) };
-	this.node.appendChild(a);
-
+	this.node.className = "multiRecorder";
+	this.node.appendChild(this.createMenu());
 	this.node.appendChild(this.recorderNode);
 	
 	//--Manual mode

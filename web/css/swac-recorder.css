@@ -21,9 +21,11 @@ div.listing {
 	background-color: #fff;
 	font-size: 180%;
 	padding: 10px;
-	min-height: 400px;
+	min-height: 100px;
+	height: 500px;
 	resize: both;
 	overflow: auto;
+	position: relative;
 }
 
 div.listing > div.item {
@@ -39,12 +41,12 @@ div.listing > div.item {
 	user-select: none;
 }
 
-div.listing > div.current {
-	background-color: #fcc;
-}
-
 div.listing > div.sent {
 	background-color: #cfc;
+}
+
+div.listing > div.current {
+	background-color: #fcc;
 }
 
 div.listingRecorder {

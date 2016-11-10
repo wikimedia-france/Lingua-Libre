@@ -143,11 +143,20 @@ ListingWidgetItem.prototype.init = function() {
 	this.node.className = this.getClassName();
 };
 
+ListingWidgetItem.prototype.pageDown = function() {
+	if (this.node.offsetTop + this.node.offsetHeight > this.parent.node.scrollTop + this.parent.node.offsetHeight) {
+		this.parent.node.scrollTop = this.node.offsetTop;
+	}
+};
+
 ListingWidgetItem.prototype.setCurrent = function(state) {
 	this.current = state;
 	this.node.className = this.getClassName();
-	if (state && document.activeElement != this.node) this.node.focus();
-//	if (this.parent.recording) this.node.scrollIntoView(true);
+	
+	if (state && document.activeElement != this.node) {
+		if (this.parent.recording) this.pageDown();
+		this.node.focus();
+	}
 };
 
 ListingWidgetItem.prototype.getClassName = function() {

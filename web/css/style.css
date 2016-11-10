@@ -244,3 +244,17 @@ ul.listepart li {
 ul.listepart li::before { 
 	content: "↪ ";
 }
+
+div.multiRecorder > ul.tabs {
+	padding: 0;
+	border-bottom: 3px solid #ddd;
+}
+
+div.multiRecorder > ul.tabs > li {
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 15px 15px 0 0;
+	background-color: #ddd;
+	padding: 15px;
+	margin-bottom: 0;
+}
