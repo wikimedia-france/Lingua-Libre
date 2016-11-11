@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="speakers")
  */
-class Speaker
+class Speaker implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -387,5 +387,10 @@ class Speaker
 		}
 		$result["sls"] = $table;
 		return $result;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

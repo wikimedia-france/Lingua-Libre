@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="sounds")
  */
 
-class Sound
+class Sound implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -312,5 +312,10 @@ class Sound
 			"lang" => $this->getLang()->getCode(),
 			"path" => $this->getVirtualFilename()
 		);
+	}
+	
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

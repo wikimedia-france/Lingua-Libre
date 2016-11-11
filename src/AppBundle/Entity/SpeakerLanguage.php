@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="speaker_languages")
  */
-class SpeakerLanguage
+class SpeakerLanguage implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -257,5 +257,10 @@ class SpeakerLanguage
 		if ($this->getTown()) $result["town"] = $this->getTown();
 		if ($this->getDialect()) $result["dialect"] = $this->getDialect();
 		return $result;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

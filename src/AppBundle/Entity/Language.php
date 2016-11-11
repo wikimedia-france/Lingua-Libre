@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="languages")
  */
-class Language
+class Language implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -93,5 +93,10 @@ class Language
 		$result["code"] = $this->getCode();
 		$result["title"] = $this->getTitle();
 		return $result;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

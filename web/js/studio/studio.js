@@ -6,7 +6,9 @@ var Studio = function(userId, targetUrl, addSpeakerNode) {
 		
 		this.ajax = new Ajax();
 		this.audioAuthWidget = new AudioAuthWidget();
+		this.multiRecorder = null;
 		this.node = document.createElement("div");
+		this.contentNode = document.createElement("div");
 		this.speakersNode = document.createElement("select");
 		this.langsNode = document.createElement("select");
 		
@@ -27,6 +29,11 @@ Studio.prototype.createRow = function(titleNode, dataNode) {
 	return tr;
 };
 
+Studio.prototype.setContent = function(node) {
+	while (this.contentNode.firstChild) this.contentNode.removeChild(this.contentNode.firstChild);
+	this.contentNode.appendChild(node);
+};
+
 Studio.prototype.addSpeaker = function(speaker) {
 	this.speakers.push(speaker);
 };
@@ -41,7 +48,6 @@ Studio.prototype.createOption = function(titleNode, data) {
 Studio.prototype.showSpeakers = function(speakers) {
 	while (this.speakersNode.firstChild) this.speakersNode.removeChild(this.speakersNode.firstChild);
 
-	this.speakersNode.appendChild(this.createOption(document.createTextNode("- Veuillez choisir un locuteur -")), null);
 	for(var i = 0; i < speakers.length; i++) {
 		var speaker = speakers[i];
 		this.speakersNode.appendChild(this.createOption(document.createTextNode(speaker.name), speaker));
@@ -52,8 +58,9 @@ Studio.prototype.showSpeakers = function(speakers) {
 Studio.prototype.showSls = function(sls) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
-	this.langsNode.appendChild(this.createOption(document.createTextNode("- Veuillez choisir une langue -")), null);
 	this.langsNode.disabled = !sls;
+	this.contentNode.style.display = sls ? "" : "none";
+
 	if (sls) {
 		for(var i = 0; i < sls.length; i++) {
 			var lang = sls[i].lang;
@@ -72,20 +79,20 @@ Studio.prototype.setSpeakers  = function(arr) {
 	this.update();
 };
 
-Studio.prototype.setSpeaker = function(speaker) {
+Studio.prototype.setCurrentSpeaker = function(speaker) {
 	this.showSls(speaker ? speaker.sls : null);
 };
 
-Studio.prototype.currentSpeaker = function() {
+Studio.prototype.getCurrentSpeaker = function() {
 	return this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
-Studio.prototype.currentLang = function() {
+Studio.prototype.getCurrentLang = function() {
 	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
 Studio.prototype.onchangeSpeaker = function(e) {
-	this.setSpeaker(this.currentSpeaker());
+	this.setCurrentSpeaker(this.getCurrentSpeaker());
 };
 
 Studio.prototype.createIcon = function(src, title, href) {
@@ -118,23 +125,26 @@ Studio.prototype.init = function() {
 	this.node.className = "studio";
 	
 	this.node.appendChild(this.createForm());
-	this.node.appendChild(this.audioAuthWidget.node);
+	this.node.appendChild(this.contentNode);
+
+	this.setContent(this.audioAuthWidget.node);
 
 	var self = this;
 	this.audioAuthWidget.onenabled = function(stream) {
-		var multiRecorder = new MultiRecorder(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
-		this.appendChild(multiRecorder.node);
+		this.multiRecorder = new MultiRecorder(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
+		self.setContent(this.multiRecorder.node);
 	};
-	this.setSpeaker(null);
+	this.setCurrentSpeaker(null);
 };
 
 Studio.prototype.update = function() {
 	this.showSpeakers(this.speakers);
+	this.onchangeSpeaker();
 };
 
 Studio.prototype.send = function send(sound, meta, doneCb) {
-	var speaker = this.currentSpeaker();
-	var lang = this.currentLang();
+	var speaker = this.getCurrentSpeaker();
+	var lang = this.getCurrentLang();
 	if (!lang || !speaker) return;
 	
 	var formData = new FormData();
