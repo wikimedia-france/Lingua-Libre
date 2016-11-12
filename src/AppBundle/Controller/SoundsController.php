@@ -82,18 +82,21 @@ class SoundsController extends Controller
 
 			//Get vars
 			$text = $request->request->get("text");
+			if (!$text) throw new Exception('No transcription');
 			
-			$user = $em->getRepository('AppBundle:User')->find($request->request->get("user"));
-			if (!$user) throw new Exception('No user found');
+			$userId = $request->request->get("user");
+			$user = $em->getRepository('AppBundle:User')->find($userId);
+			if (!$user) throw new Exception('No user #".$userId." found');
 
-			$speaker = $em->getRepository('AppBundle:Speaker')->find($request->request->get("speaker"));
-			if (!$speaker) throw new Exception('No speaker found');
+			$speakerId = $request->request->get("speaker");
+			$speaker = $em->getRepository('AppBundle:Speaker')->find($speakerId);
+			if (!$speaker) throw new Exception('No speaker #'.$speakerId.' found');
 
 			$language = $em->getRepository('AppBundle:Language')->find($request->request->get("lang"));
 			if (!$language) throw new Exception('No language found');
 			
 			//Copy file
-			$filename = $speaker->getId()."-".dechex(crc32($text))."-".rand(0, 32000).".wav";
+			$filename = $speaker->getId()."-".dechex(crc32($text))."-".dechex(rand(0, 32000)).".wav";
 			$file = $request->files->get("sound");
 			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
@@ -117,9 +120,15 @@ class SoundsController extends Controller
 			$em->flush();
 		}
 		catch (Exception $e) {
-			return new Response(json_encode(false));
+			return new Response(json_encode(array(
+				"state" => false,
+				"msg" => $e->getMessage()
+			)));
 		}
-		return new Response(json_encode(true));
+		return new Response(json_encode(array(
+			"state" => true,
+			"sound" => $sound
+		)));
 	}
 
 	/**

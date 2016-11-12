@@ -374,6 +374,7 @@ class Speaker implements \JsonSerializable
 	public function export()
 	{
 		$result = array();
+		$result["id"] = $this->getId();
 		$result["name"] = $this->getName();
 		if ($this->getLivingCountry()) $result["country"] = $this->getLivingCountry();
 		if ($this->getLivingCity()) $result["city"] = $this->getLivingCity();

@@ -156,7 +156,7 @@ Studio.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
-		doneCb(result);
+		doneCb(result.state);
 	}, false);
 };
 
