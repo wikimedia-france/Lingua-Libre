@@ -61,6 +61,7 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 	var audio = document.createElement("audio");
 	audio.src = this.audioRootPath + "/" + sound.wave;
 	audio.setAttribute("controls", "true");
+	audio.setAttribute("preload", "none");
 	td.appendChild(audio);
 
 	var th = document.createElement("th");
