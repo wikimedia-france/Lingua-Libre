@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block javascript %}
+	<script type="text/javascript" src="{{ asset('js/widgets/soundsWidget.js') }}"></script>
 	<script type="text/javascript">
-		var sounds = {{ (sounds|json_encode|raw) }};
+		window.onload = function() {
+			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }});
+			var container = document.getElementById('container');
+			container.parentNode.replaceChild(sounds.node, container);
+		};
 	</script>
 {% endblock %}
 
@@ -12,6 +17,7 @@
 
 	<p>Vous retrouverez ci-dessous l’ensemble des enregistrements effectués par les locuteurs participant au projet Lingua Libre. Ces sons seront téléversés sur la médiathèque Wikimédia Commons. Ils serviront ensuite à compléter, documenter et illustrer les autres projets comme Wikipédia et le Wiktionnaire.</p>
 
+	<div id="container"></div>
 	<table class="nice">
 		<tr><th>Locuteur</th><th>Langue</th><th>Texte</th></tr>
 		{% for sound in sounds %}

@@ -306,10 +306,12 @@ class Sound implements \JsonSerializable
 	public function export()
 	{
 		return array(
+			"id" => $this->getId(),
 			"text" => $this->getText(),
 			"lang" => $this->getLang(),
 			"speaker" => $this->getSpeaker(),
-			"path" => $this->getVirtualFilename()
+			"ogg" => $this->getVirtualFilename(),
+			"wave" => $this->getFilename()
 		);
 	}
 	

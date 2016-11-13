@@ -258,3 +258,13 @@ div.multiRecorder > ul.tabs > li {
 	padding: 15px;
 	margin-bottom: 0;
 }
+
+button.details {
+	cursor: pointer;
+	height: 24px;
+	width: 24px;
+	border: none;
+	background-color: transparent;
+	background-image: url(../img/details_24.png)
+	
+}
