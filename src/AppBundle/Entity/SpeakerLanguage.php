@@ -251,7 +251,7 @@ class SpeakerLanguage implements \JsonSerializable
 	{
 		$result = array();
 		$result["id"] = $this->getId();
-		$result["lang"] = $this->getLanguage()->export();
+		$result["lang"] = $this->getLanguage();
 		if ($this->getProfileType()) $result["profileType"] = $this->getProfileType();
 		if ($this->getCountry()) $result["country"] = $this->getCountry();
 		if ($this->getTown()) $result["town"] = $this->getTown();

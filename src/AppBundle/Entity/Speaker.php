@@ -384,7 +384,7 @@ class Speaker implements \JsonSerializable
 		$table = array();
 		foreach($languages as $language) 
 		{
-			$table[] = $language->export();
+			$table[] = $language;
 		}
 		$result["sls"] = $table;
 		return $result;

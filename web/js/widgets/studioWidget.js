@@ -1,4 +1,4 @@
-var Studio = function(userId, targetUrl, addSpeakerNode) {
+var StudioWidget = function(userId, targetUrl, addSpeakerNode) {
 		this.targetUrl = targetUrl;
 		this.userId = userId;
 		this.addSpeakerNode = addSpeakerNode;
@@ -15,7 +15,7 @@ var Studio = function(userId, targetUrl, addSpeakerNode) {
 		this.init();
 };
 
-Studio.prototype.createRow = function(titleNode, dataNode) {
+StudioWidget.prototype.createRow = function(titleNode, dataNode) {
 	var tr = document.createElement("tr");
 
 	var th = document.createElement("th");
@@ -29,23 +29,23 @@ Studio.prototype.createRow = function(titleNode, dataNode) {
 	return tr;
 };
 
-Studio.prototype.setContent = function(node) {
+StudioWidget.prototype.setContent = function(node) {
 	while (this.contentNode.firstChild) this.contentNode.removeChild(this.contentNode.firstChild);
 	this.contentNode.appendChild(node);
 };
 
-Studio.prototype.addSpeaker = function(speaker) {
+StudioWidget.prototype.addSpeaker = function(speaker) {
 	this.speakers.push(speaker);
 };
 
-Studio.prototype.createOption = function(titleNode, data) {
+StudioWidget.prototype.createOption = function(titleNode, data) {
 	var option = document.createElement("option");
 	option.appendChild(titleNode);
 	option.data = data;
 	return option;
 };
 
-Studio.prototype.showSpeakers = function(speakers) {
+StudioWidget.prototype.showSpeakers = function(speakers) {
 	while (this.speakersNode.firstChild) this.speakersNode.removeChild(this.speakersNode.firstChild);
 
 	for(var i = 0; i < speakers.length; i++) {
@@ -55,7 +55,7 @@ Studio.prototype.showSpeakers = function(speakers) {
 	}
 };
 
-Studio.prototype.showSls = function(sls) {
+StudioWidget.prototype.showSls = function(sls) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
 	this.langsNode.disabled = !sls;
@@ -70,7 +70,7 @@ Studio.prototype.showSls = function(sls) {
 	}
 };
 
-Studio.prototype.setSpeakers  = function(arr) {
+StudioWidget.prototype.setSpeakers  = function(arr) {
 	for (var i = 0; i < arr.length; i++) {
 		var speaker = new Speaker();
 		speaker.set(arr[i]);
@@ -79,23 +79,23 @@ Studio.prototype.setSpeakers  = function(arr) {
 	this.update();
 };
 
-Studio.prototype.setCurrentSpeaker = function(speaker) {
+StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
 	this.showSls(speaker ? speaker.sls : null);
 };
 
-Studio.prototype.getCurrentSpeaker = function() {
+StudioWidget.prototype.getCurrentSpeaker = function() {
 	return this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
-Studio.prototype.getCurrentLang = function() {
+StudioWidget.prototype.getCurrentLang = function() {
 	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
-Studio.prototype.onchangeSpeaker = function(e) {
+StudioWidget.prototype.onchangeSpeaker = function(e) {
 	this.setCurrentSpeaker(this.getCurrentSpeaker());
 };
 
-Studio.prototype.createIcon = function(src, title, href) {
+StudioWidget.prototype.createIcon = function(src, title, href) {
 	var a = document.createElement("a");
 	a.href = href;
 	
@@ -106,7 +106,7 @@ Studio.prototype.createIcon = function(src, title, href) {
 	return a;
 };
 
-Studio.prototype.createForm = function() {
+StudioWidget.prototype.createForm = function() {
 	var table = document.createElement("table");
 	table.className = "nice";
 
@@ -121,7 +121,7 @@ Studio.prototype.createForm = function() {
 	return table;
 };
 
-Studio.prototype.init = function() {
+StudioWidget.prototype.init = function() {
 	this.node.className = "studio";
 	
 	this.node.appendChild(this.createForm());
@@ -131,18 +131,18 @@ Studio.prototype.init = function() {
 
 	var self = this;
 	this.audioAuthWidget.onenabled = function(stream) {
-		this.multiRecorder = new MultiRecorder(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
+		this.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
 		self.setContent(this.multiRecorder.node);
 	};
 	this.setCurrentSpeaker(null);
 };
 
-Studio.prototype.update = function() {
+StudioWidget.prototype.update = function() {
 	this.showSpeakers(this.speakers);
 	this.onchangeSpeaker();
 };
 
-Studio.prototype.send = function send(sound, meta, doneCb) {
+StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	var speaker = this.getCurrentSpeaker();
 	var lang = this.getCurrentLang();
 	if (!lang || !speaker) return;

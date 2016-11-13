@@ -303,13 +303,12 @@ class Sound implements \JsonSerializable
 		return count($this->comments) > 0 ? $this->comments[0] : false;
 	}
 	
-	
-
 	public function export()
 	{
 		return array(
 			"text" => $this->getText(),
-			"lang" => $this->getLang()->getCode(),
+			"lang" => $this->getLang(),
+			"speaker" => $this->getSpeaker(),
 			"path" => $this->getVirtualFilename()
 		);
 	}

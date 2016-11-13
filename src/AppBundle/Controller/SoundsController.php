@@ -61,14 +61,9 @@ class SoundsController extends Controller
 		$user = $this->getUser();
 
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		$data = array();
-		foreach($speakers as $speaker) {
-			$data[] = $speaker->export();
-		}
-
 		return $this->render('sounds/add.html.twig', array(
 			"user" => $user,
-			"speakers_data" => $data,
+			"speakers" => $speakers,
 		));
 	}
 

@@ -48,7 +48,7 @@ ListingRecorderWidget.prototype.save = function(buffers) {
 			"transcript": current.str,
 		},
 		function(success) {
-			current.setSent(true);
+			current.setSent(success);
 		}
 	);
 

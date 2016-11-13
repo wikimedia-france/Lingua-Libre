@@ -9,11 +9,12 @@
 	{{ parent() }}
 	<script type="text/javascript" src="{{ asset('js/ajax.js') }}"></script>
 
-	<script type="text/javascript" src="{{ asset('js/studio/studio.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/studio/multiRecorder.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/studio/speaker.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/studio/lang.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/studio/sl.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/widgets/studioWidget.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/widgets/multiRecorderWidget.js') }}"></script>
+
+	<script type="text/javascript" src="{{ asset('js/entities/speaker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/entities/lang.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/entities/sl.js') }}"></script>
 
 	<script type="text/javascript" src="{{ asset('js/swac-recorder/buffer.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/swac-recorder/buffers.js') }}"></script>
@@ -37,8 +38,8 @@
 		var app = null;
 		window.onload = function() {
 
-			studio = new Studio({{ user.getId() }}, "{{ path('soundsApi') }}", document.getElementById('addSpeaker') );
-			studio.setSpeakers({{(speakers_data|json_encode|raw)}});
+			studio = new StudioWidget({{ user.getId() }}, "{{ path('soundsApi') }}", document.getElementById('addSpeaker') );
+			studio.setSpeakers({{(speakers|json_encode|raw)}});
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(studio.node, container);
 		};

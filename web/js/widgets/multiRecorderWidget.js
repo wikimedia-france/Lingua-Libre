@@ -1,4 +1,4 @@
-var MultiRecorder = function(stream, sendCb) {
+var MultiRecorderWidget = function(stream, sendCb) {
 	this.recorderWidget = new RecorderWidget(stream, sendCb );
 	this.listingRecorderWidget = new ListingRecorderWidget(stream, sendCb );
 	this.listingEditor = new ListingEditorWidget();
@@ -8,12 +8,12 @@ var MultiRecorder = function(stream, sendCb) {
 	this.init();
 };
 
-MultiRecorder.prototype.setContent = function(node) {
+MultiRecorderWidget.prototype.setContent = function(node) {
 	while (this.recorderNode.firstChild) this.recorderNode.removeChild(this.recorderNode.firstChild);
 	this.recorderNode.appendChild(node);
 };
 
-MultiRecorder.prototype.createMenu = function() {
+MultiRecorderWidget.prototype.createMenu = function() {
 	var self = this;
 	var ul = document.createElement("ul");
 	ul.className = "tabs";
@@ -31,7 +31,7 @@ MultiRecorder.prototype.createMenu = function() {
 	return ul;
 };
 
-MultiRecorder.prototype.init = function() {
+MultiRecorderWidget.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "multiRecorder";
