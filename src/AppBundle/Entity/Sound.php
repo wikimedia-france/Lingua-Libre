@@ -310,7 +310,7 @@ class Sound implements \JsonSerializable
 			"text" => $this->getText(),
 			"lang" => $this->getLang(),
 			"speaker" => $this->getSpeaker(),
-			"ogg" => $this->getVirtualFilename(),
+			//"ogg" => $this->getVirtualFilename(),
 			"wave" => $this->getFilename()
 		);
 	}
