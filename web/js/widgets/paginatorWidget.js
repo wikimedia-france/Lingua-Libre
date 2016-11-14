@@ -22,9 +22,9 @@ PaginatorWidget.prototype.setPosition = function(page, npages) {
 PaginatorWidget.prototype.init = function() {
 	var self = this;
 	this.node.className = "paginator";
-	
+
 	this.node.appendChild(this.previousNode);
-	this.previousNode.appendChild(document.createTextNode("◀"));
+	this.previousNode.appendChild(document.createTextNode("⏪"));
 	this.previousNode.onclick = function() { self.pageInc(-1); };
 
 	this.node.appendChild(this.numberNode);
@@ -32,7 +32,7 @@ PaginatorWidget.prototype.init = function() {
 	this.numberNode.className = "number";
 	
 	this.node.appendChild(this.nextNode);
-	this.nextNode.appendChild(document.createTextNode("▶"));
+	this.nextNode.appendChild(document.createTextNode("⏩"));
 	this.nextNode.onclick = function() { self.pageInc(1); };
 };
 
