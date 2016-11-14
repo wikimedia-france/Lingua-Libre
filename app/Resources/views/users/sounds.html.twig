@@ -1,5 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block javascript %}
+	{% include 'routes.inc.twig' %}
+	
+	<script type="text/javascript" src="{{ asset('js/widgets/soundsWidget.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/widgets/paginatorWidget.js') }}"></script>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
+			sounds.onloadspeaker = function(speaker) {
+				pathSpeakerShow(speaker.id).goto();
+			};
+			sounds.onloadsound = function(sound) {
+				pathSoundsShow(sound.id).goto();
+			};
+			var container = document.getElementById('container');
+			container.parentNode.replaceChild(sounds.node, container);
+		};
+	</script>
+{% endblock %}
+
 {% block body %}
 	<h1>
 	{% if auth and auth.getId() == user.getId() %}
@@ -9,19 +30,7 @@
 	{% endif %}
 	</h1>
 
-	<table class="nice">
-		<tr><th>Locuteur</th><th>Langue</th><th>Texte</th></tr>
-		{% for sound in sounds %}
-		<tr>
-			<td>{% if sound.getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getSpeaker().getId()}) }}'>{{ sound.getSpeaker().getName() }}</a>{% else %}-{% endif %}</td>
-			<td>{{ sound.getLang().getTitle() }}</td>
-			<td>{{ sound.getText() }}</td>
-			<td><audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio></td>
-			<th><a href="{{ path("soundsShow", {"id": sound.getId() }) }}"><img src="{{ asset('img/details_24.png') }}" title="Détails"/></a></th>
-		</tr>
-		{% endfor %}
-		{% if auth and auth.getId() == user.getId() %}<tr><th><a href="{{ path("soundsAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></tr></th>{% endif %}
-	</table>
+	<div id="container"></div>
 
 {% endblock %}
 

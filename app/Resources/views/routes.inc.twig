@@ -1,0 +1,14 @@
+<script type="text/javascript">
+function pathSpeakerShow(id) {
+	return String("{{ path('speakersShow', {'id': '_id_'}) }}").replace("_id_", id);
+}
+
+function pathSoundsShow(id) {
+	return String("{{ path('soundsShow', {'id': '_id_'}) }}").replace("_id_", id);
+}
+
+String.prototype.goto = function() {
+	window.location.href = this;
+};
+
+</script>
