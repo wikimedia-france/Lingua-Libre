@@ -84,7 +84,7 @@ StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
 };
 
 StudioWidget.prototype.getCurrentSpeaker = function() {
-	return this.speakersNode.options[this.speakersNode.selectedIndex].data;
+	return this.speakersNode.selectedIndex == -1 ? null : this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
 StudioWidget.prototype.getCurrentLang = function() {
