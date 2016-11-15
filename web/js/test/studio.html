@@ -34,9 +34,8 @@
 		<script type="text/javascript" src="js/swac-recorder/listingRecorderWidget.js"></script>
 
 		<script type="text/javascript">
-			var app = null;
 			window.onload = function() {
-				studio = new StudioWidget(5, "/api/sounds");
+				var studio = new StudioWidget(5, "/api/sounds");
 				studio.setSpeakers([{"name":"Nicolas Vion","country":"FR","city":"Paris","path":"Nicolas Vion","sls":[{"id":1,"lang":{"id":17,"code":"fra","title":"Fran\u00e7ais"},"profileType":"NAT","country":"FR","town":"R\u00e9gion parisienne"},{"id":2,"lang":{"id":15,"code":"eng","title":"Anglais"},"profileType":"B2","country":"FR","town":"R\u00e9gion parisienne"}]},{"name":"Olivier Fraysse","country":"FR","city":"Paris","path":"Olivier Fraysse","sls":[]}]);
 				document.body.appendChild(studio.node);
 			};
