@@ -10,7 +10,11 @@
 		{% endblock %}
 
 		{% block javascript %}
-			<script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
+			<script type="text/javascript">
+				function toggle_visibility(node) {
+					node.style.display = node.style.display == "none" ? "" : "none";
+				};
+			</script>
 		{% endblock %}
 	</head>
 	<body>
