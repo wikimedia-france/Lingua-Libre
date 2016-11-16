@@ -13,7 +13,7 @@ SoundsWidget.prototype = Object.create(Widget.prototype);
 SoundsWidget.prototype.constructor = SoundsWidget;
 
 SoundsWidget.prototype.init = function() {
-	this.createElement("div")
+	this.createElement("div").setClass("sounds")
 		.appendChild(this.paginator
 			.setCallback("changeposition", this, function(n) { this.show(n) })
 		)
@@ -25,20 +25,20 @@ SoundsWidget.prototype.createHeader = function() {
 	return new Widget().createElement("tr")
 		.appendChild(new Widget().createElement("th").appendTextNode("Locuteur"))
 		.appendChild(new Widget().createElement("th").appendTextNode("Langue"))
-		.appendChild(new Widget().createElement("th").appendTextNode("Transcription").setClass("transcription"))
+		.appendChild(new Widget().createElement("th").appendTextNode("Transcription"))
 	;
 };
 
 SoundsWidget.prototype.createSoundTr = function(sound) {
 	return new Widget().createElement("tr")
-		.appendChild(new Widget().createElement("td")
+		.appendChild(new Widget().createElement("td").setClass("speaker")
 			.appendChild(new Widget().createElement("a")
 				.appendTextNode(sound.speaker.name)
 				.addEventListener("click", this, function() { this.call("showspeaker", sound.speaker ) })
 			)
 		)
-		.appendChild(new Widget().createElement("td").appendTextNode(sound.lang.title))
-		.appendChild(new Widget().createElement("td").appendTextNode(sound.text))
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.lang.title).setClass("language"))
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.text).setClass("transcription"))
 		.appendChild(new Widget().createElement("td")
 			.appendChild(new Widget().createElement("audio")
 				.setAttribute("src", this.audioRootPath + "/" + sound.wave)

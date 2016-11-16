@@ -266,11 +266,20 @@ button.details {
 	border: none;
 	background-color: transparent;
 	background-image: url(../img/details_24.png)
-	
 }
 
-th.transcription {
+div.sounds td.transcription {
 	width: 350px;
+}
+
+div.sounds td.speaker {
+	text-align: center;
+	width: 150px;
+}
+
+div.sounds td.language {
+	text-align: center;
+	width: 120px;
 }
 
 div.paginator > span.number {
