@@ -19,7 +19,7 @@
 		<p><a class="lienpart" href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
 
 		{% if user.getSpeakers()|length > 0 %}
-			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id":user.getId()}) }}">Voir les locuteurs</a></p>
+			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
 		{% else %}	
 			<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
 		{% endif %}
