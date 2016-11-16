@@ -3,7 +3,7 @@ var SoundsWidget = function(sounds, audioRootPath) {
 
 	this.table = Widget.createElement("table");
 	this.paginator = new PaginatorWidget();
-	this.pageSize = 4;
+	this.pageSize = 20;
 	this.audioRootPath = audioRootPath;
 	this.init();
 	if (sounds) this.setSounds(sounds);
