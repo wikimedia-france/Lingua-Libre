@@ -43,7 +43,7 @@
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<hr/>
 				<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
-				<li><a href="{{ path('speakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
+				<li><a href="{{ path('usersSpeakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
 				<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
 				<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
 				{% if is_granted('ROLE_ADMIN') %}

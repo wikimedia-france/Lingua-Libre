@@ -26,8 +26,7 @@ class SpeakersController extends Controller
 
 		return $this->render('speakers/index.html.twig', array(
 			"auth" => $this->getUser(),
-			"speakers" => $speakers,
-			"user" => $this->getUser()
+			"speakers" => $speakers
 		));
 	}
 
