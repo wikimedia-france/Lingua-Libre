@@ -1,9 +1,9 @@
 var SoundsWidget = function(sounds, audioRootPath) {
-	Widget.call(this, document.createElement("div"));
-
-	this.table = Widget.createElement("table");
+	Widget.call(this);
+	
+	this.table = new Widget().createElement("table");
 	this.paginator = new PaginatorWidget();
-	this.pageSize = 20;
+	this.pageSize = 15;
 	this.audioRootPath = audioRootPath;
 	this.init();
 	if (sounds) this.setSounds(sounds);
@@ -13,51 +13,46 @@ SoundsWidget.prototype = Object.create(Widget.prototype);
 SoundsWidget.prototype.constructor = SoundsWidget;
 
 SoundsWidget.prototype.init = function() {
-	var self = this;
-	
-	this.node.appendChild(this.paginator.node);
-	this.appendChild(this.table);
-	this.table.setClass("nice");
-	
-	this.paginator.onchangeposition = function(n) { self.show(n); };
+	this.createElement("div")
+		.appendChild(this.paginator
+			.setCallback("changeposition", this, function(n) { this.show(n) })
+		)
+		.appendChild(this.table.setClass("nice"))
+	;
 };
 
 SoundsWidget.prototype.createHeader = function() {
-	return Widget.createElement("tr")
-		.appendChild(Widget.createElement("th").appendTextNode("Locuteur"))
-		.appendChild(Widget.createElement("th").appendTextNode("Langue"))
-		.appendChild(Widget.createElement("th").appendTextNode("Transcription"))
+	return new Widget().createElement("tr")
+		.appendChild(new Widget().createElement("th").appendTextNode("Locuteur"))
+		.appendChild(new Widget().createElement("th").appendTextNode("Langue"))
+		.appendChild(new Widget().createElement("th").appendTextNode("Transcription"))
 	;
 };
 
 SoundsWidget.prototype.createSoundTr = function(sound) {
-	return Widget.createElement("tr")
-		.appendChild(Widget.createElement("td")
-			.appendChild(Widget.createElement("a")
+	return new Widget().createElement("tr")
+		.appendChild(new Widget().createElement("td")
+			.appendChild(new Widget().createElement("a")
 				.appendTextNode(sound.speaker.name)
-				.addEventListener("click", this, function() { this.call("showSpeaker", sound.speaker ) })
+				.addEventListener("click", this, function() { this.call("showspeaker", sound.speaker ) })
 			)
 		)
-		.appendChild(Widget.createElement("td").appendTextNode(sound.lang.title))
-		.appendChild(Widget.createElement("td").appendTextNode(sound.text))
-		.appendChild(Widget.createElement("td")
-			.appendChild(Widget.createElement("audio")
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.lang.title))
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.text))
+		.appendChild(new Widget().createElement("td")
+			.appendChild(new Widget().createElement("audio")
 				.setAttribute("src", this.audioRootPath + "/" + sound.wave)
 				.setAttribute("controls", "true")
 				.setAttribute("preload", "none")
 			)
 		)
-		.appendChild(Widget.createElement("th")
-			.appendChild(Widget.createElement("button")
+		.appendChild(new Widget().createElement("th")
+			.appendChild(new Widget().createElement("button")
 				.setClass("details")
-				.addEventListener("click", this, function() { this.call("showSound", sound ) })
+				.addEventListener("click", this, function() { this.call("showsound", sound ) })
 			)
 		)
 	;
-};
-
-SoundsWidget.prototype.onclickspeaker = function(sound) {
-	console.log("plop");
 };
 
 SoundsWidget.prototype.show = function(page) {

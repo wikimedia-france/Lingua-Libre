@@ -1,39 +1,42 @@
 var PaginatorWidget = function() {
-	this.node = document.createElement("div");
-	this.nextNode = document.createElement("button");
-	this.numberNode = document.createElement("span"); 
-	this.previousNode = document.createElement("button");
+	Widget.call(this);
+
+	this.next = new Widget().createElement("button");
+	this.number = new Widget().createElement("span"); 
+	this.previous = new Widget().createElement("button");
 	this.page = 0;
 	this.npages = 0;
 	this.init();
 };
 
+PaginatorWidget.prototype = Object.create(Widget.prototype);
+PaginatorWidget.prototype.constructor = PaginatorWidget;
+
 PaginatorWidget.prototype.showPosition = function(page, npages) {
-	this.numberNode.firstChild.nodeValue = (page + 1) + " / " + npages;
+	this.number
+		.clearChilds()
+		.appendTextNode((page + 1) + " / " + npages);
 };
 
 PaginatorWidget.prototype.setPosition = function(page, npages) {
 	this.page = page;
 	this.npages = npages;
 	this.showPosition(page, npages);
-	if ("onchangeposition" in this) this.onchangeposition(page);
+	this.call("changeposition", page);
 };
 
 PaginatorWidget.prototype.init = function() {
-	var self = this;
-	this.node.className = "paginator";
-
-	this.node.appendChild(this.previousNode);
-	this.previousNode.appendChild(document.createTextNode("⏪"));
-	this.previousNode.onclick = function() { self.pageInc(-1); };
-
-	this.node.appendChild(this.numberNode);
-	this.numberNode.appendChild(document.createTextNode(""));
-	this.numberNode.className = "number";
-	
-	this.node.appendChild(this.nextNode);
-	this.nextNode.appendChild(document.createTextNode("⏩"));
-	this.nextNode.onclick = function() { self.pageInc(1); };
+	this.createElement("div").setClass("paginator")
+		.appendChild(this.previous
+			.appendTextNode("⏪")
+			.addEventListener("click", this, function() { this.pageInc(-1) } )
+		)
+		.appendChild(this.number.setClass("number"))
+		.appendChild(this.next
+			.appendTextNode("⏩")
+			.addEventListener("click", this, function() { this.pageInc(+1) } )
+		)
+	;
 };
 
 PaginatorWidget.prototype.pageInc = function(n) {

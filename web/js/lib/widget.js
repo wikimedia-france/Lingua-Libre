@@ -1,5 +1,16 @@
 var Widget = function(node) {
 	this.node = node;
+	this.callbacks = {};
+};
+
+Widget.prototype.createElement = function(tagName) {
+	this.node = document.createElement(tagName);
+	return this;
+};
+
+Widget.prototype.createTextNode = function(str) {
+	this.node = document.createTextNode(str);
+	return this;
 };
 
 Widget.prototype.setVisibility = function(value) {
@@ -46,8 +57,15 @@ Widget.prototype.addEventListener = function(event, target, fct, useCapture) {
 };
 
 Widget.prototype.call = function(fctName, a, b, c, d, e) {
-	return (fctName in this) ? this[fctName](a, b, c, d, e) : false;
+	return (fctName in this.callbacks) ? this.callbacks[fctName](a, b, c, d, e) : false;
 };
+
+Widget.prototype.setCallback = function(fctName, target, fct) {
+	this.callbacks[fctName] = function(a, b, c, d, e) {
+		return fct.call(target, a, b, c, d, e);
+	};
+	return this;
+}
 
 Widget.prototype.appendChild = function(child) {
 	if (child) this.node.appendChild(child.node);
@@ -100,13 +118,5 @@ Widget.prototype.replaceWidget = function(widget) {
 Widget.prototype.removeWidget = function() {
 	this.node.parentNode.removeChild(this.node);
 	return null;
-};
-
-Widget.createElement = function(tagName) {
-	return new Widget(document.createElement(tagName));
-};
-
-Widget.createTextNode = function(str) {
-	return new Widget(document.createTextNode(str));
 };
 

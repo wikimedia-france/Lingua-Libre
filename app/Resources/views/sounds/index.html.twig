@@ -6,12 +6,12 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
-			sounds.showSpeaker = function(speaker) {
+			sounds.setCallback("showspeaker", sounds, function(speaker) {
 				pathSpeakerShow(speaker.id).goto();
-			};
-			sounds.showSound = function(sound) {
+			});
+			sounds.setCallback("showsound", sounds, function(sound) {
 				pathSoundsShow(sound.id).goto();
-			};
+			});
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(sounds.node, container);
 		};
