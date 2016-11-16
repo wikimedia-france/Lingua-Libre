@@ -39,7 +39,7 @@ ListingRecorderWidget.prototype.init = function() {
 };
 
 ListingRecorderWidget.prototype.setState = function(state) {
-	this.listing.recording = state;
+	this.listing.setRecording(state);
 };
 
 ListingRecorderWidget.prototype.save = function(buffers) {

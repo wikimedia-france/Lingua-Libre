@@ -102,11 +102,12 @@ class SoundsController extends Controller
 			$file->move($path, $filename);
 
 			//Create sound object
-			$sound = new Sound();
+			$sound = false;
 			if ($id) {
 				$sound = $em->getRepository('AppBundle:Sound')->find($id);
-				if ($sound && !$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
+				if ($sound && !$sound->getUser()->editableBy($this->getUser())) throw new Exception('Forbidden');
 			}
+			if (!$sound) $sound = new Sound();
 
 			$sound->setText($text);
 			

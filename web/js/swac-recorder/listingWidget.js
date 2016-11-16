@@ -8,9 +8,18 @@ var ListingWidget = function() {
 
 ListingWidget.prototype.init = function() {
 	var self = this;
-	this.node.className = "listing";
+	this.node.className = this.getClassName();
 	this.node.setAttribute("tabindex", "0");
 	this.node.onkeydown = function(e) { return self.onkeydown(e); };
+};
+
+ListingWidget.prototype.getClassName = function() {
+	return "listing" + (this.recording ? " recording" : "");
+};
+
+ListingWidget.prototype.setRecording = function(value) {
+	this.recording = value;
+	this.node.className = this.getClassName();
 };
 
 ListingWidget.prototype.onkeydown = function(e) {
@@ -126,7 +135,7 @@ var ListingWidgetItem = function(str) {
 	this.str = str;
 	this.parent = null;
 	this.current = false;
-	this.sent = false;
+	this.sent = null;
 	this.sound = false;
 	this.init();
 };
@@ -175,7 +184,7 @@ ListingWidgetItem.prototype.setCurrent = function(state) {
 };
 
 ListingWidgetItem.prototype.getClassName = function() {
-	return "item" + (this.current ? " current" : "") + (this.sent ? " sent" : "");
+	return "item" + (this.current ? " current" : "") + (this.sent === true ? " sent" : "") + (this.sent === false ? " error" : "");
 };
 
 ListingWidgetItem.prototype.getY = function() {
