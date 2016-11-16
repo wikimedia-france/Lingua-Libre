@@ -269,6 +269,10 @@ button.details {
 	
 }
 
+th.transcription {
+	min-width: 350px;
+}
+
 div.paginator > span.number {
 	padding: 5px;
 }

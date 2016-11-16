@@ -25,7 +25,7 @@ SoundsWidget.prototype.createHeader = function() {
 	return new Widget().createElement("tr")
 		.appendChild(new Widget().createElement("th").appendTextNode("Locuteur"))
 		.appendChild(new Widget().createElement("th").appendTextNode("Langue"))
-		.appendChild(new Widget().createElement("th").appendTextNode("Transcription"))
+		.appendChild(new Widget().createElement("th").appendTextNode("Transcription").setClass("transcription"))
 	;
 };
 
