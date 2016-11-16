@@ -48,7 +48,10 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 			)
 		)
 		.appendChild(Widget.createElement("th")
-			.appendChild(Widget.createElement("button").setClass("details"))
+			.appendChild(Widget.createElement("button")
+				.setClass("details")
+				.addEventListener("click", this, function() { this.call("showSound", sound ) })
+			)
 		)
 	;
 };
