@@ -16,3 +16,7 @@ common.js: $(FILES)
 
 clean:
 	rm --force *.js
+	
+dev:
+	while /bin/true; do make all; sleep 1; inotifywait -r -e modify *; sleep 0.5; done
+

@@ -6,10 +6,10 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
-			sounds.onloadspeaker = function(speaker) {
+			sounds.showSpeaker = function(speaker) {
 				pathSpeakerShow(speaker.id).goto();
 			};
-			sounds.onloadsound = function(sound) {
+			sounds.showSound = function(sound) {
 				pathSoundsShow(sound.id).goto();
 			};
 			var container = document.getElementById('container');

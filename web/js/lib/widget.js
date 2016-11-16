@@ -38,34 +38,31 @@ Widget.prototype.clearChilds = function() {
 	return this;
 };
 
-Widget.prototype.connect = function(event, target, method) {
-	var self = this;
-	this.node[event] = function(a, b, c, d) {
-		return target[method](self, a, b, c, d);
-	};
+Widget.prototype.addEventListener = function(event, target, fct, useCapture) {
+	this.node.addEventListener(event, function(a, b, c, d, e) {
+		return fct.call(target, a, b, c, d, e);
+	}, useCapture);
 	return this;
 };
 
-Widget.prototype.emit = function(event, a, b, c, d) {
-	if (event in this.node) {
-		this.node[event](a, b, c, d);
-	}
+Widget.prototype.call = function(fctName, a, b, c, d, e) {
+	return (fctName in this) ? this[fctName](a, b, c, d, e) : false;
 };
 
-Widget.prototype.addChild = function(child) {
+Widget.prototype.appendChild = function(child) {
 	if (child) this.node.appendChild(child.node);
 	return this;
 };
 
-Widget.prototype.addChilds = function(childs) {
+Widget.prototype.appendChilds = function(childs) {
 	for (var i = 0; i < childs.length; i++) {
-		this.addChild(childs[i]);
+		this.appendChild(childs[i]);
 	}
 	return this;
 };
 
-Widget.prototype.addTextChild = function(text) {
-	return this.addChild(new Widget(document.createTextNode(text)));
+Widget.prototype.appendTextNode = function(text) {
+	return this.appendChild(new Widget(document.createTextNode(text)));
 };
 
 Widget.prototype.unshiftChild = function(child) {
@@ -78,12 +75,12 @@ Widget.prototype.setClass = function(className) {
 	return this;
 };
 
-Widget.prototype.setAttr = function(attribute, value) {
+Widget.prototype.setAttribute = function(attribute, value) {
 	this.node.setAttribute(attribute, value);
 	return this;
 };
 
-Widget.prototype.getAttr = function(attribute) {
+Widget.prototype.getAttribute = function(attribute) {
 	return this.node.getAttribute(attribute);
 };
 
