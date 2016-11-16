@@ -66,6 +66,10 @@ ListingWidget.prototype.getCurrent = function() {
 	return this.current;
 };
 
+ListingWidget.prototype.getFirst = function() {
+	return this.items.length > 0 ? this.items[0] : null;
+};
+
 ListingWidget.prototype.getLast = function() {
 	return this.items.length > 0 ? this.items[this.items.length - 1] : null;
 };
@@ -123,6 +127,7 @@ var ListingWidgetItem = function(str) {
 	this.parent = null;
 	this.current = false;
 	this.sent = false;
+	this.sound = false;
 	this.init();
 };
 
@@ -130,9 +135,18 @@ ListingWidgetItem.prototype.setParent = function(listing) {
 	this.parent = listing;
 };
 
+ListingWidgetItem.prototype.setSound = function(sound) {
+	this.sound = sound;
+};
+
 ListingWidgetItem.prototype.setSent = function(value) {
 	this.sent = value;
 	this.node.className = this.getClassName();
+};
+
+ListingWidgetItem.prototype.showSound = function() {
+	//console.log(this.sound ? "sound id #" + this.sound.id : "no sound");
+	if (this.sound && "showSound" in this.parent) this.parent.showSound(this.sound);
 };
 
 ListingWidgetItem.prototype.init = function() {
@@ -141,6 +155,7 @@ ListingWidgetItem.prototype.init = function() {
 	this.node.onfocus = function(e) { self.onfocus(e); }
 	this.node.setAttribute("tabindex", "0");
 	this.node.className = this.getClassName();
+	this.node.ondblclick = function() { self.showSound() };
 };
 
 ListingWidgetItem.prototype.pageDown = function() {

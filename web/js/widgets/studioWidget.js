@@ -84,7 +84,7 @@ StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
 };
 
 StudioWidget.prototype.getCurrentSpeaker = function() {
-	return this.speakersNode.options[this.speakersNode.selectedIndex].data;
+	return this.speakersNode.selectedIndex == -1 ? null : this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
 StudioWidget.prototype.getCurrentLang = function() {
@@ -131,8 +131,9 @@ StudioWidget.prototype.init = function() {
 
 	var self = this;
 	this.audioAuthWidget.onenabled = function(stream) {
-		this.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
-		self.setContent(this.multiRecorder.node);
+		self.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
+		self.multiRecorder.showSound = function(sound) { self.showSound(sound) };
+		self.setContent(self.multiRecorder.node);
 	};
 	this.setCurrentSpeaker(null);
 };
@@ -151,12 +152,13 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("user", this.userId);
 	formData.append("sound", sound.getBlob());
 	formData.append("text", meta.transcript);
+	if (meta.id) formData.append("id", meta.id);
 	if ("description" in meta) formData.append("description", meta.description);
 	formData.append("speaker", speaker.id);
 	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
-		doneCb(result.state);
+		doneCb(result);
 	}, false);
 };
 

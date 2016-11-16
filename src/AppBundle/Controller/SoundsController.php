@@ -76,6 +76,8 @@ class SoundsController extends Controller
 			$em = $this->getDoctrine();
 
 			//Get vars
+			$id = $request->request->get("id");
+
 			$text = $request->request->get("text");
 			if (!$text) throw new Exception('No transcription');
 			
@@ -101,6 +103,11 @@ class SoundsController extends Controller
 
 			//Create sound object
 			$sound = new Sound();
+			if ($id) {
+				$sound = $em->getRepository('AppBundle:Sound')->find($id);
+				if ($sound && !$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
+			}
+
 			$sound->setText($text);
 			
 			$description = $request->request->get("description");
@@ -116,12 +123,12 @@ class SoundsController extends Controller
 		}
 		catch (Exception $e) {
 			return new Response(json_encode(array(
-				"state" => false,
+				"success" => false,
 				"msg" => $e->getMessage()
 			)));
 		}
 		return new Response(json_encode(array(
-			"state" => true,
+			"success" => true,
 			"sound" => $sound
 		)));
 	}

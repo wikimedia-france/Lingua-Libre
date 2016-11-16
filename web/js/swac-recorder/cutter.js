@@ -7,7 +7,7 @@ var Cutter = function(stream) {
 	this.marginBefore = 0.25;
 	this.marginAfter = 0.25;
 	this.stopSilence = 0.3;
-	this.minimalLength = 0.20;
+	this.minimalLength = 0.15;
 	this.normalize = true;
 
 	this.initState();

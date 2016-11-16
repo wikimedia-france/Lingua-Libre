@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ asset('js/widgets/soundsWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/widgets/paginatorWidget.js') }}"></script>
-
+	{% include 'routes.inc.twig' %}
+	<script type="text/javascript" src="{{ asset('js/common.min.js') }}"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
+			sounds.setCallback("showspeaker", sounds, function(speaker) {
+				pathSpeakerShow(speaker.id).open();
+			});
+			sounds.setCallback("showsound", sounds, function(sound) {
+				pathSoundsShow(sound.id).open();
+			});
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(sounds.node, container);
 		};

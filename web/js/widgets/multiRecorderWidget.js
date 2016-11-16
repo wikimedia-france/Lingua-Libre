@@ -46,5 +46,6 @@ MultiRecorderWidget.prototype.init = function() {
 	this.listingEditor.onsubmit = function(list) {
 		self.listingRecorderWidget.setList(list);
 		self.setContent(self.listingRecorderWidget.node);
-	};	
+	};
+	this.listingRecorderWidget.showSound = function(sound) { if ("showSound" in self) self.showSound(sound) };
 };

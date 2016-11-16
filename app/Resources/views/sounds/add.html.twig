@@ -7,39 +7,15 @@
 
 {% block javascript %}
 	{{ parent() }}
-	<script type="text/javascript" src="{{ asset('js/ajax.js') }}"></script>
-
-	<script type="text/javascript" src="{{ asset('js/widgets/studioWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/widgets/multiRecorderWidget.js') }}"></script>
-
-	<script type="text/javascript" src="{{ asset('js/entities/speaker.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/entities/lang.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/entities/sl.js') }}"></script>
-
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/buffer.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/buffers.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/sound.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/soundWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/player.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/recorder.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/recorderWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/audioAuthWidget.js') }}"></script>
-
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/cutter.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/cutterWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/cutterViewWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/listingEditorWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/listingWidget.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/swac-recorder/listingRecorderWidget.js') }}"></script>
-
+	{% include 'routes.inc.twig' %}
+	<script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
 	<script type="text/javascript">
-		
-		
-		var app = null;
 		window.onload = function() {
-
 			studio = new StudioWidget({{ user.getId() }}, "{{ path('soundsApi') }}", document.getElementById('addSpeaker') );
 			studio.setSpeakers({{(speakers|json_encode|raw)}});
+			studio.showSound = function(sound) {
+				pathSoundsShow(sound.id).open("_blank");
+			};
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(studio.node, container);
 		};

@@ -23,6 +23,7 @@ ListingRecorderWidget.prototype.setList = function(list) {
 	for (var i = 0; i < list.length; i++) {
 		this.listing.push(new ListingWidgetItem(list[i]));
 	}
+	this.listing.setCurrentIndex(0);
 };
 
 ListingRecorderWidget.prototype.init = function() {
@@ -34,6 +35,7 @@ ListingRecorderWidget.prototype.init = function() {
 
 	this.recorder.cutter.onsave = function(buffers) { return self.save(buffers); };
 	this.recorder.onstatechange = function(state) { self.setState(state) };
+	this.listing.showSound = function(sound) { if ("showSound" in self) self.showSound(sound) };
 };
 
 ListingRecorderWidget.prototype.setState = function(state) {
@@ -42,13 +44,16 @@ ListingRecorderWidget.prototype.setState = function(state) {
 
 ListingRecorderWidget.prototype.save = function(buffers) {
 	var current = this.listing.getCurrent();
+	if (!current) return false;
 	this.sendCb(
 		buffers.getSound(),
 		{
 			"transcript": current.str,
+			"id": current.sound ? current.sound.id : false
 		},
-		function(success) {
-			current.setSent(success);
+		function(response) {
+			current.setSent(response.success);
+			if (response.success) current.setSound(response.sound);
 		}
 	);
 
