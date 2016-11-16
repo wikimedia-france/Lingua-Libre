@@ -116,12 +116,12 @@ class SoundsController extends Controller
 		}
 		catch (Exception $e) {
 			return new Response(json_encode(array(
-				"state" => false,
+				"success" => false,
 				"msg" => $e->getMessage()
 			)));
 		}
 		return new Response(json_encode(array(
-			"state" => true,
+			"success" => true,
 			"sound" => $sound
 		)));
 	}

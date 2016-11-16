@@ -7,10 +7,10 @@
 		window.onload = function() {
 			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
 			sounds.setCallback("showspeaker", sounds, function(speaker) {
-				pathSpeakerShow(speaker.id).goto();
+				pathSpeakerShow(speaker.id).open();
 			});
 			sounds.setCallback("showsound", sounds, function(sound) {
-				pathSoundsShow(sound.id).goto();
+				pathSoundsShow(sound.id).open();
 			});
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(sounds.node, container);

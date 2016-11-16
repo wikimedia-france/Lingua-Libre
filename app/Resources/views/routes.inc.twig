@@ -7,8 +7,13 @@ function pathSoundsShow(id) {
 	return String("{{ path('soundsShow', {'id': '_id_'}) }}").replace("_id_", id);
 }
 
-String.prototype.goto = function() {
-	window.location.href = this;
+String.prototype.open = function(target) {
+	if (target) {
+		window.open(this, target);
+	}
+	else {
+		window.location.href = this;
+	}
 };
 
 </script>

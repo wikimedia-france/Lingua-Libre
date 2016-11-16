@@ -7,11 +7,15 @@
 
 {% block javascript %}
 	{{ parent() }}
-	<script type="text/javascript" src="{{ asset('js/common.min.js') }}"></script>
+	{% include 'routes.inc.twig' %}
+	<script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			studio = new StudioWidget({{ user.getId() }}, "{{ path('soundsApi') }}", document.getElementById('addSpeaker') );
 			studio.setSpeakers({{(speakers|json_encode|raw)}});
+			studio.showSound = function(sound) {
+				pathSoundsShow(sound.id).open("_blank");
+			};
 			var container = document.getElementById('container');
 			container.parentNode.replaceChild(studio.node, container);
 		};

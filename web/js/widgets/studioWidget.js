@@ -131,8 +131,9 @@ StudioWidget.prototype.init = function() {
 
 	var self = this;
 	this.audioAuthWidget.onenabled = function(stream) {
-		this.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
-		self.setContent(this.multiRecorder.node);
+		self.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
+		self.multiRecorder.showSound = function(sound) { self.showSound(sound) };
+		self.setContent(self.multiRecorder.node);
 	};
 	this.setCurrentSpeaker(null);
 };
@@ -155,8 +156,8 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("speaker", speaker.id);
 	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
-		console.log(JSON.stringify(result));
-		doneCb(result.state);
+		//console.log(JSON.stringify(result));
+		doneCb(result);
 	}, false);
 };
 

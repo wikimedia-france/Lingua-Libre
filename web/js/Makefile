@@ -6,7 +6,7 @@ FILES = $(LIB_FILES) $(WIDGETS_FILES) $(ENTITIES_FILES) $(SWAC_RECORDER_FILES)
 
 all: common.min.js
 
-.INTERMEDIATE: common.js
+#.INTERMEDIATE: common.js
 
 common.js: $(FILES)
 	cat $(FILES) > $@
