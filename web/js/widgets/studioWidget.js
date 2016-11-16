@@ -152,11 +152,12 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("user", this.userId);
 	formData.append("sound", sound.getBlob());
 	formData.append("text", meta.transcript);
+	if (meta.id) formData.append("id", meta.id);
 	if ("description" in meta) formData.append("description", meta.description);
 	formData.append("speaker", speaker.id);
 	formData.append("lang", lang.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
-		//console.log(JSON.stringify(result));
+		console.log(JSON.stringify(result));
 		doneCb(result);
 	}, false);
 };

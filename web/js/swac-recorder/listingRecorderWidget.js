@@ -49,6 +49,7 @@ ListingRecorderWidget.prototype.save = function(buffers) {
 		buffers.getSound(),
 		{
 			"transcript": current.str,
+			"id": current.sound ? current.sound.id : false
 		},
 		function(response) {
 			current.setSent(response.success);
