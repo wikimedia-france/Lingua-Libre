@@ -21,7 +21,7 @@ class SoundsController extends Controller
 	public function indexAction()
 	{
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Sound');
-		$sounds = $repository->findAll();
+		$sounds = $repository->findBy(array(), array('id' => 'DESC'));
 
 		return $this->render('sounds/index.html.twig', array(
 			"sounds" => $sounds,
