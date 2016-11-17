@@ -41,6 +41,10 @@ div.listing > div.item {
 	user-select: none;
 }
 
+div.listing > div.sending {
+	opacity: 0.3;
+}
+
 div.listing > div.sent {
 	background-color: #cfc;
 }

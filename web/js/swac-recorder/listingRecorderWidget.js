@@ -42,6 +42,8 @@ ListingRecorderWidget.prototype.setState = function(state) {
 ListingRecorderWidget.prototype.save = function(buffers) {
 	var current = this.listing.getCurrent();
 	if (!current) return false;
+	current.setSending(true);
+	
 	this.sendCb(
 		buffers.getSound(),
 		{
@@ -49,7 +51,7 @@ ListingRecorderWidget.prototype.save = function(buffers) {
 			"id": current.sound ? current.sound.id : false
 		},
 		function(response) {
-			current.setSent(response.success);
+			current.setSuccess(response.success);
 			if (response.success) current.setSound(response.sound);
 		}
 	);

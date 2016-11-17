@@ -149,7 +149,8 @@ var ListingWidgetItem = function(str) {
 	this.str = str;
 	this.parent = null;
 	this.current = false;
-	this.sent = null;
+	this.success = null;
+	this.sending = false;
 	this.sound = false;
 	this.init();
 };
@@ -162,8 +163,14 @@ ListingWidgetItem.prototype.setSound = function(sound) {
 	this.sound = sound;
 };
 
-ListingWidgetItem.prototype.setSent = function(value) {
-	this.sent = value;
+ListingWidgetItem.prototype.setSuccess = function(value) {
+	this.sending = false;
+	this.success = value;
+	this.node.className = this.getClassName();
+};
+
+ListingWidgetItem.prototype.setSending = function(value) {
+	this.sending = value;
 	this.node.className = this.getClassName();
 };
 
@@ -198,7 +205,7 @@ ListingWidgetItem.prototype.setCurrent = function(state) {
 };
 
 ListingWidgetItem.prototype.getClassName = function() {
-	return "item" + (this.current ? " current" : "") + (this.sent === true ? " sent" : "") + (this.sent === false ? " error" : "");
+	return "item" + (this.current ? " current" : "") + (this.success === true ? " sent" : "") + (this.sucess === false ? " error" : "") + (this.sending ? " sending" : "");
 };
 
 ListingWidgetItem.prototype.getY = function() {
