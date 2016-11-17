@@ -171,7 +171,6 @@ class SoundsController extends Controller
 		));
 	}
 
-
 	/**
 	* @Route("/sounds/{id}/delete", name="soundsDelete")
 	*/

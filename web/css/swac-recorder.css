@@ -31,7 +31,7 @@ div.listing {
 div.listing > div.item {
 	margin: 10px;
 	padding: 10px;
-	background-color: #ccf;
+	background-color: #bbe;
 	display: inline-block;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -50,7 +50,7 @@ div.listing > div.error {
 }
 
 div.listing > div.current {
-	background-color: #eef;
+	background-color: #ddf;
 }
 
 div.recording > div.current {

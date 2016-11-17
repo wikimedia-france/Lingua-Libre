@@ -42,6 +42,14 @@ ListingWidget.prototype.onkeydown = function(e) {
 	return true;
 };
 
+ListingWidget.prototype.setList = function(list) {
+	this.clear();
+	for (var i = 0; i < list.length; i++) {
+		this.push(new ListingWidgetItem(list[i]));
+	}
+	this.setCurrentIndex(0);
+};
+
 ListingWidget.prototype.findItemIndex = function(item) {
 	if (!item) return -1;
 	for (var i = 0; i < this.items.length; i++) {
@@ -120,6 +128,12 @@ ListingWidget.prototype.push = function(item) {
 	this.items.push(item);
 	this.node.appendChild(item.node);
 	item.setParent(this);
+};
+
+ListingWidget.prototype.clear = function() {
+	while (this.node.firstChild) this.node.removeChild(this.node.firstChild);
+	this.items = [];
+	this.current = null;
 };
 
 ListingWidget.prototype.setCurrent = function(item) {

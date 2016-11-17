@@ -20,10 +20,7 @@ ListingRecorderWidget.prototype.onkeydown = function(e) {
 };
 
 ListingRecorderWidget.prototype.setList = function(list) {
-	for (var i = 0; i < list.length; i++) {
-		this.listing.push(new ListingWidgetItem(list[i]));
-	}
-	this.listing.setCurrentIndex(0);
+	this.listing.setList(list);
 };
 
 ListingRecorderWidget.prototype.init = function() {
