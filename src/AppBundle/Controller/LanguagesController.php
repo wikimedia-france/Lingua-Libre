@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Sound;
+use AppBundle\Entity\User;
+use AppBundle\Entity\Language;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,8 +31,30 @@ class LanguagesController extends Controller
 	/**
 	* @Route("/languages/add", name="languagesAdd")
 	*/
-	public function addAction()
+	public function addAction(Request $request)
 	{
+		$lang = new Language();
+
+		$form = $this->createFormBuilder($lang)
+			->add('title', TextType::class)
+			->add('code', TextType::class)
+			->add('save', SubmitType::class, array('label' => 'Ok'))
+			->getForm();
+
+		//Enregistrement
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($lang);
+			$em->flush();
+			return $this->redirectToRoute('languagesShow', array("id" => $lang->getId()));
+		}
+
+		$token = $this->get('security.token_storage')->getToken();
+		return $this->render('languages/add.html.twig', array(
+			"form" => $form->createView(),
+			"token" => $token
+		));
 	}
 
 	/**
@@ -46,13 +69,6 @@ class LanguagesController extends Controller
 			"language" => $lang,
 			"user" => $this->getUser()
 		));
-	}
-
-	/**
-	* @Route("/languages/{id}/delete", name="languagesDelete")
-	*/
-	public function soundsAction(Request $request, $id)
-	{
 	}
 	
 	/**
