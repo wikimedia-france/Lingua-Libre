@@ -30,13 +30,15 @@ class LanguagesController extends Controller
 	*/
 	public function addAction()
 	{
+/*
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Language');
-		$langs = $repository->findAll();
+		$langs = $repository->find($id);
 
 		return $this->render('languages/index.html.twig', array(
 			"languages" => $langs,
 			"user" => $this->getUser()
 		));
+*/
 	}
 
 	/**
@@ -45,10 +47,10 @@ class LanguagesController extends Controller
 	public function showAction(Request $request, $id)
 	{
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Language');
-		$langs = $repository->findAll();
+		$lang = $repository->find($id);
 
-		return $this->render('languages/index.html.twig', array(
-			"languages" => $langs,
+		return $this->render('languages/show.html.twig', array(
+			"language" => $lang,
 			"user" => $this->getUser()
 		));
 	}
