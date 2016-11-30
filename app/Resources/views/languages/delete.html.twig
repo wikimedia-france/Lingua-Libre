@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Supprimer langue</h1>
+	
+	<p>Êtes-vous sûr de vouloir supprimer la langue « {{ language.getTitle()|capitalize }} » ?</p>
+
+	{{ form_start(form) }}
+	<table>
+		<tr><td>{{ form_widget(form.save) }} <a href="{{ path("languagesShow", {"id": language.getId() }) }}">Annuler</a></td></tr>
+	</table>
+	{{ form_end(form) }}
+
+{% endblock %}
+

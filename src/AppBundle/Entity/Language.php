@@ -99,4 +99,8 @@ class Language implements \JsonSerializable
 	{
 		return $this->export();
 	}
+	
+	public function editableBy($user) {
+		return $user->getIsAdmin();
+	}
 }
