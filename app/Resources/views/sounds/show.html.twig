@@ -17,50 +17,25 @@
 	<h2>Commentaires</h2>
 	
 	{% if comments|length==0 %}
-	
-	<p>Aucun commentaire à afficher.</p>
-	
+		<p>Aucun commentaire à afficher.</p>
 	{% endif %}
 	
-	
 	{% if comments|length>0 or user != null %}
-	
-	<table class="nice">
-	
-	
-		{% for sc in comments %}
-	
-		
-		
-		
-			
-		
-			{% if sc.getVisibility() == false %}
-				<tr class="privatecom">
-			{% else %}
-				<tr>
-			{% endif %}	
+		<table class="nice">
+			{% for sc in comments %}
+				<tr{% if sc.getVisibility() == false %} class="privatecom"{% endif %}>
 			
 				<th>Par {{ sc.getUser().getUsername() }}<br />le {{ sc.getDatetime()|date("d/m/Y") }}</th>
 				<td>{{ sc.getText() }}</td>
-				
+			
 				{% if sc.editableBy(user) %}<th class="tools"><a href="{{ path("soundCommentsUpdate", {"id": sc.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundCommentsDelete", {"id": sc.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
-			</tr>
-			
+				</tr>
+			{% endfor %}
 		
-			
-			
-			
-		{% endfor %}
-		
-	{% if user != null %}
-		<tr><th class="tools"><a href="{{ path("soundCommentsAdd", {"id": sound.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
+			{% if user != null %}
+				<tr><th class="tools"><a href="{{ path("soundCommentsAdd", {"id": sound.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
+			{% endif %}
+		</table>
 	{% endif %}
-	</table>
-		
-	{% endif %}
-	
-	
-
 {% endblock %}
 
