@@ -5,11 +5,13 @@
 
 
 	<table class="nice">
-		<tr><th>Titre</th><th>Code</th></tr>
+		<tr><th>Titre</th><th>Code</th><th>Description</th></tr>
 		{% for language in languages %}
 		<tr>
 			<td><a href="{{ path("languagesShow", {"id": language.getId() }) }}">{{ language.getTitle()|capitalize }}</a></td>
 			<td>{{ language.getCode() }}</td>
+			<td>{{ language.getDescription() }}</td>
+			<th><a href="{{ path("languagesShow", {"id": language.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
 		</tr>
 		{% endfor %}
 		<tr><th><a href="{{ path("languagesAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>

@@ -6,6 +6,7 @@
 	<table class="nice">
 		<tr><th>Titre</th><td>{{ language.getTitle()|capitalize }}</td></tr>
 		<tr><th>Code</th><td>{{ language.getCode() }}</td></tr>
+		<tr><th>Description</th><td>{{ language.getDescription() }}</td></tr>
 		{% if language.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("languagesUpdate", {"id": language.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("languagesDelete", {"id": language.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}	</table>
 {% endblock %}
 

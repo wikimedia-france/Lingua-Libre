@@ -29,6 +29,11 @@ class Language implements \JsonSerializable
 	private $code;
 
 	/**
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $description;
+
+	/**
 	 * Get id
 	 *
 	 * @return integer
@@ -84,6 +89,30 @@ class Language implements \JsonSerializable
 	public function getCode()
 	{
 		return $this->code;
+	}
+	
+	/**
+	 * Set description
+	 *
+	 * @param string $description
+	 *
+	 * @return Speaker
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
 	}
 	
 	public function export()
