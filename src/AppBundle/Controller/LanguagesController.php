@@ -47,7 +47,7 @@ class LanguagesController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($lang);
 			$em->flush();
-			return $this->redirectToRoute('languagesShow', array("id" => $lang->getId()));
+			return $this->redirectToRoute('languages');
 		}
 
 		$token = $this->get('security.token_storage')->getToken();
