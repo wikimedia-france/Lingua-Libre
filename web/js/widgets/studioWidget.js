@@ -63,8 +63,8 @@ StudioWidget.prototype.showSls = function(sls) {
 
 	if (sls) {
 		for(var i = 0; i < sls.length; i++) {
-			var lang = sls[i].lang;
-			this.langsNode.appendChild(this.createOption(document.createTextNode(lang.title), lang));
+			var sl = sls[i];
+			this.langsNode.appendChild(this.createOption(document.createTextNode(sl.lang.title + (sl.dialect ? " (" + sl.dialect + ")" : "")), sl.lang));
 
 		}
 	}
