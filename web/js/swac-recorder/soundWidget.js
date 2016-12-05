@@ -114,8 +114,8 @@ SoundWidget.prototype.send = function() {
 			"transcript": this.getTranscript(),
 			"description": this.getDescription()
 		},
-		function(success) {
-			if (success) self.discard();
+		function(response) {
+			if (response.success) self.discard();
 		}
 	);
 }

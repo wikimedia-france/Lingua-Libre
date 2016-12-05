@@ -37,7 +37,7 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 				.addEventListener("click", this, function() { this.call("showspeaker", sound.speaker ) })
 			)
 		)
-		.appendChild(new Widget().createElement("td").appendTextNode(sound.lang.title).setClass("language"))
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.sl.getTitle()).setClass("language"))
 		.appendChild(new Widget().createElement("td").appendTextNode(sound.text).setClass("transcription"))
 		.appendChild(new Widget().createElement("td")
 			.appendChild(new Widget().createElement("audio")
@@ -62,8 +62,10 @@ SoundsWidget.prototype.show = function(page) {
 
 	for (var i = 0; i < this.pageSize; i++) {
 		var key = page * this.pageSize + i;
-		var sound = key < this.sounds.length ? this.sounds[key] : false;
-		if (!sound) break;
+		var arr = key < this.sounds.length ? this.sounds[key] : false;
+		if (!arr) break;
+		var sound = new Sound();
+		sound.set(arr);
 		this.table.appendChild(this.createSoundTr(sound));		
 	}
 

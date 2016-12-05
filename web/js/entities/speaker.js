@@ -20,4 +20,5 @@ Speaker.prototype.set = function(item) {
 	this.id = item.id;
 	this.name = item.name;
 	this.setSls(item.sls);
+	return this;
 };

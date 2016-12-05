@@ -89,8 +89,9 @@ class SoundsController extends Controller
 			$speaker = $em->getRepository('AppBundle:Speaker')->find($speakerId);
 			if (!$speaker) throw new Exception('No speaker #'.$speakerId.' found');
 
-			$language = $em->getRepository('AppBundle:Language')->find($request->request->get("lang"));
-			if (!$language) throw new Exception('No language found');
+			$slId = $request->request->get("sl");
+			$sl = $em->getRepository('AppBundle:SpeakerLanguage')->find($slId);
+			if (!$sl) throw new Exception('No speaker language #'.$slId.' found');
 			
 			//Copy file
 			$filename = $speaker->getId()."-".dechex(crc32($text))."-".dechex(rand(0, 32000)).".wav";
@@ -117,7 +118,7 @@ class SoundsController extends Controller
 			$sound->setUser($user);
 			$sound->setFilename($filename);
 			$sound->setSpeaker($speaker);
-			$sound->setLang($language);
+			$sound->setSl($sl);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($sound);
 			$em->flush();
@@ -146,7 +147,7 @@ class SoundsController extends Controller
 		if (!$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$form = $this->createFormBuilder($sound)
-			->add('lang', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
+			->add('sl', EntityType::class, array('class' => 'AppBundle:SpeakerLanguage', 'choice_label' => 'title'))
 			->add('text', TextType::class)
 			->add('description', TextareaType::class, array("required" => false))
 			->add('speaker', EntityType::class, array('class' => 'AppBundle:Speaker', 'choice_label' => 'name', "choices" => $sound->getUser()->getSpeakers()))

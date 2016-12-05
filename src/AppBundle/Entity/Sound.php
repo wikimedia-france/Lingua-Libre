@@ -41,10 +41,10 @@ class Sound implements \JsonSerializable
 	protected $text;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Language")
-	 * @ORM\JoinColumn(name="lang_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="SpeakerLanguage")
+	 * @ORM\JoinColumn(name="sl_id", referencedColumnName="id")
 	 */
-	protected $lang;
+	protected $sl;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -186,27 +186,27 @@ class Sound implements \JsonSerializable
 	}
 
 	/**
-	 * Set lang
+	 * Set sl
 	 *
-	 * @param string $lang
+	 * @param string $sl
 	 *
 	 * @return Sound
 	 */
-	public function setLang($lang)
+	public function setSl($sl)
 	{
-		$this->lang = $lang;
+		$this->sl = $sl;
 
 		return $this;
 	}
 
 	/**
-	 * Get lang
+	 * Get sl
 	 *
 	 * @return string
 	 */
-	public function getLang()
+	public function getSl()
 	{
-		return $this->lang;
+		return $this->sl;
 	}
 
 	/**
@@ -308,7 +308,7 @@ class Sound implements \JsonSerializable
 		return array(
 			"id" => $this->getId(),
 			"text" => $this->getText(),
-			"lang" => $this->getLang(),
+			"sl" => $this->getSl(),
 			"speaker" => $this->getSpeaker(),
 			//"ogg" => $this->getVirtualFilename(),
 			"wave" => $this->getFilename()

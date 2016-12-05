@@ -64,7 +64,7 @@ StudioWidget.prototype.showSls = function(sls) {
 	if (sls) {
 		for(var i = 0; i < sls.length; i++) {
 			var sl = sls[i];
-			this.langsNode.appendChild(this.createOption(document.createTextNode(sl.lang.title + (sl.dialect ? " (" + sl.dialect + ")" : "")), sl.lang));
+			this.langsNode.appendChild(this.createOption(document.createTextNode(sl.lang.title + (sl.dialect ? " (" + sl.dialect + ")" : "")), sl));
 
 		}
 	}
@@ -87,7 +87,7 @@ StudioWidget.prototype.getCurrentSpeaker = function() {
 	return this.speakersNode.selectedIndex == -1 ? null : this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
-StudioWidget.prototype.getCurrentLang = function() {
+StudioWidget.prototype.getCurrentSl = function() {
 	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
@@ -145,8 +145,8 @@ StudioWidget.prototype.update = function() {
 
 StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	var speaker = this.getCurrentSpeaker();
-	var lang = this.getCurrentLang();
-	if (!lang || !speaker) return;
+	var sl = this.getCurrentSl();
+	if (!sl || !speaker) return;
 	
 	var formData = new FormData();
 	formData.append("user", this.userId);
@@ -155,7 +155,7 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	if (meta.id) formData.append("id", meta.id);
 	if ("description" in meta) formData.append("description", meta.description);
 	formData.append("speaker", speaker.id);
-	formData.append("lang", lang.id);
+	formData.append("sl", sl.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
 		doneCb(result);

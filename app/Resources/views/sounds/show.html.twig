@@ -5,7 +5,7 @@
 
 	<table class="nice">
 		<tr><th>Locuteur</th><td>{% if sound.getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getSpeaker().getId()}) }}'>{{ sound.getSpeaker().getName() }}</a>{% else %}-{% endif %}</td></tr>
-		<tr><th>Langue</th><td>{{ sound.getLang().getTitle() }}</td></tr>
+		<tr><th>Langue</th><td>{{ sound.getSl().getLang().getTitle() }}</td></tr>
 		<tr><th>Transcription</th><td>{{ sound.getText() }}</td></tr>
 		<tr><th>Date</th><td>{{ sound.getCreated()|date("d/m/Y")}}</td></tr>
 		{% if sound.getDescription() %}<tr><th>Description</th><td>{{ sound.getDescription() }}</td></tr>{% endif %}
