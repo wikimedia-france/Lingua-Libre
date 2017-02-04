@@ -16,7 +16,7 @@
 		<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
 		<tr><th colspan="2" class="tools"><a href="{{ path("usersUpdate", {"id":user.getId()}) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th></tr>
 	</table>
-	<p><a class="lienpart" href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
+	<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
 	{% endif %}
 
 
@@ -36,9 +36,9 @@
 			{% if user.editableBy(auth) %}<tr><th><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
 		</table>
 	{% else %}
-		<p>Pas de locuteur défini pour le moment.</p>
-		<p>{% if user.editableBy(auth) %}<a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>{% endif %}	</p>
-		
+		<p>Pas de locuteur défini pour le moment.
+		{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
+		</p>
 	{% endif %}
 
 {% endblock %}
