@@ -1,22 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block javascript %}
+	{% include 'routes.inc.twig' %}
+	<script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
+			sounds.setCallback("showspeaker", sounds, function(speaker) {
+				pathSpeakerShow(speaker.id).open();
+			});
+			sounds.setCallback("showsound", sounds, function(sound) {
+				pathSoundsShow(sound.id).open();
+			});
+			var container = document.getElementById('container');
+			container.parentNode.replaceChild(sounds.node, container);
+		};
+	</script>
+{% endblock %}
+
+
 {% block body %}
 	<h1>Sonothèque</h1>
-
-	<p>Vous retrouverez ci-dessous l’ensemble des enregistrements effectués par les locuteurs participant au projet Lingua Libre. Ces sons seront téléversés sur la médiathèque Wikimédia Commons. Ils serviront ensuite à compléter, documenter et illustrer les autres projets comme Wikipédia et le Wiktionnaire.</p>
-
-	<table class="nice">
-		<tr><th>Locuteur</th><th>Langue</th><th>Texte</th></tr>
-		{% for sound in sounds %}
-		<tr>
-			<td>{% if sound.getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getSpeaker().getId()}) }}'>{{ sound.getSpeaker().getName() }}</a>{% else %}-{% endif %}</td>
-			<td>{{ sound.getLang().getTitle() }}</td>
-			<td>{{ sound.getText() }}</td>
-			<td><audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio></td>
-			<th><a href="{{ path("soundsShow", {"id": sound.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
-		</tr>
-		{% endfor %}
-	</table>
-
+	<p>Vous retrouverez ci-dessous l’ensemble des enregistrements effectués par les locuteurs participant au projet Lingua Libre. Ces sons seront téléversés sur la médiathèque <a href="https://commons.wikimedia.org/" target="_blank" alt="Wikimédia Commons" title="Wikimédia Commons">Wikimédia Commons</a>. Ils serviront ensuite à compléter, documenter et illustrer les autres projets comme <a href="https://www.wikipedia.org/" alt="Wikipédia" title="Wikipédia" target="_blank">Wikipédia</a> et le <a href="https://www.wiktionary.org/" alt="Wiktionnaire" title="Wiktionnaire" target="_blank">Wiktionnaire</a>.</p>
+	<div id="container"></div>
 {% endblock %}
 

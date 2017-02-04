@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="sounds")
  */
 
-class Sound
+class Sound implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -41,10 +41,10 @@ class Sound
 	protected $text;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Language")
-	 * @ORM\JoinColumn(name="lang_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="SpeakerLanguage")
+	 * @ORM\JoinColumn(name="sl_id", referencedColumnName="id")
 	 */
-	protected $lang;
+	protected $sl;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -186,27 +186,27 @@ class Sound
 	}
 
 	/**
-	 * Set lang
+	 * Set sl
 	 *
-	 * @param string $lang
+	 * @param string $sl
 	 *
 	 * @return Sound
 	 */
-	public function setLang($lang)
+	public function setSl($sl)
 	{
-		$this->lang = $lang;
+		$this->sl = $sl;
 
 		return $this;
 	}
 
 	/**
-	 * Get lang
+	 * Get sl
 	 *
 	 * @return string
 	 */
-	public function getLang()
+	public function getSl()
 	{
-		return $this->lang;
+		return $this->sl;
 	}
 
 	/**
@@ -303,14 +303,20 @@ class Sound
 		return count($this->comments) > 0 ? $this->comments[0] : false;
 	}
 	
-	
-
 	public function export()
 	{
 		return array(
+			"id" => $this->getId(),
 			"text" => $this->getText(),
-			"lang" => $this->getLang()->getCode(),
-			"path" => $this->getVirtualFilename()
+			"sl" => $this->getSl(),
+			"speaker" => $this->getSpeaker(),
+			//"ogg" => $this->getVirtualFilename(),
+			"wave" => $this->getFilename()
 		);
+	}
+	
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="speakers")
  */
-class Speaker
+class Speaker implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -25,7 +25,7 @@ class Speaker
 	private $user;
 
 	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
+	 * @ORM\Column(type="string", length=25, unique=false)
 	 * @Assert\NotBlank()
 	 */
 	private $name;
@@ -63,9 +63,9 @@ class Speaker
 	private $languages;
 
 	/**
-	 * @ORM\Column(type="date")
+	 * @ORM\Column(type="date", nullable=true)
 	 */
-	private $hasSignedDate;
+	private $signedDate;
 
 	/**
 	 * Get id
@@ -272,27 +272,27 @@ class Speaker
 	}
 
 	/**
-	 * Set hasSignedDate
+	 * Set signedDate
 	 *
-	 * @param \DateTime $hasSignedDate
+	 * @param \DateTime $signedDate
 	 *
 	 * @return Speaker
 	 */
-	public function setHasSignedDate($hasSignedDate)
+	public function setSignedDate($signedDate)
 	{
-		$this->hasSignedDate = $hasSignedDate;
+		$this->signedDate = $signedDate;
 
 		return $this;
 	}
 
 	/**
-	 * Get hasSignedDate
+	 * Get signedDate
 	 *
 	 * @return \DateTime
 	 */
-	public function getHasSignedDate()
+	public function getSignedDate()
 	{
-		return $this->hasSignedDate;
+		return $this->signedDate;
 	}
 
 	/**
@@ -374,6 +374,7 @@ class Speaker
 	public function export()
 	{
 		$result = array();
+		$result["id"] = $this->getId();
 		$result["name"] = $this->getName();
 		if ($this->getLivingCountry()) $result["country"] = $this->getLivingCountry();
 		if ($this->getLivingCity()) $result["city"] = $this->getLivingCity();
@@ -383,9 +384,14 @@ class Speaker
 		$table = array();
 		foreach($languages as $language) 
 		{
-			$table[] = $language->export();
+			$table[] = $language;
 		}
-		$result["languages"] = $table;
+		$result["sls"] = $table;
 		return $result;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->export();
 	}
 }

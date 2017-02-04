@@ -37,4 +37,20 @@ class HomeController extends Controller
 	{
 		return $this->render('about.html.twig', array());
 	}
+
+	/**
+	* @Route("/partners", name="partners")
+	*/
+	public function partnersAction(Request $request)
+	{
+		return $this->render('partners.html.twig', array());
+	}
+
+	/**
+	* @Route("/wikimedia", name="wikimedia")
+	*/
+	public function wikimediaAction(Request $request)
+	{
+		return $this->render('wikimedia.html.twig', array());
+	}
 }

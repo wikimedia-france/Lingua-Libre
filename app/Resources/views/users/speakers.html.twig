@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Locuteurs</h1>
+	{% set speakers = user.getSpeakers() %}
+	{% if speakers|length > 0 %}
+
+		<table class="nice">
+			<tr><th>Nom</th><th>Sexe</th><th>Habitation</th></tr>
+			{% for speaker in speakers %}
+			<tr>
+				<td><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}">{{ speaker.getName() }}</a></td>
+				<td>{{ speaker.getSexSymbol() }}</td>
+				<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
+				<th><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
+			</tr>
+			{% endfor %}
+			{% if user.editableBy(auth) %}<tr><th><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
+		</table>
+	{% else %}
+		<p>Pas de locuteur défini pour le moment.</p>
+		{% if user.editableBy(auth) %}<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a></p>{% endif %}
+		
+	{% endif %}
+
+{% endblock %}
+

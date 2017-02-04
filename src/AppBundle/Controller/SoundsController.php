@@ -21,7 +21,7 @@ class SoundsController extends Controller
 	public function indexAction()
 	{
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Sound');
-		$sounds = $repository->findAll();
+		$sounds = $repository->findBy(array(), array('id' => 'DESC'));
 
 		return $this->render('sounds/index.html.twig', array(
 			"sounds" => $sounds,
@@ -37,9 +37,18 @@ class SoundsController extends Controller
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Sound');
 		$sound = $repository->find($id);
 		if (!$sound) throw $this->createNotFoundException('No sound found for id '.$id);
+		
+		$comments = $sound->getComments();
+		
+		foreach ($comments as $key => $comment) {
+			if((!$comment->getVisibility() ) and (!$comment->editableBy($this->getUser()))) {
+				unset ($comments[$key]);
+			}		
+		}
 
 		return $this->render('sounds/show.html.twig', array(
 			"sound" => $sound,
+			"comments" => $comments,
 			"user" => $this->getUser()
 		));
 	}
@@ -50,13 +59,11 @@ class SoundsController extends Controller
 	public function addAction()
 	{
 		$user = $this->getUser();
-		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		$languages = $this->getDoctrine()->getRepository('AppBundle:Language')->findAll();
 
+		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
 		return $this->render('sounds/add.html.twig', array(
 			"user" => $user,
 			"speakers" => $speakers,
-			"languages" => $languages
 		));
 	}
 
@@ -68,40 +75,64 @@ class SoundsController extends Controller
 		try {
 			$em = $this->getDoctrine();
 
-			$user = $em->getRepository('AppBundle:User')->find($request->request->get("user"));
-			if (!$user) throw new Exception('No user found');
+			//Get vars
+			$id = $request->request->get("id");
 
-			$speaker = $em->getRepository('AppBundle:Speaker')->find($request->request->get("speaker"));
-			if (!$speaker) throw new Exception('No speaker found');
-
-			$language = $em->getRepository('AppBundle:Language')->find($request->request->get("lang"));
-			if (!$language) throw new Exception('No language found');
+			$text = $request->request->get("text");
+			if (!$text) throw new Exception('No transcription');
 			
-			$filename = dechex(crc32(rand(0, 32000))).".wav";
+			$userId = $request->request->get("user");
+			$user = $em->getRepository('AppBundle:User')->find($userId);
+			if (!$user) throw new Exception('No user #".$userId." found');
+
+			$speakerId = $request->request->get("speaker");
+			$speaker = $em->getRepository('AppBundle:Speaker')->find($speakerId);
+			if (!$speaker) throw new Exception('No speaker #'.$speakerId.' found');
+
+			$slId = $request->request->get("sl");
+			$sl = $em->getRepository('AppBundle:SpeakerLanguage')->find($slId);
+			if (!$sl) throw new Exception('No speaker language #'.$slId.' found');
+			
+			//Copy file
+			$filename = $speaker->getId()."-".dechex(crc32($text))."-".dechex(rand(0, 32000)).".wav";
 			$file = $request->files->get("sound");
 			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
-			$file->move($this->container->getParameter('audio_path'), $filename);
+			$path = $this->container->getParameter('audio_path');
+			if (file_exists($path."/".$filename)) throw new Exception("Filename already used!");
+			$file->move($path, $filename);
 
-			$sound = new Sound();
-			$sound->setText($request->request->get("text"));
+			//Create sound object
+			$sound = false;
+			if ($id) {
+				$sound = $em->getRepository('AppBundle:Sound')->find($id);
+				if ($sound && !$sound->getUser()->editableBy($this->getUser())) throw new Exception('Forbidden');
+			}
+			if (!$sound) $sound = new Sound();
+
+			$sound->setText($text);
 			
 			$description = $request->request->get("description");
 			if ($description) $sound->setDescription($description);
 
-			$sound->setDescription($request->request->get("text"));
 			$sound->setUser($user);
 			$sound->setFilename($filename);
 			$sound->setSpeaker($speaker);
-			$sound->setLang($language);
+			$sound->setSl($sl);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($sound);
 			$em->flush();
 		}
 		catch (Exception $e) {
-			return new Response(json_encode(false));
+			return new Response(json_encode(array(
+				"success" => false,
+				"msg" => $e->getMessage()
+			)));
 		}
-		return new Response(json_encode(true));
+		return new Response(json_encode(array(
+			"success" => true,
+			"sound" => $sound
+		)));
 	}
 
 	/**
@@ -116,9 +147,9 @@ class SoundsController extends Controller
 		if (!$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$form = $this->createFormBuilder($sound)
-			->add('lang', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
+			->add('sl', EntityType::class, array('class' => 'AppBundle:SpeakerLanguage', 'choice_label' => 'title'))
 			->add('text', TextType::class)
-			->add('description', TextareaType::class)
+			->add('description', TextareaType::class, array("required" => false))
 			->add('speaker', EntityType::class, array('class' => 'AppBundle:Speaker', 'choice_label' => 'name', "choices" => $sound->getUser()->getSpeakers()))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
@@ -140,7 +171,6 @@ class SoundsController extends Controller
 			"token" => $token
 		));
 	}
-
 
 	/**
 	* @Route("/sounds/{id}/delete", name="soundsDelete")

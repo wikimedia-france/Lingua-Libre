@@ -9,7 +9,7 @@
 		<tr><th>Habitation</th><td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td></tr>
 		<tr><th>Naissance</th><td>{{ speaker.getBirth()|date("d/m/Y") }}</td></tr>
 		{% if speaker.getDescription() %}<tr><th>Description</th><td>{{ speaker.getDescription() }}</td></tr>{% endif %}
-		<tr><th>Licence</th><td>{% if speaker.getHasSignedDate() %}<a href="https://creativecommons.org/licenses/by-sa/4.0/"><span class="creativeCommons">CC-BY-SA 4.0</span></a> signée le <a href="{# {{ path("speakers/licence.html.twig")}} #}">{{ speaker.getHasSignedDate()|date("d/m/Y") }}</a>{% else %}Non signée{% endif %}</td></tr>
+		<tr><th>Licence</th><td>{% if speaker.getSignedDate() %}<a href="https://creativecommons.org/licenses/by-sa/4.0/"><span class="creativeCommons">CC-BY-SA 4.0</span></a> signée le {{ speaker.getSignedDate()|date("d/m/Y") }}{% else %}<a href="{{ path("speakersLicense", {"id": speaker.getId() }) }}">Non signée</a>{% endif %}</td></tr>
 		<tr><th>Utilisateur</th><td>{% if speaker.getUser() %}<a href="{{ path("usersShow", {"id": speaker.getUser().getId() }) }}">{{ speaker.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
 		{% if speaker.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("speakersUpdate", {"id": speaker.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakersDelete", {"id": speaker.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
 	</table>

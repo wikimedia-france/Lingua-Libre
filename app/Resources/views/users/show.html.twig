@@ -23,23 +23,17 @@
 	<h2>Locuteurs</h2>
 	{% if user.getSpeakers()|length > 0 %}
 
-		<table class="nice">
-			<tr><th>Nom</th><th>Sexe</th><th>Habitation</th></tr>
-			{% for speaker in user.getSpeakers() %}
-			<tr>
-				<td><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}">{{ speaker.getName() }}</a></td>
-				<td>{{ speaker.getSexSymbol() }}</td>
-				<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
-				<th><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
-			</tr>
-			{% endfor %}
-			{% if user.editableBy(auth) %}<tr><th><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
-		</table>
 	{% else %}
 		<p>Pas de locuteur défini pour le moment.
 		{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
 		</p>
 	{% endif %}
 
+		{% if user.getSpeakers()|length > 0 %}
+			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
+		{% else %}	
+			<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
+		{% endif %}
+	{% endif %}
 {% endblock %}
 

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="languages")
  */
-class Language
+class Language implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -28,61 +28,108 @@ class Language
 	 */
 	private $code;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $description;
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Language
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set title
+	 *
+	 * @param string $title
+	 *
+	 * @return Language
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
 
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+		return $this;
+	}
 
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Language
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
+	/**
+	 * Get title
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set code
+	 *
+	 * @param string $code
+	 *
+	 * @return Language
+	 */
+	public function setCode($code)
+	{
+		$this->code = $code;
 
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
+		return $this;
+	}
+
+	/**
+	 * Get code
+	 *
+	 * @return string
+	 */
+	public function getCode()
+	{
+		return $this->code;
+	}
+	
+	/**
+	 * Set description
+	 *
+	 * @param string $description
+	 *
+	 * @return Speaker
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+	
+	public function export()
+	{
+		$result = array();
+		$result["id"] = $this->getId();
+		$result["code"] = $this->getCode();
+		$result["title"] = $this->getTitle();
+		return $result;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->export();
+	}
+	
+	public function editableBy($user) {
+		return $user->getIsAdmin();
+	}
 }

@@ -1,57 +1,62 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block body %}
 	<h1>Partenaires</h1>
-<p>Des partenaires ont apporté leur expertise, leur savoir-faire et leur expérience pour le développement de l'outil libre d'enregistrement Lingua Libre. Grâce à eux, diverses actions seront menées en région afin d'accroître les contenus en langues régionales et minoritaires sur les projets Wikimédia tant à l'oral qu'à l'écrit. 
 
-<h2>Délégation générale à la langue française et aux langues de France</h2>
+	<p>Des partenaires ont apporté leur expertise, leur savoir-faire et leur expérience pour le développement de l’outil libre d’enregistrement Lingua Libre. Grâce à eux, diverses actions seront menées en région afin d’accroître les contenus en langues régionales et minoritaires sur les projets Wikimédia tant à l’oral qu’à l’écrit. 
 
-<img src="../img/DGLFLF.jpeg" title="Délégation Générale à la Langue Française et aux Langues de France" class="imagepart">
-La délégation générale à la langue française et aux langues de France (DGLFLF) est chargée d'animer et de coordonner la politique linguistique du Gouvernement et d'orienter son évolution dans un sens favorable au maintien de la cohésion sociale et à la prise en compte de la diversité de la société. Service à vocation interministérielle directement rattaché au ministre chargé de la culture, la DGLFLF est constituée d'une trentaine d'agents et mobilise pour son action un ensemble de partenaires, publics ou privés, impliqués dans la promotion du français et de la diversité linguistique.
-</p><p><a class="lienpart" target="_blank" href="http://www.culturecommunication.gouv.fr/Politiques-ministerielles/Langue-francaise-et-langues-de-France">Visiter le site de la DGLFLF</a>
+	<h2>Projet Shtooka</h2>
+	<img src="{{ asset("img/logo_shtooka.png") }}" title="Délégation Générale à la Langue Française et aux Langues de France" class="imagepart">
+	<p>Depuis 2006, le Projet Shtooka travaille sur le développement d’outils informatiques pour l’enregistrement de corpus audio. Grâce a ces outils, le projet a pu constituer un corpus d’une centaine de milliers d’enregistrements (mots, locutions, etc. dans une douzaine de langues). Ces enregistrements publiés sous des licence libres sont notamment massivement utilisés par le Wiktionnaire de la fondation Wikimedia depuis une dizaine d’années.</p>
+	<p><a class="lienpart" target="_blank" href="http://shtooka.net">Visiter le site du Projet Shtooka</a></p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Digital Language Diversity Project</h2>
-<img src="../img/DLDP_Logo.png" title="Digital language diversity project" class="imagepart">
-La mission de DLDP est d'aider au développement des langues régionales et minoritaires de l'Europe dans le monde numérique en apportant aux locuteurs les connaissances et les capacités nécessaires pour créer et partager du contenu sur internet en utilisant leurs langues.
-</p><p><a class="lienpart" target="_blank" href="http://www.dldp.eu/">Visiter le site du DLDP</a>
+	<h2>Délégation générale à la langue française et aux langues de France</h2>
+	<img src="{{ asset("img/DGLFLF.jpeg") }}" title="Délégation Générale à la Langue Française et aux Langues de France" class="imagepart">
+	<p>La délégation générale à la langue française et aux langues de France (DGLFLF) est chargée d’animer et de coordonner la politique linguistique du Gouvernement et d’orienter son évolution dans un sens favorable au maintien de la cohésion sociale et à la prise en compte de la diversité de la société. Service à vocation interministérielle directement rattaché au ministre chargé de la culture, la DGLFLF est constituée d’une trentaine d’agents et mobilise pour son action un ensemble de partenaires, publics ou privés, impliqués dans la promotion du français et de la diversité linguistique.</p>
+	<p><a class="lienpart" target="_blank" href="http://www.culturecommunication.gouv.fr/Politiques-ministerielles/Langue-francaise-et-langues-de-France">Visiter le site de la DGLFLF</a>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Lo Congrès</h2>
-<p><img src="../img/LoCONGRES_Logo_2.jpg" title="Le Congrès permanent de la langue occitane" class="imagepart">
-Lo Congrès permanent de la lenga occitana est une institution scientifique et morale indépendante qui représente les acteurs et les utilisateurs de l’occitan – appelé aussi langue d’Oc. Il oeuvre dans le respect de l'unité et de la diversité de l'occitan, la stabilité, la coopération, la représentativité des territoires linguistiques du territoire d'Òc, la collégialité des décisions et la diffusion de l'information.
-Lo Congrès a pour but de contribuer à la vitalité et au développement de l’occitan, en travaillant à sa connaissance et à sa codification par la production des outils concernant les différents aspects de la langue occitane (lexicographie, lexicologie, terminologie,  néologie, phonologie, la graphie, la grammaire et la toponymie).
-</p><p><a class="lienpart" target="_blank" href="http://locongres.org/">Visiter  le site de Lo Congrès</a></p>
+	<h2>Digital Language Diversity Project</h2>
+	<img src="{{ asset("img/DLDP_Logo.png") }}" title="Digital language diversity project" class="imagepart">
+	<p>La mission de DLDP est d’aider au développement des langues régionales et minoritaires de l’Europe dans le monde numérique en apportant aux locuteurs les connaissances et les capacités nécessaires pour créer et partager du contenu sur internet en utilisant leurs langues.</p>
+	<p><a class="lienpart" target="_blank" href="http://www.dldp.eu/">Visiter le site du DLDP</a></p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>L'Office pour la langue et la culture d'Alsace</h2>
-<p><img src="../img/OLCA.jpg" title="Office pour la langue et la culture d'Alsace" class="imagepart">
-L’Office pour la Langue et la Culture d’Alsace (OLCA - Elsassisches Sprochàmt) œuvre pour une présence plus forte de l’alsacien dans tous les domaines et soutient les initiatives des associations, collectivités, administrations et entreprises. Il est également pôle d’information et de documentation dans les domaines de la langue et de la culture régionales. Son action s’inscrit en accompagnement des politiques initiées par le Conseil Régional d’Alsace et les Conseils Départementaux du Bas-Rhin et du Haut-Rhin.
-</p><p><a class="lienpart" target="_blank" href="https://www.olcalsace.org/fr">Visiter le site de l'OLCA</a></p>
+	<h2>Lo Congrès</h2>
+	<img src="{{ asset("img/LoCONGRES_Logo_2.jpg") }}" title="Le Congrès permanent de la langue occitane" class="imagepart">
+	<p>Lo Congrès permanent de la lenga occitana est une institution scientifique et morale indépendante qui représente les acteurs et les utilisateurs de l’occitan – appelé aussi langue d’Oc. Il oeuvre dans le respect de l’unité et de la diversité de l’occitan, la stabilité, la coopération, la représentativité des territoires linguistiques du territoire d’Òc, la collégialité des décisions et la diffusion de l’information.</p>
+	<p>Lo Congrès a pour but de contribuer à la vitalité et au développement de l’occitan, en travaillant à sa connaissance et à sa codification par la production des outils concernant les différents aspects de la langue occitane (lexicographie, lexicologie, terminologie,  néologie, phonologie, la graphie, la grammaire et la toponymie).</p>
+	<p><a class="lienpart" target="_blank" href="http://locongres.org/">Visiter  le site de Lo Congrès</a></p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Maison de la Nouvelle-Calédonie</h2>
-<p><img src="../img/MNC_logo.png" title="Maison de la Nouvelle Calédonie de Paris" class="imagepart">
-La Maison de la Nouvelle-Calédonie est chargée d'assurer la promotion du pays en Métropole et, plus largement, en Europe. Elle représente également les intérêts des institutions politiques de Nouvelle-Calédonie (gouvernement, Congrès et Provinces) et suit les dossiers administratifs qui lui sont confiés. La Maison de la Nouvelle-Calédonie est également présente sur les sites des grandes manifestations internationales, comme les foires, salons et festivals, partout où la promotion de la région océanienne a sa place.
-</p><p><a class="lienpart" target="_blank" href="http://www.mncparis.fr/">Visiter  le site de la MNC</a></p>
+	<h2>L’Office pour la langue et la culture d’Alsace</h2>
+	<img src="{{ asset("img/OLCA.jpg") }}" title="Office pour la langue et la culture d’Alsace" class="imagepart">
+	<p>L’Office pour la Langue et la Culture d’Alsace (OLCA - Elsassisches Sprochàmt) œuvre pour une présence plus forte de l’alsacien dans tous les domaines et soutient les initiatives des associations, collectivités, administrations et entreprises. Il est également pôle d’information et de documentation dans les domaines de la langue et de la culture régionales. Son action s’inscrit en accompagnement des politiques initiées par le Conseil Régional d’Alsace et les Conseils Départementaux du Bas-Rhin et du Haut-Rhin.</p>
+	<p><a class="lienpart" target="_blank" href="https://www.olcalsace.org/fr">Visiter le site de l’OLCA</a></p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Office public de la langue basque</h2>
-<p><img src="../img/OPLB.jpeg" title="Office public de la langue basque" class="imagepart">
-L'office public de la langue basque a pour mission de concevoir, définir et mettre en oeuvre une politique linguistique publique et concertée en faveur de la Langue Basque tout en mobilisant les moyens financiers nécéssaires pour mener à bien les actions retenues dans le cadre de son programme d'activités. </p>
+	<h2>Maison de la Nouvelle-Calédonie</h2>
+	<img src="{{ asset("img/MNC_logo.png") }}" title="Maison de la Nouvelle Calédonie de Paris" class="imagepart">
+	<p>La Maison de la Nouvelle-Calédonie est chargée d’assurer la promotion du pays en Métropole et, plus largement, en Europe. Elle représente également les intérêts des institutions politiques de Nouvelle-Calédonie (gouvernement, Congrès et Provinces) et suit les dossiers administratifs qui lui sont confiés. La Maison de la Nouvelle-Calédonie est également présente sur les sites des grandes manifestations internationales, comme les foires, salons et festivals, partout où la promotion de la région océanienne a sa place.</p>
+	<p><a class="lienpart" target="_blank" href="http://www.mncparis.fr/">Visiter  le site de la MNC</a></p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Gau un Griis</h2>
-<p><img src="../img/gaugriis.png" title="Gau un Griis" class="imagepart">
-L'association pour la défense et la promotion du francique "Gau un Griis" soutient toute activité allant dans ce sens : bilinguisme, langue et culture, théâtre, chansons. Elle organise des manifestations et édite des ouvrages en Francique, aussi nommé "Platt"
-</p><p><a class="lienpart" target="_blank" href="http://www.gaugriis.com/">Visiter le site de l'association Gau un Griis</a></p>
+	<h2>Office public de la langue basque</h2>
+	<img src="{{ asset("img/OPLB.jpeg") }}" title="Office public de la langue basque" class="imagepart">
+	<p>L’office public de la langue basque a pour mission de concevoir, définir et mettre en oeuvre une politique linguistique publique et concertée en faveur de la Langue Basque tout en mobilisant les moyens financiers nécéssaires pour mener à bien les actions retenues dans le cadre de son programme d’activités.</p>
+	<div style="clear:both;"></div>
 
-<div style="clear:both;"></div>
-<h2>Agence pour le Picard</h2>
-<p><img src="../img/agencepicard.jpg" title="Agence pour le Picard" class="imagepart">
-L’Agence pour le picard soutient la langue et la culture picarde dans un esprit de modernité, de créativité et d’ouverture aux autres cultures des habitants de la région. Pour ce faire, elle développe des activités sous la forme d’une programmation annuelle proposant de nombreux rendez-vous s’articulant autour de plusieurs événements comme des conférences, un prix de littérature ainsi que différents rendez-vous découvertes. 
-</p><p><a class="lienpart" target="_blank" href="http://www.agencepourlepicard.fr/">Visiter le site de l'Agence pour le Picard</a></p>
-</p>
+	<h2>Gau un Griis</h2>
+	<img src="{{ asset("img/gaugriis.png") }}" title="Gau un Griis" class="imagepart">
+	<p>L’association pour la défense et la promotion du francique "Gau un Griis" soutient toute activité allant dans ce sens : bilinguisme, langue et culture, théâtre, chansons. Elle organise des manifestations et édite des ouvrages en Francique, aussi nommé "Platt".</p>
+	<p><a class="lienpart" target="_blank" href="http://www.gaugriis.com/">Visiter le site de l’association Gau un Griis</a></p>
+	<div style="clear:both;"></div>
 
+	<h2>Agence pour le Picard</h2>
+	<img src="{{ asset("img/agencepicard.jpg") }}" title="Agence pour le Picard" class="imagepart">
+	<p>L’Agence pour le picard soutient la langue et la culture picarde dans un esprit de modernité, de créativité et d’ouverture aux autres cultures des habitants de la région. Pour ce faire, elle développe des activités sous la forme d’une programmation annuelle proposant de nombreux rendez-vous s’articulant autour de plusieurs événements comme des conférences, un prix de littérature ainsi que différents rendez-vous découvertes.</p>
+	<p><a class="lienpart" target="_blank" href="http://www.agencepourlepicard.fr/">Visiter le site de l’Agence pour le Picard</a></p>
+	<div style="clear:both;"></div>
 {% endblock %}
 

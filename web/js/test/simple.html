@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Swac Recorder JS</title>
+		<meta charset="utf-8"/>
+		<link href="css/style.css" type="text/css" rel="stylesheet"/>
+		<base href="../../"/>
+
+		<script type="text/javascript" src="js/swac-recorder/buffer.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/buffers.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/sound.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/soundWidget.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/player.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/recorder.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/recorderWidget.js"></script>
+		<script type="text/javascript" src="js/swac-recorder/audioAuthWidget.js"></script>
+
+		<script type="text/javascript">
+			var App = function() {
+				this.audioAuthWidget = new AudioAuthWidget();
+				this.node = this.audioAuthWidget.node;
+				this.init();
+			};
+
+			App.prototype.init = function() {
+				var self = this;
+
+				this.audioAuthWidget.onenabled = function(stream) {
+					var recorderWidget = new RecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) } );
+					this.appendChild(recorderWidget.node);
+				};
+			};
+
+			App.prototype.send = function send(sound, meta, doneCb) {
+				console.log(meta.transcript + " sent");
+				doneCb(true);
+			};
+
+			window.onload = function() {
+				document.body.appendChild(new App().node);
+			};
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

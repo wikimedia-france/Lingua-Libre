@@ -89,6 +89,22 @@ class UsersController extends Controller
 	}
 
 	/**
+	* @Route("/users/{id}/speakers", name="usersSpeakers")
+	*/
+	public function speakersAction(Request $request, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$user = $em->getRepository('AppBundle:User')->find($id);
+		if (!$user) throw $this->createNotFoundException('No user found for id '.$id);
+
+		return $this->render('users/speakers.html.twig', array(
+			"auth" => $this->getUser(),
+			"user" => $user,
+		));
+	}
+
+	/**
 	* @Route("/users/{id}/sounds", name="usersSounds")
 	*/
 	public function soundsAction(Request $request, $id)

@@ -1,0 +1,172 @@
+div.spinner {
+	vertical-align: middle;
+	display: inline-block;
+	margin: 10px;
+	width: 24px;
+	height: 24px;
+	background-color: #333;
+	border-radius: 100%;
+	animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@keyframes sk-scaleout {
+	0% { 
+		transform: scale(0);
+	} 100% {
+		opacity: 0;
+	}
+}
+
+div.listing {
+	background-color: #fff;
+	font-size: 180%;
+	padding: 10px;
+	min-height: 100px;
+	height: 500px;
+	resize: both;
+	overflow: auto;
+	position: relative;
+}
+
+div.listing > div.item {
+	margin: 10px;
+	padding: 10px;
+	background-color: #bbe;
+	display: inline-block;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+div.listing > div.sending {
+	opacity: 0.3;
+}
+
+div.listing > div.sent {
+	background-color: #cfc;
+}
+
+div.listing > div.error {
+	background-color: #f44;
+}
+
+div.listing > div.current {
+	background-color: #ddf;
+}
+
+div.recording > div.current {
+	background-color: #fcc;
+}
+
+div.listingRecorder {
+	border: 3px solid lightgray;
+	background-color: #eee;
+}
+
+div.audioAuth p.error {
+	text-align: center;
+	padding: 10px;
+	color: red;
+}
+
+div.audioAuth p.waiting {
+	text-align: center;
+	padding: 10px;
+}
+
+div.cutter {
+	padding: 7px;
+}
+
+div.cutter button {
+	padding: 5px;
+	border-radius: 8px;
+	border: 3px solid lightgray;
+	background-color: #e9e9e9;
+	margin: 5px;
+}
+
+div.cutter button.record {
+	color: red;
+}
+
+div.cutterView {
+	position: relative;
+	display: inline-block;
+	border: 1px solid black;
+	background-color: white;
+	margin: 5px;
+	vertical-align: middle;
+	padding: 0;
+}
+
+div.cutterView div.spinner {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 16px;
+	height: 16px;
+	background-color: red;
+}
+
+div.cutterView > canvas {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+div.cutterView > canvas.saturated {
+	background-color: #f99;
+}
+
+div.sound {
+	border-radius: 10px;
+	border: 3px solid lightgray;
+	margin: 10px;
+	padding: 10px;
+	background-color: #f1f1f1;
+}
+
+div.sound canvas {
+	border: 3px solid lightgray;
+	background-color: white;
+}
+
+div.sound a {
+	margin: 4px;
+	float: right;
+}
+
+div.sound div.tools {
+	float: right;
+}
+
+div.sound textarea {
+	width: 350px;
+}
+
+div.sound input {
+	width: 350px;
+}
+
+div.recorder button.record {
+	background: url(../img/microphone.png) no-repeat;
+	padding: 5px 5px 5px 40px;
+	height: 48px;
+	border-radius: 8px;
+	border: 3px solid lightgray;
+	background-color: #eee;
+	margin: 10px;
+}
+
+div.recorder button.record:disabled {
+	display: none;
+}
+
+form.listingEditor textarea {
+	height: 300px;
+	width: 300px;
+}

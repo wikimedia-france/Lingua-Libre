@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Liste des utilisateurs :</h1>
+	<h1>Locuteurs</h1>
 
-	<table class="nice">
-		<tr><th>User</th><th>Name</th><th>Sex</th><th>Living</th><th>Birthdate</th><th>Description</th></tr>
-		{% for speaker in speakers %}
-		<tr>
-			<td>{{ speaker.getUser() ? speaker.getUser().getUsername() : "-"}}</td>
-			<td>{{ speaker.getName() }}</td>
-			<td>{{ speaker.getSexSymbol() }}</td>
-			<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
-			<td>{{ speaker.getBirth()|date("d/m/Y") }}</td>
-			<td>{{ speaker.getDescription() }}</td>
-			<td>{% if speaker.editableBy(user) %}<a href="{{ path("speakersUpdate", {"id": speaker.getId() }) }}">Éditer</a> | <a href="{{ path("speakersDelete", {"id": speaker.getId() }) }}">Supprimer</a>{% endif %}</td>
-		</tr>
-		{% endfor %}
-	</table>
+	{% if speakers|length > 0 %}
 
-	<a href="{{ path("speakersAdd") }}">Ajouter</a>
+		<table class="nice">
+			<tr><th>Nom</th><th>Sexe</th><th>Habitation</th></tr>
+			{% for speaker in speakers %}
+			<tr>
+				<td><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}">{{ speaker.getName() }}</a></td>
+				<td>{{ speaker.getSexSymbol() }}</td>
+				<td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td>
+				<th><a href="{{ path("speakersShow", {"id": speaker.getId() }) }}"><img src="{{ asset("img/details_24.png") }}" title="Détails"/></a></th>
+			</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>Pas de locuteur défini pour le moment.</p>
+		
+	{% endif %}
 
 {% endblock %}
 

@@ -1,5 +1,5 @@
-var SoundWidget = function(sound, sendCb) {
-	this.sound = sound;
+var SoundWidget = function(buffers, sendCb) {
+	this.buffers = buffers;
 	this.sendCb = sendCb;
 	this.node = document.createElement("div");
 	this.nodeSave = document.createElement("a");
@@ -7,18 +7,18 @@ var SoundWidget = function(sound, sendCb) {
 	this.nodeDiscard = document.createElement("button");
 	this.nodeSend = document.createElement("button");
 	this.nodeCanvas = document.createElement("canvas");
-	this.nodeText = document.createElement("input");
+	this.nodeTranscript = document.createElement("input");
 	this.nodeDescription = document.createElement("textarea");
 	this.nodeTools = document.createElement("div");
 
-	this.player = new Player(sound);
+	this.player = new Player(buffers);
 	this.init();
 }
 
 
 SoundWidget.prototype.init = function() {
-	var obj = this;
-	this.node.className = "soundWidget";
+	var self = this;
+	this.node.className = "sound";
 
 	//Canvas
 	this.node.appendChild(this.nodeCanvas);
@@ -34,21 +34,21 @@ SoundWidget.prototype.init = function() {
 	this.nodePlay.appendChild(document.createTextNode("Écouter"));
 	this.nodeTools.appendChild(this.nodePlay);
 	this.nodePlay.onclick = function() {
-		obj.play();
+		self.play();
 	}
 
 	//Bouton "Send"
 	this.nodeSend.appendChild(document.createTextNode("Enregistrer"));
 	this.nodeTools.appendChild(this.nodeSend);
 	this.nodeSend.onclick = function() {
-		obj.send();
+		self.send();
 	}
 
 	//Bouton "Discard"
 	this.nodeDiscard.appendChild(document.createTextNode("Annuler"));
 	this.nodeTools.appendChild(this.nodeDiscard);
 	this.nodeDiscard.onclick = function() {
-		obj.discard();
+		self.discard();
 	}
 
 	var table = document.createElement("table");
@@ -60,7 +60,7 @@ SoundWidget.prototype.init = function() {
 	th.appendChild(document.createTextNode("Transcription"));
 	var td = document.createElement("td");
 	tr.appendChild(td);
-	td.appendChild(this.nodeText);
+	td.appendChild(this.nodeTranscript);
 
 	var tr = document.createElement("tr");
 	table.appendChild(tr);
@@ -94,12 +94,12 @@ SoundWidget.prototype.play = function() {
 	this.player.play();
 }
 
-SoundWidget.prototype.getSound = function() {
-	return this.sound;
+SoundWidget.prototype.getSamples = function() {
+	return this.buffers.getSamples();
 }
 
-SoundWidget.prototype.getText = function() {
-	return this.nodeText.value;
+SoundWidget.prototype.getTranscript = function() {
+	return this.nodeTranscript.value;
 }
 
 SoundWidget.prototype.getDescription = function() {
@@ -107,11 +107,26 @@ SoundWidget.prototype.getDescription = function() {
 }
 
 SoundWidget.prototype.send = function() {
-	this.sendCb(this);
+	var self = this;
+	this.sendCb(
+		this.buffers.getSound(),
+		{
+			"transcript": this.getTranscript(),
+			"description": this.getDescription()
+		},
+		function(response) {
+			if (response.success) self.discard();
+		}
+	);
+}
+
+SoundWidget.prototype.sent = function() {
+	this.discard();
 }
 
 SoundWidget.prototype.draw = function(context, width, height) {
-	var step = Math.ceil(this.sound.samples.length / width);
+	var samples = this.getSamples();
+	var step = Math.ceil(samples.length / width);
 	var amp = height / 2;
 	context.fillStyle = "gray";
 
@@ -119,7 +134,7 @@ SoundWidget.prototype.draw = function(context, width, height) {
 		var min = 1.0;
 		var max = -1.0;
 		for (j = 0; j < step; j++) {
-			var datum = this.sound.samples[(i * step) + j]; 
+			var datum = samples[(i * step) + j]; 
 			if (datum < min)
 			min = datum;
 			if (datum > max)
