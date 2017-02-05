@@ -2,6 +2,7 @@
 
 {% block body %}
 	<h1>Locuteurs</h1>
+<div class="cadre">
 	{% set speakers = user.getSpeakers() %}
 	{% if speakers|length > 0 %}
 
@@ -22,6 +23,6 @@
 		{% if user.editableBy(auth) %}<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a></p>{% endif %}
 		
 	{% endif %}
-
+</div>
 {% endblock %}
 

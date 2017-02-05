@@ -1,23 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Accueil</h1>
+	<h1>Bienvenue sur Lingua Libre</h1>
+	<h2>L'interface d'enregistrement audio libre et gratuite</h2>
+	<div class="cadre">
 
-	<p>Bienvenue sur <span class='lingualibre'>Lingua Libre</span>, l’interface d’enregistrement audio libre et gratuite.</p>
-
-	<p>Afin que s’exprime la richesse linguistique des régions sur Internet, l’association <span class='partner'>Wikimédia France</span> mène une action autour de la valorisation des langues minoritaires dans l’espace numérique.
-	De cette volonté est née <span class='lingualibre'>Lingua Libre</span> outil de collecte collaboratif à destination de tous.</p>
+	<img src="{{ asset('img/template/accueil.jpg') }}" title="Page d’accueil" class="imagegauche"><p>Afin que s’exprime la richesse linguistique des régions sur Internet, l’association <span class='partner'><a href="http://www.wikimedia.fr/" alt="Wikimédia France" title="Wikimédia France" target="_blank">Wikimédia France</a></span> mène une action autour de la valorisation des langues minoritaires dans l’espace numérique.
+	De cette volonté est née <span class='lingualibre'>Lingua Libre</span> outil de collecte collaboratif à destination de tous.
+</p>
 
 	<p><span class='lingualibre'>Lingua Libre</span> a été conçue pour que chacun puisse léguer aux générations futures le trésor fragile de l’oralité.</p>
 
-	<p>Les mots, locutions, chansons ainsi collectés grâce à vous aideront les spécialistes dans leur travail et viendront également améliorer certains des projets Wikimédia comme <span class='project'>Wikipédia</span>, <span class='project'>Wikimédia Commons</span> ainsi que le <span class='project'>Wiktionnaire</span>.</p>
-
+	<p>Les mots, locutions, chansons ainsi collectés grâce à vous aideront les spécialistes dans leur travail et viendront également améliorer certains des projets Wikimédia comme <span class='project'><a href="https://www.wikipedia.org/" alt="Wikipédia" title="Wikipédia" target="_blank">Wikipédia</a></span>, <span class='project'><a href="https://commons.wikimedia.org/wiki/Accueil" alt="Wikimédia Commons" title="Wikimédia Commons" target="_blank">Wikimédia Commons</a></span> ainsi que le <span class='project'><a href="https://www.wiktionary.org/" alt="Wiktionnaire" title="Wiktionnaire" target="_blank">Wiktionnaire</a></span>.</p>
+<div style="clear:both;"></div></div>
 	<p class="quotation"><cite>« À travers la langue que nous parlons résonnent les voix des peuples qui se sont éteints »</cite> — Vassilis Alexakis</p>
-
-	<p>Ce projet ambitieux vise à réunir un corpus audio inédit qui aidera à la visibilité des langues minoritaires et régionales en améliorant les différentes versions linguistiques de <span class='project'>Wikipédia</span> et apportant du matériel audio pour illustrer les entrées du <span class='project'>Wiktionnaire</span>.</p>
+<div class="cadre">
+	<p>Ce projet ambitieux vise à réunir un corpus audio inédit qui aidera à la visibilité des langues minoritaires et régionales en améliorant les différentes versions linguistiques de <span class='project'><a href="https://www.wikipedia.org/" alt="Wikipédia" title="Wikipédia" target="_blank">Wikipédia</a></span> et apportant du matériel audio pour illustrer les entrées du <span class='project'><a href="https://www.wiktionary.org/" alt="Wiktionnaire" title="Wiktionnaire" target="_blank">Wiktionnaire</a></span>.</p>
 
 	<p class="letsbegin"><a href="{{ path("usersAdd") }}">Je participe au projet !</a></p>
-
+</div>
 	<div class="partner">
 		<a target="_blank" href="http://www.culturecommunication.gouv.fr/Politiques-ministerielles/Langue-francaise-et-langues-de-France"><img src="{{ asset('img/dglflf_Logo.jpg') }}" title="Délégation Générale à la Langue Française et aux Langues de France" style="max-width:50px; max-height:80px;"></a>
 		<a target="_blank" href="http://www.dldp.eu/"><img src="{{ asset('img/DLDP_Logo.png') }}" title="Digital Language Diversity Project" style="max-width:50px;  max-height:80px;"></a>

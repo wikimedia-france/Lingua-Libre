@@ -2,7 +2,7 @@
 
 {% block body %}
 	<h1>Éditer utilisateur</h1>
-
+<div class="cadre">
 	{{ form_start(form) }}
 	<table class="nice">
 		<tr><th>E-mail</th><td>{{ form_widget(form.email) }}</td></tr>
@@ -10,7 +10,7 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th>
 	</table>
 	{{ form_end(form) }}
-
+</div>
 
 
 {% endblock %}

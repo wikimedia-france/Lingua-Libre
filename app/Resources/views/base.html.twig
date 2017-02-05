@@ -18,7 +18,74 @@
 		{% endblock %}
 	</head>
 	<body>
-		<ul class="bar">
+
+<div class="account barItem">
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<a onclick="toggle_visibility(document.getElementById('accountPopup'));">{{ app.user.username|capitalize }}</a>
+				<ul id="accountPopup" style="display: none">
+					<li><a href="{{ path('logout') }}">Déconnexion</a></li>
+				</ul>
+				{% else %}
+				<a href="{{ path('login') }}">Connexion</a>
+				{% endif %}
+			</div>
+
+		<div class="menumobile">
+			<img src="{{ asset('img/template/menumobile.png') }}" class="immenumobile">
+			<div class="sousmenumobile">
+				<div class="itemsousmenumobile"><a href="{{ path("home") }}">Accueil</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("about") }}">Lingua Libre</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("sounds") }}">Sonothèque</a></div>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<div class="itemsousmenumobile"><a href="{{ path("soundsAdd") }}">Enregistrement</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path('usersSpeakers', {"id":app.user.id}) }}">Mes locuteurs</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></div>
+			{% endif %}
+				<div class="itemsousmenumobile"><a href="{{ path("about") }}">Lingua Libre</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("help") }}">Aide</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("historique") }}">Historique</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("partners") }}">Partenaires</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("wikimedia") }}">Wikimedia France</a></div>
+				<div class="itemsousmenumobile"><a href="{{ path("contact") }}">Contact</a></div>
+
+			</div>
+		</div>
+
+		<div class="logomobile"><img src="{{ asset('img/template/lingualibre.png') }}" title="Lingua Libre"></div>
+
+		<div class="menuhaut">
+			<div class="itemmenu"><a href="{{ path("home") }}">Accueil</a></div>
+			<div class="itemmenu">A&nbsp;propos
+				<div class="sousmenu">
+					<div class="itemsousmenu"><a href="{{ path("about") }}">Lingua Libre</a></div>
+					<div class="itemsousmenu"><a href="{{ path("help") }}">Aide</a></div>
+					<div class="itemsousmenu"><a href="{{ path("historique") }}">Historique</a></div>
+					<div class="itemsousmenu"><a href="{{ path("partners") }}">Partenaires</a></div>
+					<div class="itemsousmenu"><a href="{{ path("wikimedia") }}">Wikimedia France</a></div>
+				</div>
+			</div>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<div class="itemmenu"><a href="{{ path("sounds") }}">Sonothèque</a></div>
+		{% endif %}
+			<div class="itemmenulogo"><img src="{{ asset('img/template/lingualibre.png') }}" title="Lingua Libre"></div>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<div class="itemmenu"><a href="{{ path("soundsAdd") }}">Enregistrement</a></div>
+			<div class="itemmenu">Moi
+				<div class="sousmenu">
+					<div class="itemsousmenu"><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></div>
+					<div class="itemsousmenu"><a href="{{ path('usersSpeakers', {"id":app.user.id}) }}">Mes locuteurs</a></div>
+					<div class="itemsousmenu"><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></div>
+				</div>
+			</div>
+		{% else %}
+			<div class="itemmenu"><a href="{{ path("sounds") }}">Sonothèque</a></div>
+		{% endif %}
+			<div class="itemmenu"><a href="{{ path("contact") }}">Contact</a></div>
+		</div>
+		
+
+		<!--<ul class="bar">
 			<li class="barItem"><a href="{{ path('home') }}"><img src="{{ asset('img/home_60.png') }}" title="Page d’accueil"></a></li>
 			Lingua Libre – <i>l’outil d’enregistrement audio libre</i>
 			<div class="account barItem">
@@ -33,28 +100,16 @@
 			</div>
 		</ul>
 
-		<ul class="menu">
-			<li><a href="{{ path("home") }}">Accueil</a></li>
-			<li><a href="{{ path("sounds") }}">Sonothèque</a></li>
-			<li><a href="{{ path("about") }}">Lingua Libre</a></li>
-			<li><a href="{{ path("historique") }}">Historique</a></li>
-			<li><a href="{{ path("partners") }}">Partenaires</a></li>
-			<li><a href="{{ path("wikimedia") }}">Wikimedia France</a></li>
-			<li><a href="{{ path("contact") }}">Contact</a></li>
+		
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<hr/>
-				<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
-				<li><a href="{{ path('usersSpeakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
-				<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
-				<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
 				{% if is_granted('ROLE_ADMIN') %}
 					<hr/>
 					<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>
 					<li><a href="{{ path("languages") }}">Gestion des langues</a></li>
 				{% endif %}
 				{% endif %}
-		</ul>
+		-->
 
 		<div class="page">
 			{% block body %}{% endblock %}

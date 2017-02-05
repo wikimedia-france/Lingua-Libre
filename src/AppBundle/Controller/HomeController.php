@@ -39,6 +39,14 @@ class HomeController extends Controller
 	}
 
 	/**
+	* @Route("/help", name="help")
+	*/
+	public function helpAction(Request $request)
+	{
+		return $this->render('help.html.twig', array());
+	}
+
+	/**
 	* @Route("/historique", name="historique")
 	*/
 	public function historiqueAction(Request $request)

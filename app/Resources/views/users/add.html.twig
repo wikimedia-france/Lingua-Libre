@@ -2,6 +2,7 @@
 
 {% block body %}
 	<h1>Inscription</h1>
+<div class="cadre">
 	{{ form_start(form) }}
 	{{ form_errors(form) }}
 	<table class="nice">
@@ -12,6 +13,6 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th>
 	</table>
 	{{ form_end(form) }}
-
+</div>
 {% endblock %}
 

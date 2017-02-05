@@ -2,7 +2,7 @@
 
 {% block body %}
 	<h1>Nouveau locuteur :</h1>
-
+<div class="cadre">
 	{{ form_start(form) }}
 	<table class="nice">
 		<tr><th>Nom</th><td>{{ form_widget(form.name) }}</td></tr>
@@ -22,6 +22,6 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
 	</table>
 	{{ form_end(form) }}
-
+</div>
 {% endblock %}
 

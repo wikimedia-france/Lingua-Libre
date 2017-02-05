@@ -1,10 +1,30 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #fff;
+	background: #f2f2f2;
 	font-family: "Linux Libertine",Georgia,Times,serif;
 	color:#3C3C3C;
 }
+
+
+
+@media (min-width: 750px){
+  :root, input {
+    font-size: 18px;
+  }
+}
+@media (min-width: 550px) and (max-width: 900px){
+  :root, input {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 550px){
+  :root, input {
+    font-size: 12px;
+  }
+}
+
 
 a {
 	text-decoration: none;
@@ -20,18 +40,20 @@ li {
 	margin: 7px;
 }
 
-h3, h1, h4, h5, h6 {
+h1, h4, h5, h6 {
 	color: #00a99d;
 }
 
 h1 {
 	margin: 5px 0;
-	text-size: 20px;
+	font-size:2.1em;
 }
 
 h2 {
 	color: #00a99d;
+	margin-bootom:0px;
 }
+
 
 textarea {
 	width: 300px;
@@ -43,8 +65,8 @@ table.nice {
 }
 
 table.nice th {
-	background-color: #f0f0f8;
-	color: gray;
+	background-color: #f2f2f2;
+	color: #3C3C3C;
 	padding: 5px 10px;
 	font-weight: bold;
 }
@@ -55,13 +77,11 @@ table.nice td {
 }
 
 div.account {
-	float: right;
-	position: relative;
 }
 
 div.account ul {
-	background-color: #3c3c3c;
-	border: 1px solid #222;
+	background-color: #f2f2f2;
+	border: 1px solid #3C3C3C;
 	padding: 5px;
 	margin: 4px 0 0 0;
 	position: absolute;
@@ -77,8 +97,112 @@ div.account ul li {
 }
 
 div.account ul li:hover {
-	background-color: #666;
 }
+
+
+.logomobile {
+	width:15vw;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.logomobile img {
+	width:15vw;
+	min-width:50px;
+}
+
+
+.menuhaut {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	width:90vw;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:1.1em;
+	text-transform:uppercase;
+}
+
+.menumobile {
+	padding-top: 10px;
+	position:absolute;
+	left:5vw;
+}
+
+.immenumobile {
+	max-width:7vw;
+}
+
+
+.menumobile .sousmenumobile {
+	visibility:hidden;
+	position:absolute;
+	background: #f2f2f2;
+	padding:5px;
+	font-size:1.2em;
+	width:50vw;
+}
+
+.menumobile:hover .sousmenumobile {
+	visibility:visible;
+}
+
+
+@media (min-width: 550px){
+	.logomobile {
+		display:none;
+	}
+	.menumobile {
+		display:none;
+	}
+}
+
+@media (max-width: 550px){
+	.menuhaut {
+		display:none;
+	}
+}
+
+.itemmenu {
+	border-top:1px solid #00A99D;
+	flex-grow:1;
+}
+
+.itemmenulogo {
+	width:15vw;
+	min-width:50px;
+}
+
+.itemmenu a {
+	color:#3C3C3C;
+}
+
+.itemmenu a:hover,.itemmenu:hover {
+	color:#00A99D;
+}
+
+.itemmenulogo img {
+	width:15vw;
+	min-width:50px;
+}
+
+
+.menuhaut .sousmenu {
+	visibility:hidden;
+	position:absolute;
+	background: #f2f2f2;
+	padding:5px;
+}
+
+.menuhaut .itemmenu:hover .sousmenu {
+	visibility:visible;
+}
+
+.itemmenu .sousmenu .itemsousmenu {
+	text-transform:none;
+	opacity:1;
+}
+
 
 ul.bar {
 	padding: 0 15px;
@@ -93,9 +217,10 @@ ul.bar a {
 }
 
 .barItem {
-	padding: 5px;
+	padding-top: 10px;
 	color: #eee;
-	border-bottom: 3px solid #3c3c3c;
+	position:absolute;
+	right:5vw;
 }
 
 .barItem:hover {
@@ -135,10 +260,40 @@ ul.menu a {
 }
 
 div.page {
-	position: absolute;
-	left: 300px;
+	width:90vw;
+	margin-left:auto;
+	margin-right:auto;
 	padding: 10px;
-	margin: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.page .cadre {
+	background-color:white;
+	padding:10px;
+	margin-bottom:15px;
+	margin-top:15px;
+
+}
+
+.page .cadre h1 {
+	color:#3C3C3C;
+}
+
+.page .cadre p {
+	margin-top:0;
+}
+
+h2 {
+	margin-top:0;
+	margin-bottom:0;
+	color:#3C3C3C;
+}
+
+.imagegauche {
+	float:left;
+	margin-right:15px;
+	max-width:20vw;
 }
 
 input.lang {
@@ -151,7 +306,6 @@ a img:hover {
 
 form.login table {
 	margin: 10px auto;
-	border: 1px solid black;
 	padding: 5px;
 }
 
@@ -183,7 +337,7 @@ div.licenceBloc {
 	height: 200px;
 	overflow: auto;
 	padding: 10px;
-	background-color: #E1E1E1;
+	background-color: #dad8d8;
 }
 
 div.partner {
@@ -195,12 +349,17 @@ div.partner img {
 }
 
 p.quotation {
-	margin: 5px 150px;
+	width:70vw;
+	margin-left:auto;
+	margin-right:auto;
 	text-align: center;
+	font-weight:bold;
 }
 
 p.letsbegin {
 	text-align: center;
+	font-size:1.4em;
+	font-weight:bold;
 }
 
 div.toolbar {

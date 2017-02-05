@@ -11,6 +11,7 @@
 
 	{% if user.editableBy(auth) %}
 		<h2>Paramètres</h2>
+<div class="cadre">
 		<table class="nice">
 			<tr><th>E-mail</th><td>{{ user.getEmail() }}</td></tr>
 			<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
@@ -23,6 +24,7 @@
 		{% else %}	
 			<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
 		{% endif %}
+</div>
 	{% endif %}
 {% endblock %}
 
