@@ -141,10 +141,19 @@ div.account ul li:hover {
 	padding:5px;
 	font-size:1.2em;
 	width:50vw;
+	border:1px solid #00A99D;
 }
 
 .menumobile:hover .sousmenumobile {
 	visibility:visible;
+}
+
+.itemsousmenumobile a {
+	color:#3C3C3C;
+}
+
+.itemsousmenumobile a:hover {
+	color:#00A99D;
 }
 
 
@@ -166,6 +175,8 @@ div.account ul li:hover {
 .itemmenu {
 	border-top:1px solid #00A99D;
 	flex-grow:1;
+	text-align:center;
+	position:relative;
 }
 
 .itemmenulogo {
@@ -177,6 +188,8 @@ div.account ul li:hover {
 	color:#3C3C3C;
 }
 
+
+
 .itemmenu a:hover,.itemmenu:hover {
 	color:#00A99D;
 }
@@ -187,16 +200,25 @@ div.account ul li:hover {
 }
 
 
-.menuhaut .sousmenu {
+.menuhaut .itemmenu .sousmenu {
 	visibility:hidden;
 	position:absolute;
 	background: #f2f2f2;
-	padding:5px;
+	left: 50%;
+	transform: translate(-50%,0);
+	width:20vw;
+	border:1px solid #00A99D;
+	
 }
 
 .menuhaut .itemmenu:hover .sousmenu {
 	visibility:visible;
 }
+
+
+.menuhaut .itemmenu .sousmenu {
+}
+
 
 .itemmenu .sousmenu .itemsousmenu {
 	text-transform:none;
