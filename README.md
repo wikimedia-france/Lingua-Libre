@@ -1,6 +1,6 @@
-### Lingua-Libre
+### LinguaLibre – Massive Open Audio Recording
 
-**Lingua-Libre** ([LinguaLibre.fr](http://lingualibre.fr)) is an opensource, openlicense platform and webapps which allows and boost mass recording of words or sentences into clean, well cut, well named audio files. It is perfect to create from small to large datasets of audio files. Lingua-Libre is funded and used by the Wikimedia community. 
+**Lingua-Libre** ([LinguaLibre.fr](http://lingualibre.fr)) is an opensource, openlicense platform and webapps which boost mass recording of words or sentences into clean, well cut, well named audio files. It is perfect to create from small to large datasets of audio files. Lingua-Libre is funded and used by the Wikimedia community. 
 
 **History:** 
 - **Shtooka Recorder** by Nicolas - a desktop software notable which had a deep impact on the open audio reccording ecosystems. Hundreds of applications use data produced by this software.
@@ -34,6 +34,9 @@ php bin/console server:run
 
 ### License
 Lingua-Libre was produced thanks to a Wikimedia-France's funding.
+
+- GNU GENERAL PUBLIC LICENSE
+
 
 ### Humans
 - Nicolas -- for developments
