@@ -58,9 +58,9 @@ class Speaker implements \JsonSerializable
 	private $birth;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="SpeakerLanguage", mappedBy="speaker")
+	 * @ORM\OneToMany(targetEntity="Idiolect", mappedBy="speaker")
 	 */
-	private $languages;
+	private $idiolects;
 
 	/**
 	 * @ORM\Column(type="date", nullable=true)
@@ -329,46 +329,46 @@ class Speaker implements \JsonSerializable
 	 */
 	public function __construct()
 	{
-		$this->languages = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->idiolects = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
-	 * Add language
+	 * Add idiolect
 	 *
-	 * @param \AppBundle\Entity\SpeakerLanguage $language
+	 * @param \AppBundle\Entity\Idiolect $idiolect
 	 *
 	 * @return Speaker
 	 */
-	public function addLanguage(\AppBundle\Entity\SpeakerLanguage $language)
+	public function addIdiolect(\AppBundle\Entity\Idiolect $idiolect)
 	{
-		$this->languages[] = $language;
+		$this->idiolects[] = $idiolect;
 
 		return $this;
 	}
 
 	/**
-	 * Remove language
+	 * Remove idiolect
 	 *
-	 * @param \AppBundle\Entity\SpeakerLanguage $language
+	 * @param \AppBundle\Entity\Idiolect $idiolect
 	 */
-	public function removeLanguage(\AppBundle\Entity\SpeakerLanguage $language)
+	public function removeIdiolect(\AppBundle\Entity\Idiolect $idiolect)
 	{
-		$this->languages->removeElement($language);
+		$this->idiolects->removeElement($idiolect);
 	}
 
 	/**
-	 * Get languages
+	 * Get idiolects
 	 *
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
-	public function getLanguages()
+	public function getIdiolects()
 	{
-		return $this->languages;
+		return $this->idiolects;
 	}
 
-	public function getDefaultLanguage()
+	public function getDefaultIdiolect()
 	{
-		return count($this->languages) > 0 ? $this->languages[0] : false;
+		return isset($this->idiolects[0]) ? $this->idiolects[0] : false;
 	}
 
 	public function export()
@@ -380,13 +380,13 @@ class Speaker implements \JsonSerializable
 		if ($this->getLivingCity()) $result["city"] = $this->getLivingCity();
 		$result["path"] = $this->getName();
 
-		$languages = $this->getLanguages();
+		$idiolects = $this->getIdiolects();
 		$table = array();
-		foreach($languages as $language) 
+		foreach($idiolects as $idiolect) 
 		{
-			$table[] = $language;
+			$table[] = $idiolect;
 		}
-		$result["sls"] = $table;
+		$result["idiolects"] = $table;
 		return $result;
 	}
 

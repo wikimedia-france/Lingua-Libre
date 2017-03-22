@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\SpeakerLanguage;
+use AppBundle\Entity\Idiolect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,38 +13,38 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class SpeakerLanguagesController extends Controller
+class IdiolectsController extends Controller
 {
 	/**
-	* @Route("/speaker_languages/{id}/show", name="speakerLanguagesShow")
+	* @Route("/idiolects/{id}/show", name="idiolectsShow")
 	*/
 	public function showAction($id)
 	{
 
-		$sl = $this->getDoctrine()->getRepository('AppBundle:SpeakerLanguage')->find($id);
+		$idiolect = $this->getDoctrine()->getRepository('AppBundle:Idiolect')->find($id);
 
-		if (!$sl) {
-			throw $this->createNotFoundException('No speaker language found for id '.$id);
+		if (!$idiolect) {
+			throw $this->createNotFoundException('No idiolect found for id '.$id);
 		}
 
-		return $this->render('speaker_languages/show.html.twig', array("sl" => $sl));
+		return $this->render('idiolects/show.html.twig', array("idiolect" => $idiolect));
 
 	}
 
 	/**
-	* @Route("/speaker_languages/{id}/update", name="speakerLanguagesUpdate")
+	* @Route("/idiolects/{id}/update", name="idiolectsUpdate")
 	*/
 	public function updateAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$sl = $em->getRepository('AppBundle:SpeakerLanguage')->find($id);
-		if (!$sl) throw $this->createNotFoundException('No speaker language found for id '.$id);
+		$sl = $em->getRepository('AppBundle:Idiolect')->find($id);
+		if (!$sl) throw $this->createNotFoundException('No idiolect found for id '.$id);
 		if (!$sl->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$form = $this->createFormBuilder($sl)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
-			->add('profileType', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::profileTypeChoices()))
+			->add('profileType', ChoiceType::class, array("required" => false, "choices" => Idiolect::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
 			->add('dialect', TextType::class, array("required" => false))
 			->add('town', TextType::class, array("required" => false))
@@ -62,14 +62,14 @@ class SpeakerLanguagesController extends Controller
 		}
 
 		$token = $this->get('security.token_storage')->getToken();
-		return $this->render('speaker_languages/update.html.twig', array(
+		return $this->render('idiolects/update.html.twig', array(
 			"form" => $form->createView(),
 			"token" => $token
 		));
 	}
 
 	/**
-	* @Route("/speaker/{id}/languages/add", name="speakerLanguagesAdd")
+	* @Route("/speaker/{id}/idiolects/add", name="idiolectsAdd")
 	*/
 	public function addAction(Request $request, $id)
 	{
@@ -79,10 +79,10 @@ class SpeakerLanguagesController extends Controller
 		if (!$speaker) throw $this->createNotFoundException('No speaker found for id '.$id);
 		if (!$speaker->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
-		$sl = new SpeakerLanguage();
+		$sl = new Idiolect();
 		$form = $this->createFormBuilder($sl)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
-			->add('profileType', ChoiceType::class, array("required" => false, "choices" => SpeakerLanguage::profileTypeChoices()))
+			->add('profileType', ChoiceType::class, array("required" => false, "choices" => Idiolect::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
 			->add('town', TextType::class, array("required" => false))
 			->add('country', CountryType::class, array("required" => false))
@@ -101,24 +101,24 @@ class SpeakerLanguagesController extends Controller
 		}
 
 		$token = $this->get('security.token_storage')->getToken();
-		return $this->render('speaker_languages/update.html.twig', array(
+		return $this->render('idiolects/update.html.twig', array(
 			"form" => $form->createView(),
 			"token" => $token
 		));
 	}
 
 	/**
-	* @Route("/speaker_languages/{id}/delete", name="speakerLanguagesDelete")
+	* @Route("/idiolects/{id}/delete", name="idiolectsDelete")
 	*/
 	public function deleteAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $this->getDoctrine()->getRepository('AppBundle:SpeakerLanguage');
+		$repository = $this->getDoctrine()->getRepository('AppBundle:Idiolect');
 		$sl = $repository->find($id);
 		if (!$sl->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		if (!$sl) {
-			throw $this->createNotFoundException('No speaker language found for id '.$id);
+			throw $this->createNotFoundException('No idiolect found for id '.$id);
 		}
 		$speaker_id = $sl->getSpeaker()->getId();
 

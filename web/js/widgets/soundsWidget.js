@@ -72,6 +72,7 @@ SoundsWidget.prototype.show = function(page) {
 };
 
 SoundsWidget.prototype.setSounds = function(sounds) {
-	this.sounds = sounds;
+	this.sounds = [];
+//	this.sounds = sounds;
 	this.paginator.setPosition(0, Math.ceil(sounds.length / this.pageSize));
 };

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="speaker_languages")
  */
-class SpeakerLanguage implements \JsonSerializable
+class Idiolect implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
