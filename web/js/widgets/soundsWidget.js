@@ -33,11 +33,11 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 	return new Widget().createElement("tr")
 		.appendChild(new Widget().createElement("td").setClass("speaker")
 			.appendChild(new Widget().createElement("a")
-				.appendTextNode(sound.speaker.name)
-				.addEventListener("click", this, function() { this.call("showspeaker", sound.speaker ) })
+				.appendTextNode(sound.idiolect.speaker.name)
+				.addEventListener("click", this, function() { this.call("showspeaker", sound.idiolect.speaker ) })
 			)
 		)
-		.appendChild(new Widget().createElement("td").appendTextNode(sound.sl.getTitle()).setClass("language"))
+		.appendChild(new Widget().createElement("td").appendTextNode(sound.idiolect.getTitle()).setClass("language"))
 		.appendChild(new Widget().createElement("td").appendTextNode(sound.text).setClass("transcription"))
 		.appendChild(new Widget().createElement("td")
 			.appendChild(new Widget().createElement("audio")
@@ -64,15 +64,13 @@ SoundsWidget.prototype.show = function(page) {
 		var key = page * this.pageSize + i;
 		var arr = key < this.sounds.length ? this.sounds[key] : false;
 		if (!arr) break;
-		var sound = new Sound();
-		sound.set(arr);
+		sound = new EntitySound().set(arr);
 		this.table.appendChild(this.createSoundTr(sound));		
 	}
 
 };
 
 SoundsWidget.prototype.setSounds = function(sounds) {
-	this.sounds = [];
-//	this.sounds = sounds;
+	this.sounds = sounds;
 	this.paginator.setPosition(0, Math.ceil(sounds.length / this.pageSize));
 };

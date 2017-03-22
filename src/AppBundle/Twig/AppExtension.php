@@ -27,7 +27,7 @@ class AppExtension extends \Twig_Extension
 		return $result;
 	}
 
-	public function toArrFilter($arr, $keys) {
+	public function toArrFilter($arr, $keys = array()) {
 		return self::toArr($arr, array_flip($keys));
 	}
 }
