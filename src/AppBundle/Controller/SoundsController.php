@@ -72,6 +72,8 @@ class SoundsController extends Controller
 			if (!$user) throw new Exception('No user #".$userId." found');
 
 			$idiolectId = $request->request->get("idiolect");
+			if (!$idiolectId) throw new Exception('No idiolect argument');
+
 			$idiolect = $em->getRepository('AppBundle:Idiolect')->find($idiolectId);
 			if (!$idiolect) throw new Exception('No idiolect #'.$idiolectId.' found');
 			

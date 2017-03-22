@@ -1,4 +1,4 @@
-var Sl = function(id, lang, country, town) {
+var Idiolect = function(id, lang, country, town) {
 	this.id = id;
 	this.lang = lang;
 	this.lang = lang;
@@ -6,11 +6,11 @@ var Sl = function(id, lang, country, town) {
 	this.town = town; 	
 };
 
-Sl.prototype.getTitle = function() {
+Idiolect.prototype.getTitle = function() {
 	return this.lang.title + (this.dialect ? " (" + this.dialect + ")" : "");
 };
 
-Sl.prototype.set = function(arr) {
+Idiolect.prototype.set = function(arr) {
 	this.id = arr.id;
 	this.country = arr.country;
 	this.town = arr.town;
