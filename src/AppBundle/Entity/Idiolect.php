@@ -252,6 +252,7 @@ class Idiolect implements \JsonSerializable
 		$result = array();
 		$result["id"] = $this->getId();
 		$result["lang"] = $this->getLanguage();
+		$result["speaker"] = $this->getSpeaker();
 		if ($this->getProfileType()) $result["profileType"] = $this->getProfileType();
 		if ($this->getCountry()) $result["country"] = $this->getCountry();
 		if ($this->getTown()) $result["town"] = $this->getTown();

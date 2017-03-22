@@ -378,7 +378,6 @@ class Speaker implements \JsonSerializable
 		$result["name"] = $this->getName();
 		if ($this->getLivingCountry()) $result["country"] = $this->getLivingCountry();
 		if ($this->getLivingCity()) $result["city"] = $this->getLivingCity();
-		$result["path"] = $this->getName();
 
 		$idiolects = $this->getIdiolects();
 		$table = array();

@@ -167,6 +167,22 @@ class UsersController extends Controller
 		));
 	}
 
+	public function toArr(&$arr, $keys = array()) {
+		$result = array();
+		foreach($arr as $key => $value) {
+			if (!isset($keys[$key])) {
+				if (is_object($value)) {
+					$value = $value->export();
+				}
+				if (is_array($value)) {
+					if (is_string($key)) $keys[$key] = true;
+					$value = self::toArr($value, $keys);
+				}
+				$result[$key] = $value;
+			}
+		}
+		return $result;
+	}
 
 	/**
 	* @Route("/users/{id}/record", name="usersRecord")
@@ -180,12 +196,12 @@ class UsersController extends Controller
 		if (!$user->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
+		$speakers = self::toArr($speakers, array("speaker" => true));
 		return $this->render('users/record.html.twig', array(
 			"user" => $user,
-			"speakers" => $speakers,
+			"speakers" => $speakers
 		));
 	}
-
 
 	/**
 	* @Route("/users/{id}/update", name="usersUpdate")
