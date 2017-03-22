@@ -38,11 +38,11 @@ class IdiolectsController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$sl = $em->getRepository('AppBundle:Idiolect')->find($id);
-		if (!$sl) throw $this->createNotFoundException('No idiolect found for id '.$id);
-		if (!$sl->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
+		$idiolect = $em->getRepository('AppBundle:Idiolect')->find($id);
+		if (!$idiolect) throw $this->createNotFoundException('No idiolect found for id '.$id);
+		if (!$idiolect->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
-		$form = $this->createFormBuilder($sl)
+		$form = $this->createFormBuilder($idiolect)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
 			->add('profileType', ChoiceType::class, array("required" => false, "choices" => Idiolect::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
@@ -56,9 +56,9 @@ class IdiolectsController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($sl);
+			$em->persist($idiolect);
 			$em->flush();
-			return $this->redirectToRoute('speakersShow', array("id" => $sl->getSpeaker()->getId()));
+			return $this->redirectToRoute('speakersShow', array("id" => $idiolect->getSpeaker()->getId()));
 		}
 
 		$token = $this->get('security.token_storage')->getToken();
@@ -76,11 +76,11 @@ class IdiolectsController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$speaker = $em->getRepository('AppBundle:Speaker')->find($id);
-		if (!$speaker) throw $this->createNotFoundException('No speaker found for id '.$id);
+		if (!$speaker) throw $this->createNotFoundException('No idiolect for id '.$id);
 		if (!$speaker->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
-		$sl = new Idiolect();
-		$form = $this->createFormBuilder($sl)
+		$idiolect = new Idiolect();
+		$form = $this->createFormBuilder($idiolect)
 			->add('language', EntityType::class, array('class' => 'AppBundle:Language', 'choice_label' => 'title'))
 			->add('profileType', ChoiceType::class, array("required" => false, "choices" => Idiolect::profileTypeChoices()))
 			->add('description', TextType::class, array("required" => false))
@@ -93,9 +93,9 @@ class IdiolectsController extends Controller
 		//Enregistrement 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
-			$sl->setSpeaker($speaker);
+			$idiolect->setSpeaker($speaker);
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($sl);
+			$em->persist($idiolect);
 			$em->flush();
 			return $this->redirectToRoute('speakersShow', array("id" => $speaker->getId()));
 		}
@@ -114,15 +114,15 @@ class IdiolectsController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Idiolect');
-		$sl = $repository->find($id);
-		if (!$sl->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
+		$idiolect = $repository->find($id);
+		if (!$idiolect->getSpeaker()->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
-		if (!$sl) {
+		if (!$idiolect) {
 			throw $this->createNotFoundException('No idiolect found for id '.$id);
 		}
-		$speaker_id = $sl->getSpeaker()->getId();
+		$speaker_id = $idiolect->getSpeaker()->getId();
 
-		$em->remove($sl);
+		$em->remove($idiolect);
 		$em->flush();
 		return $this->redirectToRoute('speakersShow', array("id" => $speaker_id));
 	}

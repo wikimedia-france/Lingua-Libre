@@ -206,7 +206,7 @@ class Sound implements \JsonSerializable
 	 */
 	public function getIdiolect()
 	{
-		return $this->iodiolect;
+		return $this->idiolect;
 	}
 
 	/**

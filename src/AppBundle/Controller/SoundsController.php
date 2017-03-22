@@ -54,20 +54,6 @@ class SoundsController extends Controller
 	}
 
 	/**
-	* @Route("/sounds/add", name="soundsAdd")
-	*/
-	public function addAction()
-	{
-		$user = $this->getUser();
-
-		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		return $this->render('sounds/add.html.twig', array(
-			"user" => $user,
-			"speakers" => $speakers,
-		));
-	}
-
-	/**
 	* @Route("/api/sounds", name="soundsApi")
 	*/
 	public function postAction(Request $request)
@@ -85,16 +71,12 @@ class SoundsController extends Controller
 			$user = $em->getRepository('AppBundle:User')->find($userId);
 			if (!$user) throw new Exception('No user #".$userId." found');
 
-			$speakerId = $request->request->get("speaker");
-			$speaker = $em->getRepository('AppBundle:Speaker')->find($speakerId);
-			if (!$speaker) throw new Exception('No speaker #'.$speakerId.' found');
-
-			$slId = $request->request->get("sl");
-			$sl = $em->getRepository('AppBundle:SpeakerLanguage')->find($slId);
-			if (!$sl) throw new Exception('No speaker language #'.$slId.' found');
+			$idiolectId = $request->request->get("idiolect");
+			$idiolect = $em->getRepository('AppBundle:Idiolect')->find($idiolectId);
+			if (!$idiolect) throw new Exception('No idiolect #'.$idiolectId.' found');
 			
 			//Copy file
-			$filename = $speaker->getId()."-".dechex(crc32($text))."-".dechex(rand(0, 32000)).".wav";
+			$filename = $idiolect->getId()."-".dechex(crc32($text))."-".dechex(rand(0, 32000)).".wav";
 			$file = $request->files->get("sound");
 			if ($file == null) throw new Exception("no file sent");
 			if ($file->getMimeType() != "audio/x-wav") throw new Exception("this is not a wave file");
@@ -117,8 +99,7 @@ class SoundsController extends Controller
 
 			$sound->setUser($user);
 			$sound->setFilename($filename);
-			$sound->setSpeaker($speaker);
-			$sound->setSl($sl);
+			$sound->setIdiolect($idiolect);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($sound);
 			$em->flush();
@@ -147,10 +128,9 @@ class SoundsController extends Controller
 		if (!$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$form = $this->createFormBuilder($sound)
-			->add('sl', EntityType::class, array('class' => 'AppBundle:SpeakerLanguage', 'choice_label' => 'title'))
+			->add('idiolect', EntityType::class, array('class' => 'AppBundle:Idiolect', 'choice_label' => 'title'))
 			->add('text', TextType::class)
 			->add('description', TextareaType::class, array("required" => false))
-			->add('speaker', EntityType::class, array('class' => 'AppBundle:Speaker', 'choice_label' => 'name', "choices" => $sound->getUser()->getSpeakers()))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
