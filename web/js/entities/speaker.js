@@ -10,8 +10,7 @@ Speaker.prototype.addIdiolect = function(idiolect) {
 
 Speaker.prototype.setIdiolects = function(arr) {
 	for (var i = 0; i < arr.length; i++) {
-		var idiolect = new Idiolect();
-		idiolect.set(arr[i]);
+		var idiolect = new Idiolect().set(arr[i]);
 		this.addIdiolect(idiolect);		
 	}
 };
@@ -19,6 +18,6 @@ Speaker.prototype.setIdiolects = function(arr) {
 Speaker.prototype.set = function(item) {
 	this.id = item.id;
 	this.name = item.name;
-	this.setIdiolects(item.idiolects);
+	if ("idiolects" in item) this.setIdiolects(item.idiolects);
 	return this;
 };

@@ -196,7 +196,7 @@ class UsersController extends Controller
 		if (!$user->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
-		$speakers = self::toArr($speakers, array("speaker" => true));
+//		$speakers = self::toArr($speakers, array("speaker" => true));
 		return $this->render('users/record.html.twig', array(
 			"user" => $user,
 			"speakers" => $speakers
