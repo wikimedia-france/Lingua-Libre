@@ -114,7 +114,7 @@ class SoundsController extends Controller
 		}
 		return new Response(json_encode(array(
 			"success" => true,
-			"sound" => $sound
+			"soundId" => $sound->getId()
 		)));
 	}
 
