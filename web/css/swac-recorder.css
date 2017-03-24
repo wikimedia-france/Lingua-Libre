@@ -33,6 +33,7 @@ div.listing > div.item {
 	padding: 10px;
 	background-color: #bbe;
 	display: inline-block;
+	opacity: 0.75;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -54,7 +55,8 @@ div.listing > div.error {
 }
 
 div.listing > div.current {
-	background-color: #ddf;
+	text-decoration: underline;
+	opacity: 1;
 }
 
 div.recording > div.current {
