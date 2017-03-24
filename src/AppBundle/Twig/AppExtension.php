@@ -18,7 +18,10 @@ class AppExtension extends \Twig_Extension
 					$value = $value->export();
 				}
 				if (is_array($value)) {
-					if (is_string($key)) $keys[$key] = true;
+					if (is_string($key)) {
+						$keys[$key."s"] = true;
+						$keys[$key] = true;
+					}
 					$value = self::toArr($value, $keys);
 				}
 				$result[$key] = $value;

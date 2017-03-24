@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="{{ asset('js/common.min.js') }}"></script>
 	<script type="text/javascript">
 		window.onload = function() {
-			var sounds = new SoundsWidget({{ (sounds|json_encode|raw) }}, "{{ asset('audio') }}");
+			var sounds = new SoundsWidget({{ (sounds|toArr|json_encode|raw) }}, "{{ asset('audio') }}");
 			sounds.setCallback("showspeaker", sounds, function(speaker) {
 				pathSpeakerShow(speaker.id).open();
 			});
