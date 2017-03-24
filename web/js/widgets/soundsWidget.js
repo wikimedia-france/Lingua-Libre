@@ -41,7 +41,7 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 		.appendChild(new Widget().createElement("td").appendTextNode(sound.text).setClass("transcription"))
 		.appendChild(new Widget().createElement("td")
 			.appendChild(new Widget().createElement("audio")
-				.setAttribute("src", this.audioRootPath + "/" + sound.wave)
+				.setAttribute("src", this.audioRootPath + "/" + sound.filename)
 				.setAttribute("controls", "true")
 				.setAttribute("preload", "none")
 			)

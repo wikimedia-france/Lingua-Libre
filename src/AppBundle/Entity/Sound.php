@@ -284,7 +284,7 @@ class Sound implements \JsonSerializable
 			"text" => $this->getText(),
 			"idiolect" => $this->getIdiolect(),
 			//"ogg" => $this->getVirtualFilename(),
-			"wave" => $this->getFilename()
+			"filename" => $this->getFilename()
 		);
 	}
 	
