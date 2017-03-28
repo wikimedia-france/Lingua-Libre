@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="speaker_languages")
+ * @ORM\Table(name="idiolects")
  */
 class Idiolect implements \JsonSerializable
 {

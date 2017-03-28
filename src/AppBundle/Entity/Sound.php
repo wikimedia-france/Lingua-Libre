@@ -25,12 +25,6 @@ class Sound implements \JsonSerializable
 	protected $user;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Speaker")
-	 * @ORM\JoinColumn(name="speaker_id", referencedColumnName="id")
-	 */
-	protected $speaker;
-
-	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $filename;
@@ -182,7 +176,7 @@ class Sound implements \JsonSerializable
 		if (strlen($text) > $maxsize) {
 			$text = substr($text, 0, $maxsize)."…";
 		}
-		return $this->getLang()->getCode()."-".$this->getSpeaker()->getName()."-".$text."-LL".$this->getId().".ogg";
+		return $this->getLang()->getCode()."-".$this->getIdiolect()->getSpeaker()->getName()."-".$text."-LL".$this->getId().".ogg";
 	}
 
 	/**
