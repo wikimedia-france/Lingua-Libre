@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			studio = new StudioWidget({{ user.getId() }}, "{{ path('soundsApi') }}", document.getElementById('addSpeaker') );
-			studio.setSpeakers({{(speakers|json_encode|raw)}});
+			studio.setSpeakers({{(speakers|toArr(["speaker"])|json_encode|raw)}});
 			studio.showSound = function(sound) {
 				pathSoundsShow(sound.id).open("_blank");
 			};

@@ -16,7 +16,7 @@
 
 	<h2>Langues</h2>
 
-	{% if speaker.getLanguages()|length > 0 %}
+	{% if speaker.getIdiolects()|length > 0 %}
 		<table class="nice">
 		<tr>
 			<th></th>
@@ -25,22 +25,22 @@
 			<th>Niveau</th>
 			<th>Description</th>
 		</tr>
-		{% for sl in speaker.getLanguages() %}
+		{% for idiolect in speaker.getIdiolects() %}
 			<tr>
-				<th>{{ sl.getLanguage().getTitle() }}</th>
-				<td>{{ sl.getDialect() }}</td>
-				<td>{{ sl.getTown() }} {% if sl.getCountry() %}({{ sl.getCountry() }}){% endif %}</td>
-				<td>{{ sl.getProfileType() }}</td>
-				<td>{{ sl.getDescription() }}</td>
-				{% if speaker.editableBy(user) %}<th><a href="{{ path("speakerLanguagesUpdate", {"id": sl.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakerLanguagesDelete", {"id": sl.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
+				<th>{{ idiolect.getLanguage().getTitle() }}</th>
+				<td>{{ idiolect.getDialect() }}</td>
+				<td>{{ idiolect.getTown() }} {% if idiolect.getCountry() %}({{ idiolect.getCountry() }}){% endif %}</td>
+				<td>{{ idiolect.getProfileType() }}</td>
+				<td>{{ idiolect.getDescription() }}</td>
+				{% if speaker.editableBy(user) %}<th><a href="{{ path("idiolectsUpdate", {"id": idiolect.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("idiolectsDelete", {"id": idiolect.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th>{% endif %}
 			</tr>
 		{% endfor %}
-			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("speakerLanguagesAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
+			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
 
 		</table>
 	{% else %}
 		<p>Pas de langue définie pour le moment.
-		{% if speaker.editableBy(user) %}<a href="{{ path("speakerLanguagesAdd", {"id": speaker.getId() }) }}">En définir une</a>.{% endif %}
+		{% if speaker.editableBy(user) %}<a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">En définir une</a>.{% endif %}
 		</p>
 	{% endif %}
 	

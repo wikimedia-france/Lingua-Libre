@@ -55,17 +55,16 @@ StudioWidget.prototype.showSpeakers = function(speakers) {
 	}
 };
 
-StudioWidget.prototype.showSls = function(sls) {
+StudioWidget.prototype.showIdiolects = function(idiolects) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
-	this.langsNode.disabled = !sls;
-	this.contentNode.style.display = sls ? "" : "none";
+	this.langsNode.disabled = !idiolects;
+	this.contentNode.style.display = idiolects ? "" : "none";
 
-	if (sls) {
-		for(var i = 0; i < sls.length; i++) {
-			var sl = sls[i];
-			this.langsNode.appendChild(this.createOption(document.createTextNode(sl.lang.title + (sl.dialect ? " (" + sl.dialect + ")" : "")), sl.lang));
-
+	if (idiolects) {
+		for(var i = 0; i < idiolects.length; i++) {
+			var idiolect = idiolects[i];
+			this.langsNode.appendChild(this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect));
 		}
 	}
 };
@@ -80,14 +79,14 @@ StudioWidget.prototype.setSpeakers  = function(arr) {
 };
 
 StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
-	this.showSls(speaker ? speaker.sls : null);
+	this.showIdiolects(speaker ? speaker.idiolects : null);
 };
 
 StudioWidget.prototype.getCurrentSpeaker = function() {
 	return this.speakersNode.selectedIndex == -1 ? null : this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
-StudioWidget.prototype.getCurrentLang = function() {
+StudioWidget.prototype.getCurrentIdiolect = function() {
 	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
@@ -144,9 +143,8 @@ StudioWidget.prototype.update = function() {
 };
 
 StudioWidget.prototype.send = function send(sound, meta, doneCb) {
-	var speaker = this.getCurrentSpeaker();
-	var lang = this.getCurrentLang();
-	if (!lang || !speaker) return;
+	var idialect = this.getCurrentIdiolect();
+	if (!idialect) return;
 	
 	var formData = new FormData();
 	formData.append("user", this.userId);
@@ -154,8 +152,7 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("text", meta.transcript);
 	if (meta.id) formData.append("id", meta.id);
 	if ("description" in meta) formData.append("description", meta.description);
-	formData.append("speaker", speaker.id);
-	formData.append("lang", lang.id);
+	formData.append("idiolect", idialect.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
 		doneCb(result);

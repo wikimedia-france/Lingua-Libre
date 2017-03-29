@@ -168,6 +168,24 @@ class UsersController extends Controller
 	}
 
 	/**
+	* @Route("/users/{id}/record", name="usersRecord")
+	*/
+	public function recordAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$user = $em->getRepository('AppBundle:User')->find($id);
+		if (!$user) throw $this->createNotFoundException('No user found for id '.$id);
+		if (!$user->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
+
+		$speakers = $this->getDoctrine()->getRepository('AppBundle:Speaker')->findByUser($user);
+		return $this->render('users/record.html.twig', array(
+			"user" => $user,
+			"speakers" => $speakers
+		));
+	}
+
+	/**
 	* @Route("/users/{id}/update", name="usersUpdate")
 	*/
 	public function updateAction(Request $request, $id)

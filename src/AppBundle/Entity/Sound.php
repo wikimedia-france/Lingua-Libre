@@ -41,10 +41,10 @@ class Sound implements \JsonSerializable
 	protected $text;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Language")
-	 * @ORM\JoinColumn(name="lang_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="Idiolect")
+	 * @ORM\JoinColumn(name="idiolect_id", referencedColumnName="id")
 	 */
-	protected $lang;
+	protected $idiolect;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -186,27 +186,27 @@ class Sound implements \JsonSerializable
 	}
 
 	/**
-	 * Set lang
+	 * Set idiolect
 	 *
-	 * @param string $lang
+	 * @param string $idiolect
 	 *
 	 * @return Sound
 	 */
-	public function setLang($lang)
+	public function setIdiolect($idiolect)
 	{
-		$this->lang = $lang;
+		$this->idiolect = $idiolect;
 
 		return $this;
 	}
 
 	/**
-	 * Get lang
+	 * Get idiolect
 	 *
 	 * @return string
 	 */
-	public function getLang()
+	public function getIdiolect()
 	{
-		return $this->lang;
+		return $this->idiolect;
 	}
 
 	/**
@@ -233,36 +233,10 @@ class Sound implements \JsonSerializable
 		return $this->created;
 	}
 
-	/**
-	 * Set speaker
-	 *
-	 * @param \AppBundle\Entity\Speaker $speaker
-	 *
-	 * @return Sound
-	 */
-	public function setSpeaker(\AppBundle\Entity\Speaker $speaker = null)
-	{
-		$this->speaker = $speaker;
-
-		return $this;
-	}
-
-	/**
-	 * Get speaker
-	 *
-	 * @return \AppBundle\Entity\Speaker
-	 */
-	public function getSpeaker()
-	{
-		return $this->speaker;
-	}
-
 	public function editableBy($user)
 	{
 		return !$this->getUser() || $user && ($this->getUser()->getId() == $user->getId() || $user->getIsAdmin());
 	}
-	
-	
 	
 	/**
 	 * Add comment
@@ -308,10 +282,9 @@ class Sound implements \JsonSerializable
 		return array(
 			"id" => $this->getId(),
 			"text" => $this->getText(),
-			"lang" => $this->getLang(),
-			"speaker" => $this->getSpeaker(),
+			"idiolect" => $this->getIdiolect(),
 			//"ogg" => $this->getVirtualFilename(),
-			"wave" => $this->getFilename()
+			"filename" => $this->getFilename()
 		);
 	}
 	
