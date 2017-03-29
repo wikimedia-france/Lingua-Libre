@@ -1,18 +1,18 @@
 var StudioWidget = function(userId, targetUrl, addSpeakerNode) {
-		this.targetUrl = targetUrl;
-		this.userId = userId;
-		this.addSpeakerNode = addSpeakerNode;
-		this.speakers = [];
-		
-		this.ajax = new Ajax();
-		this.audioAuthWidget = new AudioAuthWidget();
-		this.multiRecorder = null;
-		this.node = document.createElement("div");
-		this.contentNode = document.createElement("div");
-		this.speakersNode = document.createElement("select");
-		this.langsNode = document.createElement("select");
-		
-		this.init();
+	this.targetUrl = targetUrl;
+	this.userId = userId;
+	this.addSpeakerNode = addSpeakerNode;
+	this.speakers = [];
+	
+	this.ajax = new Ajax();
+	this.audioAuthWidget = new AudioAuthWidget();
+	this.multiRecorder = null;
+	this.node = document.createElement("div");
+	this.contentNode = document.createElement("div");
+	this.speakersNode = document.createElement("select");
+	this.langsNode = document.createElement("select");
+	
+	this.init();
 };
 
 StudioWidget.prototype.createRow = function(titleNode, dataNode) {
@@ -48,20 +48,24 @@ StudioWidget.prototype.createOption = function(titleNode, data) {
 StudioWidget.prototype.showSpeakers = function(speakers) {
 	while (this.speakersNode.firstChild) this.speakersNode.removeChild(this.speakersNode.firstChild);
 
+	this.speakersNode.disabled = (speakers.length == 0);
 	for(var i = 0; i < speakers.length; i++) {
 		var speaker = speakers[i];
 		this.speakersNode.appendChild(this.createOption(document.createTextNode(speaker.name), speaker));
-
 	}
+};
+
+StudioWidget.prototype.setEnabled = function(value) {
+	this.contentNode.style.display = value ? "" : "none";
 };
 
 StudioWidget.prototype.showIdiolects = function(idiolects) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
-	this.langsNode.disabled = !idiolects;
-	this.contentNode.style.display = idiolects ? "" : "none";
+	this.langsNode.disabled = (idiolects.length == 0);
+	this.setEnabled(idiolects.length > 0);
 
-	if (idiolects) {
+	if (idiolects.length > 0) {
 		for(var i = 0; i < idiolects.length; i++) {
 			var idiolect = idiolects[i];
 			this.langsNode.appendChild(this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect));
@@ -79,7 +83,7 @@ StudioWidget.prototype.setSpeakers  = function(arr) {
 };
 
 StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
-	this.showIdiolects(speaker ? speaker.idiolects : null);
+	this.showIdiolects(speaker ? speaker.idiolects : []);
 };
 
 StudioWidget.prototype.getCurrentSpeaker = function() {
