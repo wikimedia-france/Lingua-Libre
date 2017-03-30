@@ -156,7 +156,7 @@ class UsersController extends Controller
 				return $this->redirectToRoute('usersShow', array("id" => $user->getId()));
 			}
 			else {
-				//Définir message d’erreur
+				$this->addFlash('error', 'Your password isn’t correct!');
 			}
 		}
 
