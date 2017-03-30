@@ -149,7 +149,7 @@ class UsersController extends Controller
 			$encoder = $this->get('security.password_encoder');
 			$oldPlainPassword = $form->get("oldPlainPassword")->getData();
 
-			if ($encoder->isPasswordValid($user, $oldPlainPassword)) {
+			if ($this->getUser()->getIsAdmin() || $encoder->isPasswordValid($user, $oldPlainPassword)) {
 				$user->encodePassword($encoder);
 				$em->persist($user);
 				$em->flush();
