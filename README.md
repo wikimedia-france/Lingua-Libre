@@ -41,7 +41,8 @@ php bin/console server:run
   - 1 x Anti-vibration system
 - 1 x personal PC -- mini-pc will do if your audio recording chain is external
 - Internet connexion
-Hardware cost : external audio equipments for US$250 + optional modest PC for US$300 = 250 ~ 550US$.
+
+**Cost** : US$250 for external audio equipments  + US$300 for optional modest PC  = 250 ~ 550US$.
 
 ### Working process
 1. Data gathering : prepare a text file with a list of words/sentences, one by line. 1000~1500 items per half day is fair.
