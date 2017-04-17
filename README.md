@@ -28,6 +28,21 @@ php bin/console server:run
 - **SWAC Recorder** (2013) by Nicolas Vion - a revamp of the earlier, less known but easier to install, with better user experience.
 - **Lingua-Libre** (2016) by Nicolas Vion - a cloud variation of the earlier versions, the project was funded by Wikimedia France, and create with feedbacks from local linguistic academics. The grant is associated with the project to reccord and preserve dying French minorities languages, but can be used for all languages around the world, as well as to reccord the voice of your important love ones. The clean, sharp, net audiofiles outputed ease the creation of various derivated applications.
 
+### Functionalities
+In order to provide very consistent, app-friendly files, the current functionality are :
+- [x] easy usage without downlaod nor installation, via LinguaLibre.fr
+- [x] speakers' profiles, with language, gender, age, origin and few other data recommended to us by linguists.
+- [x] wordlist support
+- [x] intuitive interface with audio curve went speaking
+- [x] roll back capability
+- [x] auto roll-back / do-again when saturation is detected
+- [x] consistent cut before / after the said words
+- [x] auto equalization for sound's level
+
+Wishlist :
+- [ ] batch download
+- [ ] noise reduction (?)
+
 ### Equipment (recommendation)
 - Silent room / Recording studio
 - 1 x [Scarlett2 Solo Studio Pack 2nd Generation](https://www.amazon.com/dp/B01E6T54E2/), comprising portable :
