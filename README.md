@@ -60,14 +60,15 @@ Wishlist :
 **Cost** : US$250 for external audio equipments  + US$300 for optional PC  = 250 ~ 550US$.
 
 ### Working process
-1. Data gathering : prepare a text file with a list of words/sentences, one by line. 1000~1500 items per half day is fair.
+1. Data gathering : prepare a text file with a list of words/sentences, one by line.
 2. Speaker : find a willing speaker
 3. Facility : find a calm studio or room 
-4. Installation : install the equipment
-5. Settings: connect to LinguaLibre.fr's studio, edit the settings according to your needs
-6. Recording : start your high quality massive audio recording.
-7. Applications : be creative, invente your apps ! :D
+4. Hardware installation : install the equipment in the room so to work comfortably
+5. Software settings: connect to LinguaLibre.fr's studio, edit the settings according to your needs
+6. Recording : start your high quality massive audio recording. **1000~1500 items per half day** is fair.
+7. Applications : be creative, invent your apps ! :D
 
 ### License
 - GNU GENERAL PUBLIC LICENSE -- thanks to a Wikimedia-France's funding.
+
 See also [authors](https://github.com/wikimedia-france/Lingua-Libre/blob/master/AUTHORS).
