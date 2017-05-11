@@ -1,4 +1,4 @@
-**Lingua-Libre** ([LinguaLibre.fr](http://lingualibre.fr) – Massive Open Audio Recording) is an opensource platform and webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is designed from the start to ease the creation of consistant datasets of audio files. We believe it is the best tool available to create dataset from few dozens to several thousands audios files. Recording productividy can reach up to 1000 audio recordings / hour, given a good words list and an experienced user. Lingua-Libre is funded by Wikimedia France and actively used by the Wikimedia community.
+**Lingua-Libre** ([LinguaLibre.fr](http://lingualibre.fr) – Massive Open Audio Recording) is an opensource platform and webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is designed from the start to ease the creation of consistent datasets of audio files. We believe it is the best tool available to create dataset from few dozens to several thousands audios files. Recording productivity can reach up to 1000 audio recordings / hour, given a clean words list and an experienced user. Lingua-Libre is funded by Wikimedia France and actively used by the Wikimedia community.
 
 ### Requirements
 
@@ -67,6 +67,10 @@ Wishlist :
 5. Software settings: connect to LinguaLibre.fr's studio, edit the settings according to your needs
 6. Recording : start your high quality massive audio recording. **1000~1500 items per half day** is fair.
 7. Applications : be creative, invent your apps ! :D
+
+<p align="center">
+  <img  src="https://i.stack.imgur.com/873Fb.png" alt="Schematic image"/>
+</p>
 
 ### License
 - GNU GENERAL PUBLIC LICENSE -- thanks to a Wikimedia-France's funding.
