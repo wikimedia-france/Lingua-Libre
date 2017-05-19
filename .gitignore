@@ -9,4 +9,4 @@ var/
 bin/symfony_requirements
 web/config.php
 app/config/parameters.yml
-
+.idea/
