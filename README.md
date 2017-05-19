@@ -20,6 +20,8 @@ Run:
 docker-compose up
 ```
 
+The application should now be available in your browser at <a href="http://localhost:8000">http://localhost:8000</a>
+
 #### (Re-)Create Database
 ```
 docker-compose exec app /code/bin/console doctrine:database:create --if-not-exists
