@@ -14,7 +14,7 @@ app:
     - ./docker/app/90_php.ini:/usr/local/etc/php/conf.d/90_php.ini
   links:
     - database
-  user: "1001"
+  user: "${UID}"
 
 database:
   image: mysql:5
