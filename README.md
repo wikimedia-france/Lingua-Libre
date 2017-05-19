@@ -29,6 +29,11 @@ docker-compose exec app /code/bin/console doctrine:schema:update --force
 docker-compose exec app /code/bin/console doctrine:fixtures:load
 ```
 
+#### Build the Javascript files
+```
+make -C web/js common.js
+```
+
 ### History
 - **Shtooka Recorder** (2010) by Nicolas Vion - a notable desktop software which had a deep impact on the open audio reccording ecosystems. Hundreds of applications use data produced by this software.
 - **SWAC Recorder** (2013) by Nicolas Vion - a revamp of the earlier, less known but easier to install, with better user experience.
