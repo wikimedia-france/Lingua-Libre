@@ -19,6 +19,9 @@ app:
 database:
   image: mysql:5
   environment:
-    - MYSQL_ROOT_PASSWORD="bienvenue"
+    - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    - MYSQL_USER=lingualibre
+    - MYSQL_PASSWORD=bienvenue
+    - MYSQL_DATABASE=lingualibre
   ports:
     - "3306"

@@ -22,7 +22,7 @@ docker-compose up
 
 #### (Re-)Create Database
 ```
-docker-compose exec app /code/bin/console doctrine:database:create
+docker-compose exec app /code/bin/console doctrine:database:create --if-not-exists
 docker-compose exec app /code/bin/console doctrine:schema:update --force
 docker-compose exec app /code/bin/console doctrine:fixtures:load
 ```
