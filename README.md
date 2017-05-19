@@ -10,17 +10,21 @@
 ### Install
 Run :
 ```
-composer install
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
+docker run -it --rm --user $(id -u):$(id -g) -v "$PWD":/app -v ~/.composer:/composer -w /app composer composer install
 ```
 
 ### Development
-Run :
+Run:
 
 ```
-php bin/console server:run
+docker-compose up
+```
+
+#### (Re-)Create Database
+```
+docker-compose exec app /code/bin/console doctrine:database:create
+docker-compose exec app /code/bin/console doctrine:schema:update --force
+docker-compose exec app /code/bin/console doctrine:fixtures:load
 ```
 
 ### History
