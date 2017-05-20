@@ -14,6 +14,12 @@ Wikimedia France and actively used by the Wikimedia community.
  - MySQL 5 , one instance
 
 ## Install
+
+In order to create a level playing field for development this project uses 
+<a href="https://docs.docker.com/engine/installation/">docker</a> & 
+<a href="https://docs.docker.com/compose/install/">docker-compose</a>, 
+as well as <a href="https://getcomposer.org/">composer</a> for dependency management.
+
 Run :
 ```
 docker run -it --rm --user $(id -u):$(id -g) -v "$PWD":/app -v ~/.composer:/composer -w /app composer composer install
