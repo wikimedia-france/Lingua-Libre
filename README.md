@@ -1,5 +1,5 @@
 # Lingua-Libre 
-[LinguaLibre.fr](http://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
+[LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
 webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is 
 designed from the start to ease the creation of consistent datasets of audio files. We believe it is the best tool 
 available to create dataset from few dozens to several thousands audios files. Recording productivity can reach up to 
@@ -13,26 +13,28 @@ Wikimedia France and actively used by the Wikimedia community.
  - Symfony 1.5
  - MySQL 5 , one instance
 
-## Install
+## Installation & Development 
 
 In order to create a level playing field for development this project uses 
 <a href="https://docs.docker.com/engine/installation/">docker</a> & 
 <a href="https://docs.docker.com/compose/install/">docker-compose</a>, 
 as well as <a href="https://getcomposer.org/">composer</a> for dependency management.
 
-Run :
+### Install PHP dependencies
 ```
 docker run -it --rm --user $(id -u):$(id -g) -v "$PWD":/app -v ~/.composer:/composer -w /app composer composer install
 ```
 
-## Development
-Run:
+### Start-up the system
 
 ```
 export UID && docker-compose up
 ```
 
-The application should now be available in your browser at <a href="http://localhost:8000">http://localhost:8000</a>
+This will keep stay attached to your command line and show you useful debug information. 
+The application should now already be available in your browser at <a href="http://localhost:8000">http://localhost:8000</a>.
+
+Use a second command line and continue with the following commands to complete installation.
 
 ### (Re-)Create Database
 ```
@@ -51,7 +53,8 @@ make -C web/js common.js
 The following dependencies exist in the code and are yet to be addressed in the development environment or, 
 at least, the README (e.g. required version).
 
-* `yui-compressor` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/web/js/Makefile#L15">`js/Makefile`</a>
+* `make` by usage of `web/js/Makefile` to build Javascript
+* `yui-compressor` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/web/js/Makefile#L15">`web/js/Makefile`</a>
 * `oggenc` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/src/AppBundle/Controller/ExportController.php#L60">`ExportController.php`</a>
 
 ## History
