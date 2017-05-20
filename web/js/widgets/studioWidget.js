@@ -39,10 +39,10 @@ StudioWidget.prototype.addSpeaker = function(speaker) {
 };
 
 StudioWidget.prototype.createOption = function(titleNode, data) {
-	var option = document.createElement("option");
-	option.appendChild(titleNode);
-	option.data = data;
-	return option;
+    var option = document.createElement("option");
+    option.appendChild(titleNode);
+    option.data = data;
+    return option;
 };
 
 StudioWidget.prototype.showSpeakers = function(speakers) {
@@ -67,8 +67,13 @@ StudioWidget.prototype.showIdiolects = function(idiolects) {
 
 	if (idiolects.length > 0) {
 		for(var i = 0; i < idiolects.length; i++) {
-			var idiolect = idiolects[i];
-			this.langsNode.appendChild(this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect));
+		    var idiolect = idiolects[i];
+		    console.log(idiolect);
+		    var option = this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect);
+		    
+		    option.value = idiolect.lang.code;
+		    
+		    this.langsNode.appendChild(option);
 		}
 	}
 };
@@ -124,21 +129,35 @@ StudioWidget.prototype.createForm = function() {
 	return table;
 };
 
+
 StudioWidget.prototype.init = function() {
-	this.node.className = "studio";
-	
-	this.node.appendChild(this.createForm());
-	this.node.appendChild(this.contentNode);
+    this.node.className = "studio";
+    
+    this.node.appendChild(this.createForm());
+    this.node.appendChild(this.contentNode);
+    
+    this.setContent(this.audioAuthWidget.node);
+    
+    var self = this;
+    this.audioAuthWidget.onenabled = function(stream) {
+	self.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
+	self.multiRecorder.showSound = function(sound) { self.showSound(sound) };
+	self.setContent(self.multiRecorder.node);
 
-	this.setContent(this.audioAuthWidget.node);
+	var rtl_langs = ["eng"];
+	var langChangeCallback = function(){
 
-	var self = this;
-	this.audioAuthWidget.onenabled = function(stream) {
-		self.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
-		self.multiRecorder.showSound = function(sound) { self.showSound(sound) };
-		self.setContent(self.multiRecorder.node);
+	    self.multiRecorder.listingEditor.rtl(jQuery.inArray(jQuery(self.langsNode).val(),rtl_langs)>-1);
 	};
-	this.setCurrentSpeaker(null);
+	
+	langChangeCallback();
+	
+	
+	jQuery(self.langsNode).on("change",langChangeCallback);
+	
+
+    };
+    this.setCurrentSpeaker(null);
 };
 
 StudioWidget.prototype.update = function() {

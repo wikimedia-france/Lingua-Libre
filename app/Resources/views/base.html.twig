@@ -4,12 +4,13 @@
 		<meta charset="UTF-8" />
 		<title>{% block title %}Lingua Libre{% endblock %}</title>
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/favicon_32.png') }}" />
-
+		
 		{% block stylesheets %}
 			<link rel="stylesheet" type="text/css" media="screen, projection, print" href="{{ asset('css/style.css') }}" />
 		{% endblock %}
 
-		{% block javascript %}
+			{% block javascript %}
+			<script type="text/javascript" src="/js/vendor/jquery-3.2.1.min.js"></script>
 			<script type="text/javascript">
 				function toggle_visibility(node) {
 					node.style.display = node.style.display == "none" ? "" : "none";
