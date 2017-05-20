@@ -17,7 +17,7 @@ docker run -it --rm --user $(id -u):$(id -g) -v "$PWD":/app -v ~/.composer:/comp
 Run:
 
 ```
-docker-compose up
+export UID && docker-compose up
 ```
 
 The application should now be available in your browser at <a href="http://localhost:8000">http://localhost:8000</a>
