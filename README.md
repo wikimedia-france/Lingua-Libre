@@ -34,6 +34,14 @@ docker-compose exec app /code/bin/console doctrine:fixtures:load
 make -C web/js common.js
 ```
 
+### Hard dependencies
+
+The following dependencies exist in the code and are yet to be addressed in the development environment or, 
+at least, the README (e.g. required version).
+
+* `yui-compressor` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/web/js/Makefile#L15">`js/Makefile`</a>
+* `oggenc` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/src/AppBundle/Controller/ExportController.php#L60">`ExportController.php`</a>
+
 ### History
 - **Shtooka Recorder** (2010) by Nicolas Vion - a notable desktop software which had a deep impact on the open audio reccording ecosystems. Hundreds of applications use data produced by this software.
 - **SWAC Recorder** (2013) by Nicolas Vion - a revamp of the earlier, less known but easier to install, with better user experience.
