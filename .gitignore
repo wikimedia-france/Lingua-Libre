@@ -11,3 +11,4 @@ web/config.php
 app/config/parameters.yml
 .idea/
 web/js/common.js
+web/audio/
