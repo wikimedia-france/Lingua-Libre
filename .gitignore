@@ -4,7 +4,8 @@
 *.lock
 web/bundles/
 vendor/
-var/
+var/*
+!var/.gitkeep
 *.swp
 bin/symfony_requirements
 web/config.php
