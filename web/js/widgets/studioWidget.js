@@ -144,7 +144,9 @@ StudioWidget.prototype.init = function() {
 			return;
 		}
 		var langChangeCallback = function(){
-			self.multiRecorder.listingEditor.rtl(jQuery("option:selected",self.langsNode)[0].idiolect.lang.isRtl);
+			var isRtl = jQuery("option:selected",self.langsNode)[0].idiolect.lang.isRtl;
+			self.multiRecorder.listingEditor.rtl(isRtl);
+			self.multiRecorder.listingRecorderWidget.rtl(isRtl);
 		};
 		langChangeCallback();
 		jQuery(self.langsNode).on("change",langChangeCallback);

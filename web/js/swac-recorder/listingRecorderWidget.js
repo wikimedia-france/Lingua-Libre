@@ -18,6 +18,16 @@ ListingRecorderWidget.prototype.onkeydown = function(e) {
 			return false;
 	}
 };
+ListingRecorderWidget.prototype.rtl = function(active) {
+
+    if(active){
+       jQuery(this.node).css("direction","rtl");
+    }
+    else{
+	jQuery(this.node).css("direction","ltr");
+    }
+};
+
 
 ListingRecorderWidget.prototype.setList = function(list) {
 	this.listing.setList(list);
