@@ -150,6 +150,7 @@ class Language implements \JsonSerializable
 		$result["id"] = $this->getId();
 		$result["code"] = $this->getCode();
 		$result["title"] = $this->getTitle();
+		$result["isRtl"] = $this->getIsRtl();
 		return $result;
 	}
 
