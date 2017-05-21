@@ -48,7 +48,9 @@ docker-compose exec app /code/bin/console doctrine:fixtures:load
 make -C web/js common.js
 ```
 
-## Hard dependencies
+## Technical todos
+
+### Hard dependencies
 
 The following dependencies exist in the code and are yet to be addressed in the development environment or, 
 at least, the README (e.g. required version).
@@ -56,6 +58,13 @@ at least, the README (e.g. required version).
 * `make` by usage of `web/js/Makefile` to build Javascript
 * `yui-compressor` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/web/js/Makefile#L15">`web/js/Makefile`</a>
 * `oggenc` in <a href="https://github.com/wikimedia-france/Lingua-Libre/blob/master/src/AppBundle/Controller/ExportController.php#L60">`ExportController.php`</a>
+
+### Javascript build process
+
+Currently the Javascript (`web/js/common.js`) is build using `make`. This is an anachronism to say the least.
+Switching to a more modern tool, like e.g. [grunt](https://gruntjs.com/), would resolve the hard dependency to both 
+`make` and `yui-compressor`. Additionally, the jQuery file now commited into this repo (`web/js/vendor/jquery-3.2.1.min.js`)
+can then be replaced by Javascript package management (e.g. npm).
 
 ## History
 - **Shtooka Recorder** (2010) by Nicolas Vion - a notable desktop software which had a deep impact on the open audio reccording ecosystems. Hundreds of applications use data produced by this software.
