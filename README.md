@@ -73,9 +73,15 @@ In order to provide very consistent, app-friendly files, the current functionali
 - [x] consistent cut before / after the said words
 - [x] auto equalization for sound's level
 
-Wishlist :
-- [ ] batch download
-- [ ] noise reduction (?)
+Wishlist (primary) :
+- [ ] English UI [#13](./issues/13)
+- [ ] OAuth login [#31](./issues/31)
+- [ ] Auto-upload to commons [#33](./issues/33)
+- [ ] Batch download [#2](./issues/2)
+
+Wishlist (secondary) :
+- [ ] Noise reduction [#29](./issues/29)
+- [ ] Fade-in / fade-out [#40](./issues/40)
 
 ## Equipment (recommendation)
 - Silent room / Recording studio
