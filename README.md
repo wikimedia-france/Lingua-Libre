@@ -73,7 +73,7 @@ In order to provide very consistent, app-friendly files, the current functionali
 - [x] consistent cut before / after the said words
 - [x] auto equalization for sound's level
 
-Wishlist ([primary](./issues?q=is%3Aissue+is%3Aopen+label%3Aimportant)) :
+Wishlist ([primary](https://github.com/wikimedia-france/Lingua-Libre/issues?q=is%3Aissue+is%3Aopen+label%3Aimportant)) :
 - [ ] English UI [#13](./issues/13)
 - [ ] OAuth login [#31](./issues/31)
 - [ ] Auto-upload to commons [#33](./issues/33)
