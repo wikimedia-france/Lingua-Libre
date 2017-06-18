@@ -25,12 +25,6 @@ class Sound implements \JsonSerializable
 	protected $user;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Speaker")
-	 * @ORM\JoinColumn(name="speaker_id", referencedColumnName="id")
-	 */
-	protected $speaker;
-
-	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $filename;
@@ -41,10 +35,10 @@ class Sound implements \JsonSerializable
 	protected $text;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="SpeakerLanguage")
-	 * @ORM\JoinColumn(name="sl_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="Idiolect")
+	 * @ORM\JoinColumn(name="idiolect_id", referencedColumnName="id")
 	 */
-	protected $sl;
+	protected $idiolect;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -182,31 +176,31 @@ class Sound implements \JsonSerializable
 		if (strlen($text) > $maxsize) {
 			$text = substr($text, 0, $maxsize)."…";
 		}
-		return $this->getLang()->getCode()."-".$this->getSpeaker()->getName()."-".$text."-LL".$this->getId().".ogg";
+		return $this->getLang()->getCode()."-".$this->getIdiolect()->getSpeaker()->getName()."-".$text."-LL".$this->getId().".ogg";
 	}
 
 	/**
-	 * Set sl
+	 * Set idiolect
 	 *
-	 * @param string $sl
+	 * @param string $idiolect
 	 *
 	 * @return Sound
 	 */
-	public function setSl($sl)
+	public function setIdiolect($idiolect)
 	{
-		$this->sl = $sl;
+		$this->idiolect = $idiolect;
 
 		return $this;
 	}
 
 	/**
-	 * Get sl
+	 * Get idiolect
 	 *
 	 * @return string
 	 */
-	public function getSl()
+	public function getIdiolect()
 	{
-		return $this->sl;
+		return $this->idiolect;
 	}
 
 	/**
@@ -233,36 +227,10 @@ class Sound implements \JsonSerializable
 		return $this->created;
 	}
 
-	/**
-	 * Set speaker
-	 *
-	 * @param \AppBundle\Entity\Speaker $speaker
-	 *
-	 * @return Sound
-	 */
-	public function setSpeaker(\AppBundle\Entity\Speaker $speaker = null)
-	{
-		$this->speaker = $speaker;
-
-		return $this;
-	}
-
-	/**
-	 * Get speaker
-	 *
-	 * @return \AppBundle\Entity\Speaker
-	 */
-	public function getSpeaker()
-	{
-		return $this->speaker;
-	}
-
 	public function editableBy($user)
 	{
 		return !$this->getUser() || $user && ($this->getUser()->getId() == $user->getId() || $user->getIsAdmin());
 	}
-	
-	
 	
 	/**
 	 * Add comment
@@ -308,10 +276,9 @@ class Sound implements \JsonSerializable
 		return array(
 			"id" => $this->getId(),
 			"text" => $this->getText(),
-			"sl" => $this->getSl(),
-			"speaker" => $this->getSpeaker(),
+			"idiolect" => $this->getIdiolect(),
 			//"ogg" => $this->getVirtualFilename(),
-			"wave" => $this->getFilename()
+			"filename" => $this->getFilename()
 		);
 	}
 	

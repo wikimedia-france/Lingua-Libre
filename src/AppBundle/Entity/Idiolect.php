@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="speaker_languages")
+ * @ORM\Table(name="idiolects")
  */
-class SpeakerLanguage implements \JsonSerializable
+class Idiolect implements \JsonSerializable
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -252,6 +252,7 @@ class SpeakerLanguage implements \JsonSerializable
 		$result = array();
 		$result["id"] = $this->getId();
 		$result["lang"] = $this->getLanguage();
+		$result["speaker"] = $this->getSpeaker();
 		if ($this->getProfileType()) $result["profileType"] = $this->getProfileType();
 		if ($this->getCountry()) $result["country"] = $this->getCountry();
 		if ($this->getTown()) $result["town"] = $this->getTown();

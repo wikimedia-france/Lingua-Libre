@@ -1,18 +1,18 @@
 var StudioWidget = function(userId, targetUrl, addSpeakerNode) {
-		this.targetUrl = targetUrl;
-		this.userId = userId;
-		this.addSpeakerNode = addSpeakerNode;
-		this.speakers = [];
-		
-		this.ajax = new Ajax();
-		this.audioAuthWidget = new AudioAuthWidget();
-		this.multiRecorder = null;
-		this.node = document.createElement("div");
-		this.contentNode = document.createElement("div");
-		this.speakersNode = document.createElement("select");
-		this.langsNode = document.createElement("select");
-		
-		this.init();
+	this.targetUrl = targetUrl;
+	this.userId = userId;
+	this.addSpeakerNode = addSpeakerNode;
+	this.speakers = [];
+	
+	this.ajax = new Ajax();
+	this.audioAuthWidget = new AudioAuthWidget();
+	this.multiRecorder = null;
+	this.node = document.createElement("div");
+	this.contentNode = document.createElement("div");
+	this.speakersNode = document.createElement("select");
+	this.langsNode = document.createElement("select");
+	
+	this.init();
 };
 
 StudioWidget.prototype.createRow = function(titleNode, dataNode) {
@@ -48,24 +48,27 @@ StudioWidget.prototype.createOption = function(titleNode, data) {
 StudioWidget.prototype.showSpeakers = function(speakers) {
 	while (this.speakersNode.firstChild) this.speakersNode.removeChild(this.speakersNode.firstChild);
 
+	this.speakersNode.disabled = (speakers.length == 0);
 	for(var i = 0; i < speakers.length; i++) {
 		var speaker = speakers[i];
 		this.speakersNode.appendChild(this.createOption(document.createTextNode(speaker.name), speaker));
-
 	}
 };
 
-StudioWidget.prototype.showSls = function(sls) {
+StudioWidget.prototype.setEnabled = function(value) {
+	this.contentNode.style.display = value ? "" : "none";
+};
+
+StudioWidget.prototype.showIdiolects = function(idiolects) {
 	while (this.langsNode.firstChild) this.langsNode.removeChild(this.langsNode.firstChild);
 
-	this.langsNode.disabled = !sls;
-	this.contentNode.style.display = sls ? "" : "none";
+	this.langsNode.disabled = (idiolects.length == 0);
+	this.setEnabled(idiolects.length > 0);
 
-	if (sls) {
-		for(var i = 0; i < sls.length; i++) {
-			var sl = sls[i];
-			this.langsNode.appendChild(this.createOption(document.createTextNode(sl.lang.title + (sl.dialect ? " (" + sl.dialect + ")" : "")), sl));
-
+	if (idiolects.length > 0) {
+		for(var i = 0; i < idiolects.length; i++) {
+			var idiolect = idiolects[i];
+			this.langsNode.appendChild(this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect));
 		}
 	}
 };
@@ -80,14 +83,14 @@ StudioWidget.prototype.setSpeakers  = function(arr) {
 };
 
 StudioWidget.prototype.setCurrentSpeaker = function(speaker) {
-	this.showSls(speaker ? speaker.sls : null);
+	this.showIdiolects(speaker ? speaker.idiolects : []);
 };
 
 StudioWidget.prototype.getCurrentSpeaker = function() {
 	return this.speakersNode.selectedIndex == -1 ? null : this.speakersNode.options[this.speakersNode.selectedIndex].data;
 };
 
-StudioWidget.prototype.getCurrentSl = function() {
+StudioWidget.prototype.getCurrentIdiolect = function() {
 	return this.langsNode.options[this.langsNode.selectedIndex].data;
 };
 
@@ -144,9 +147,8 @@ StudioWidget.prototype.update = function() {
 };
 
 StudioWidget.prototype.send = function send(sound, meta, doneCb) {
-	var speaker = this.getCurrentSpeaker();
-	var sl = this.getCurrentSl();
-	if (!sl || !speaker) return;
+	var idialect = this.getCurrentIdiolect();
+	if (!idialect) return;
 	
 	var formData = new FormData();
 	formData.append("user", this.userId);
@@ -154,8 +156,7 @@ StudioWidget.prototype.send = function send(sound, meta, doneCb) {
 	formData.append("text", meta.transcript);
 	if (meta.id) formData.append("id", meta.id);
 	if ("description" in meta) formData.append("description", meta.description);
-	formData.append("speaker", speaker.id);
-	formData.append("sl", sl.id);
+	formData.append("idiolect", idialect.id);
 	this.ajax.querySendData(this.targetUrl, "post", formData, function(result) {
 		console.log(JSON.stringify(result));
 		doneCb(result);

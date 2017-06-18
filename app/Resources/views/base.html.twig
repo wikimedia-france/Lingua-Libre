@@ -37,6 +37,7 @@
 			<li><a href="{{ path("home") }}">Accueil</a></li>
 			<li><a href="{{ path("sounds") }}">Sonothèque</a></li>
 			<li><a href="{{ path("about") }}">Lingua Libre</a></li>
+			<!--<li><a href="{{ path("historique") }}">Historique</a></li>-->
 			<li><a href="{{ path("partners") }}">Partenaires</a></li>
 			<li><a href="{{ path("wikimedia") }}">Wikimedia France</a></li>
 			<li><a href="{{ path("contact") }}">Contact</a></li>
@@ -46,7 +47,7 @@
 				<li><a href="{{ path('usersShow', {"id":app.user.id}) }}">Mon compte</a></li>
 				<li><a href="{{ path('usersSpeakers', {"id":app.user.id}) }}">Mes locuteurs</a></li>
 				<li><a href="{{ path('usersSounds', {"id":app.user.id}) }}">Mes enregistrements</a></li>
-				<li><a href="{{ path('soundsAdd') }}">Studio d’enregistrement</a></li>
+				<li><a href="{{ path('usersRecord', {"id":app.user.id}) }}">Studio d’enregistrement</a></li>
 				{% if is_granted('ROLE_ADMIN') %}
 					<hr/>
 					<li><a href="{{ path("users") }}">Gestion des utilisateurs</a></li>

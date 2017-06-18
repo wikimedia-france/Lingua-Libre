@@ -1,24 +1,23 @@
-var Speaker = function(id, name, sls) {
+var Speaker = function(id, name, idiolects) {
 	this.id = id;
 	this.name = name;
-	this.sls = sls ? sls : [];
+	this.idiolects = idiolects ? idiolects : [];
 };
 
-Speaker.prototype.addSl = function(sl) {
-	this.sls.push(sl);
+Speaker.prototype.addIdiolect = function(idiolect) {
+	this.idiolects.push(idiolect);
 };
 
-Speaker.prototype.setSls = function(arr) {
+Speaker.prototype.setIdiolects = function(arr) {
 	for (var i = 0; i < arr.length; i++) {
-		var sl = new Sl();
-		sl.set(arr[i]);
-		this.addSl(sl);		
+		var idiolect = new Idiolect().set(arr[i]);
+		this.addIdiolect(idiolect);		
 	}
 };
 
 Speaker.prototype.set = function(item) {
 	this.id = item.id;
 	this.name = item.name;
-	this.setSls(item.sls);
+	if ("idiolects" in item) this.setIdiolects(item.idiolects);
 	return this;
 };
