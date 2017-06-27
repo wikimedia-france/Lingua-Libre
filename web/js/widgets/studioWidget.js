@@ -68,7 +68,11 @@ StudioWidget.prototype.showIdiolects = function(idiolects) {
 	if (idiolects.length > 0) {
 		for(var i = 0; i < idiolects.length; i++) {
 			var idiolect = idiolects[i];
-			this.langsNode.appendChild(this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect));
+			var option = this.createOption(document.createTextNode(idiolect.lang.title + (idiolect.dialect ? " (" + idiolect.dialect + ")" : "")), idiolect);
+
+			option.value = idiolect.lang.code;
+			option.idiolect = idiolect;
+			this.langsNode.appendChild(option);
 		}
 	}
 };
@@ -124,12 +128,11 @@ StudioWidget.prototype.createForm = function() {
 	return table;
 };
 
+
 StudioWidget.prototype.init = function() {
 	this.node.className = "studio";
-	
 	this.node.appendChild(this.createForm());
 	this.node.appendChild(this.contentNode);
-
 	this.setContent(this.audioAuthWidget.node);
 
 	var self = this;
@@ -137,6 +140,16 @@ StudioWidget.prototype.init = function() {
 		self.multiRecorder = new MultiRecorderWidget(stream, function(sound, meta, doneCb) { self.send(sound, meta, doneCb) });
 		self.multiRecorder.showSound = function(sound) { self.showSound(sound) };
 		self.setContent(self.multiRecorder.node);
+		if(jQuery("option",self.langsNode).length === 0){
+			return;
+		}
+		var langChangeCallback = function(){
+			var isRtl = jQuery("option:selected",self.langsNode)[0].idiolect.lang.isRtl;
+			self.multiRecorder.listingEditor.rtl(isRtl);
+			self.multiRecorder.listingRecorderWidget.rtl(isRtl);
+		};
+		langChangeCallback();
+		jQuery(self.langsNode).on("change",langChangeCallback);
 	};
 	this.setCurrentSpeaker(null);
 };
