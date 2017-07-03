@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Config\Definition\Exception\Exception; 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -209,12 +210,9 @@ class SoundsController extends Controller
 		$zip->open($filename);
 		foreach($sounds as $sound) {
 			$zip->addFile($audio_path.$sound->getFilename(), $sound->getVirtualFilename("wav"));
-//			$zip->addFromString($sound->getVirtualFilename("txt"), $audio_path.$sound->getFilename());
 		}
 		$zip->close();
 		
-		$response = new Response(file_get_contents($filename), Response::HTTP_OK, array('content-type' => 'application/zip'));
-		unlink($filename);
-		return $response;
+		return new BinaryFileResponse($filename, Response::HTTP_OK, array('content-type' => 'application/zip'));
 	}
 }
