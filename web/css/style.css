@@ -7,6 +7,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: #00a99d;
 	cursor: pointer;
 }
 
@@ -202,6 +203,8 @@ th.tools {
 
 div.partner {
 	text-align: center;
+}
+	
 .privatecom td {
 	background-color: #e1e1e1;
 }
