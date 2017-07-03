@@ -19,6 +19,8 @@
 	<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
 	{% endif %}
 
+	<h2>Enregistrements</h2>
+	<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
 
 	<h2>Locuteurs</h2>
 	{% if user.getSpeakers()|length > 0 %}
