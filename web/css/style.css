@@ -28,6 +28,11 @@ h2 {
 	color: #00a99d;
 }
 
+img.icon {
+	max-height: 24px;
+	max-width: 24px;
+}
+
 textarea {
 	width: 300px;
 	height: 60px;

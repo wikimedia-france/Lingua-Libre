@@ -12,7 +12,10 @@
 			<td>{{ user.getEmail() }}</td>
 			<td>{{ user.getCreated()|date("d/m/Y")}}</td>
 			<td>{% if user.getIsAdmin() %}Oui{% else %}Non{% endif %}</td>
-			{% if user.editableBy(auth) %}<th><a href="{{ path("usersUpdate", {"id": user.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th>{% endif %}
+			<th>
+				<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/></a>
+				{% if user.editableBy(auth) %}<a href="{{ path("usersUpdate", {"id": user.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a>{% endif %}
+			</th>
 		</tr>
 		{% endfor %}
 		<tr><th><a href="{{ path("usersAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
