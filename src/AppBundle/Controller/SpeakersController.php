@@ -167,8 +167,7 @@ class SpeakersController extends Controller
 	public function deleteAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $this->getDoctrine()->getRepository('AppBundle:Speaker');
-		$speaker = $repository->find($id);
+		$speaker = $em->getRepository('AppBundle:Speaker')->find($id);
 		if (!$speaker) {
 			throw $this->createNotFoundException('No speaker found for id '.$id);
 		}

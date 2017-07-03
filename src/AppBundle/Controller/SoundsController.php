@@ -160,8 +160,7 @@ class SoundsController extends Controller
 	public function deleteAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $this->getDoctrine()->getRepository('AppBundle:Sound');
-		$sound = $repository->find($id);
+		$sound = $em->getRepository('AppBundle:Sound')->find($id);
 
 		if (!$sound) {
 			throw $this->createNotFoundException('No message found for id '.$id);
@@ -187,5 +186,35 @@ class SoundsController extends Controller
 			"form" => $form->createView(),
 			"token" => $token
 		));
+	}
+
+
+	/**
+	* @Route("/sounds/download/user_{userId}.zip", name="soundsDownload")
+	*/
+	public function downloadAction(Request $request, $userId)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$user = $em->getRepository('AppBundle:User')->find($userId);
+		if (!$user) {
+			throw $this->createNotFoundException('No user found for id '.$userId);
+		}
+
+		$sounds = $em->getRepository('AppBundle:Sound')->findBy(array('user' => $user));
+
+		$audio_path = $this->container->getParameter('audio_path');
+		$filename = tempnam("/tmp", "ZIP");
+		$zip = new \ZipArchive();
+		$zip->open($filename);
+		foreach($sounds as $sound) {
+			$zip->addFile($audio_path.$sound->getFilename(), $sound->getVirtualFilename("wav"));
+//			$zip->addFromString($sound->getVirtualFilename("txt"), $audio_path.$sound->getFilename());
+		}
+		$zip->close();
+		
+		$response = new Response(file_get_contents($filename), Response::HTTP_OK, array('content-type' => 'application/zip'));
+		unlink($filename);
+		return $response;
 	}
 }

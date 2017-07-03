@@ -33,7 +33,7 @@ class Language implements \JsonSerializable
 	 */
 	private $description;
 
-    /**
+	/**
 	 * @ORM\Column(type="boolean")
 	 */
 	private $isRtl = false;
