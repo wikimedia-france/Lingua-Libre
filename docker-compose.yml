@@ -1,0 +1,27 @@
+proxy:
+  image: nginx:stable
+  ports:
+    - "8000:80"
+  volumes:
+    - ./:/code
+    - ./docker/proxy/default.conf:/etc/nginx/conf.d/default.conf
+  links:
+    - app
+app:
+  build: ./docker/app
+  volumes:
+    - ./:/code
+    - ./docker/app/90_php.ini:/usr/local/etc/php/conf.d/90_php.ini
+  links:
+    - database
+  user: "${UID}"
+
+database:
+  image: mysql:5
+  environment:
+    - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    - MYSQL_USER=lingualibre
+    - MYSQL_PASSWORD=bienvenue
+    - MYSQL_DATABASE=lingualibre
+  ports:
+    - "3306"

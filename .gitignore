@@ -3,9 +3,14 @@
 *.cache
 *.lock
 web/bundles/
-vendor/
-var/
+vendor/*
+!web/js/vendor/jquery-3.2.1.min.js
+var/*
+!var/.gitkeep
 *.swp
 bin/symfony_requirements
 web/config.php
-
+app/config/parameters.yml
+.idea/
+web/js/common.js
+web/audio/

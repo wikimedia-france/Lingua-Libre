@@ -6,5 +6,7 @@ var Lang = function(id, title) {
 Lang.prototype.set = function(arr) {
 	this.id = arr.id;
 	this.title = arr.title;
+	this.code = arr.code;
+	this.isRtl = arr.isRtl;
 	return this;
 };

@@ -37,3 +37,12 @@ ListingEditorWidget.prototype.init = function() {
 	this.nodeButton.appendChild(document.createTextNode("Ok"));
 	div.appendChild(this.nodeButton);
 };
+ListingEditorWidget.prototype.rtl = function(active) {
+
+    if(active){
+	jQuery(this.nodeTextarea).css("direction","rtl");
+    }
+    else{
+	jQuery(this.nodeTextarea).css("direction","ltr");
+    }
+};

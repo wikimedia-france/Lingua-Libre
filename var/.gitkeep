@@ -1,0 +1,2 @@
+# keep the empty var folder so composer can create bootstrap.php.cache
+

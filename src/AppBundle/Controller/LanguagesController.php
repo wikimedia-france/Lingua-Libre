@@ -12,6 +12,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class LanguagesController extends Controller
 {
@@ -40,6 +41,7 @@ class LanguagesController extends Controller
 			->add('title', TextType::class)
 			->add('code', TextType::class)
 			->add('description', TextareaType::class, array("required" => false))
+			->add('isRtl', CheckboxType::class)
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 

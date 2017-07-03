@@ -33,6 +33,11 @@ class Language implements \JsonSerializable
 	 */
 	private $description;
 
+    /**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $isRtl = false;
+
 	/**
 	 * Get id
 	 *
@@ -106,6 +111,20 @@ class Language implements \JsonSerializable
 	}
 
 	/**
+	 * Set isRtl
+	 *
+	 * @param boolean $isRtl
+	 *
+	 * @return Language
+	 */
+	public function setIsRtl($isRtl)
+	{
+		$this->isRtl = $isRtl;
+
+		return $this;
+	}
+
+	/**
 	 * Get description
 	 *
 	 * @return string
@@ -114,6 +133,16 @@ class Language implements \JsonSerializable
 	{
 		return $this->description;
 	}
+
+	/**
+	 * Get isRtl
+	 *
+	 * @return boolean
+	 */
+	public function getIsRtl()
+	{
+		return $this->isRtl;
+	}
 	
 	public function export()
 	{
@@ -121,6 +150,7 @@ class Language implements \JsonSerializable
 		$result["id"] = $this->getId();
 		$result["code"] = $this->getCode();
 		$result["title"] = $this->getTitle();
+		$result["isRtl"] = $this->getIsRtl();
 		return $result;
 	}
 
