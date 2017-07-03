@@ -41,9 +41,9 @@ class Sound implements \JsonSerializable
 	protected $idiolect;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=true)
 	 */
-	protected $description;
+	protected $description = null;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="SoundComment", mappedBy="sound")

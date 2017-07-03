@@ -130,7 +130,7 @@ class SoundsController extends Controller
 		if (!$sound->getUser()->editableBy($this->getUser())) throw $this->createAccessDeniedException('Forbidden');
 
 		$form = $this->createFormBuilder($sound)
-			->add('idiolect', EntityType::class, array('class' => 'AppBundle:Idiolect', 'choice_label' => 'title', 'choices' => $sound->getIdiolect()->getSpeaker->getIdolects()))
+			->add('idiolect', EntityType::class, array('class' => 'AppBundle:Idiolect', 'choice_label' => 'title', 'choices' => $sound->getIdiolect()->getSpeaker()->getIdiolects()))
 			->add('text', TextType::class)
 			->add('description', TextareaType::class, array("required" => false))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
