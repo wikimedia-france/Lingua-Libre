@@ -242,6 +242,11 @@ class Idiolect implements \JsonSerializable
 		);
 	}
 
+	public function getTitle()
+	{
+		return $this->getLanguage()->getTitle();
+	}
+
 	public static function profileTypeChoices()
 	{
 		return array_flip(self::profileTypeValues());

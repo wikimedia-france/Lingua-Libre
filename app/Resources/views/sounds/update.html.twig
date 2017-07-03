@@ -7,8 +7,8 @@
 
 	{{ form_start(form) }}
 	<table class="nice">
-		<tr><th>Locuteur</th><td>{{ form_widget(form.speaker) }}</td></tr>
-		<tr><th>Langue</th><td>{{ form_widget(form.sl) }}</td></tr>
+		<tr><th>Locuteur</th><td>{% if sound.getIdiolect().getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getIdiolect().getSpeaker().getId()}) }}'>{{ sound.getIdiolect().getSpeaker().getName() }}</a>{% else %}-{% endif %}</td></tr>
+		<tr><th>Idiolect</th><td>{{ form_widget(form.idiolect) }}</td></tr>
 		<tr><th>Transcription</th><td>{{ form_widget(form.text) }}</td></tr>
 		<tr><th>Description</th><td>{{ form_widget(form.description) }}</td></tr>
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
