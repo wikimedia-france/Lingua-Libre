@@ -1,10 +1,10 @@
 var SoundsWidget = function(sounds, audioRootPath) {
 	Widget.call(this);
 	
-	this.table = new Widget().createElement("table");
 	this.paginator = new PaginatorWidget();
 	this.pageSize = 10;
 	this.audioRootPath = audioRootPath;
+	this.table = new Widget().createElement("div").setClass("empty");
 	this.init();
 	if (sounds) this.setSounds(sounds);
 };
@@ -17,7 +17,7 @@ SoundsWidget.prototype.init = function() {
 		.appendChild(this.paginator
 			.setCallback("changeposition", this, function(n) { this.show(n) })
 		)
-		.appendChild(this.table.setClass("nice"))
+		.appendChild(this.table)
 	;
 };
 
@@ -55,19 +55,26 @@ SoundsWidget.prototype.createSoundTr = function(sound) {
 	;
 };
 
-SoundsWidget.prototype.show = function(page) {
-	this.table.clearChilds();
+SoundsWidget.prototype.createSoundsTable = function(page) {
+	var table = new Widget().createElement("table").setClass("nice");
 	
-	this.table.appendChild(this.createHeader());
+	table.appendChild(this.createHeader());
 
 	for (var i = 0; i < this.pageSize; i++) {
 		var key = page * this.pageSize + i;
 		var arr = key < this.sounds.length ? this.sounds[key] : false;
 		if (!arr) break;
-		sound = new EntitySound().set(arr);
-		this.table.appendChild(this.createSoundTr(sound));		
-	}
 
+		sound = new EntitySound().set(arr);
+		table.appendChild(this.createSoundTr(sound));
+	}
+	return table;
+};
+
+SoundsWidget.prototype.show = function(page) {
+	var old = this.table;
+	this.table = this.createSoundsTable(page);
+	old.replaceWidget(this.table);
 };
 
 SoundsWidget.prototype.setSounds = function(sounds) {

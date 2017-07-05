@@ -120,3 +120,11 @@ Widget.prototype.removeWidget = function() {
 	return null;
 };
 
+Widget.prototype.focus = function() {
+	return this.node.focus();
+};
+
+Widget.prototype.scrollIntoView = function(value) {
+	return this.node.scrollIntoView(value);
+};
+
