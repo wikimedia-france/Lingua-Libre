@@ -21,11 +21,31 @@ h3, h1, h4, h5, h6 {
 
 h1 {
 	margin: 5px 0;
-	text-size: 20px;
+	font-size: 35px;
 }
 
 h2 {
 	color: #00a99d;
+	font-size: 20px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+article {
+	border: 3px solid #ccc;
+	padding: 15px;
+	margin: 15px 0;
+	max-width: 1024px;
+}
+
+footer {
+	padding: 15px;
+	margin: 15px 0;
+	max-width: 1024px;
+	border-top: 3px solid #ddd;
+	background-image:linear-gradient(#e0e0e0, white);
 }
 
 img.icon {
@@ -52,6 +72,15 @@ table.nice th {
 table.nice td {
 	border: 5px solid #e1e1e1;
 	padding: 5px 10px;
+}
+
+a.button {
+	font-weight: bold;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 8px 10px;
+	background-color: #eee;
+	margin: 5px;
 }
 
 div.account {
@@ -159,7 +188,8 @@ select.country {
 	width: 100px;
 }
 
-span.lingualibre {
+em {
+	font-style: normal;
 	font-weight: bold;
 }
 
@@ -191,10 +221,6 @@ div.partner img {
 
 p.quotation {
 	margin: 5px 150px;
-	text-align: center;
-}
-
-p.letsbegin {
 	text-align: center;
 }
 
