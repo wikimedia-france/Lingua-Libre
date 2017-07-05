@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Éditer enregistrement sonore :</h1>
 
 	<audio controls="true" src="{{ asset('audio') }}/{{ sound.getFilename() }}"></audio>
@@ -14,6 +15,6 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
 	</table>
 	{{ form_end(form) }}
-
+</article>
 {% endblock %}
 

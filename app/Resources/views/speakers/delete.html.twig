@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Supprimer locuteur :</h1>
 	
 	<p>Êtes-vous sûr de vouloir supprimer le locuteur « {{ speaker.getName() }} » ?</p>
@@ -10,6 +11,6 @@
 		<tr><td></td><td>{{ form_widget(form.save) }}</td>
 	</table>
 	{{ form_end(form) }}
-
+</article>
 {% endblock %}
 

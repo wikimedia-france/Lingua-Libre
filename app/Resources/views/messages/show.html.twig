@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>{{ message.getTitle() }} ({{ message.getDate()|date("d/m/Y")}})</h1>
 	<p>{{ message.getBody() }}</p>
-
+</article>
 {% endblock %}
 

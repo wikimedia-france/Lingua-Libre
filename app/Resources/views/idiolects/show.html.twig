@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<table class="nice">
 		<tr><th>Langue</th><td>{{ idiolect.getLanguage().getTitle() }}</td></tr>
 		<tr><th>Variante</th><td>{{ idiolect.getDialect() }}</td></tr>
@@ -10,6 +11,6 @@
 		<tr><th>Niveau</th><td>{{ idiolect.getLevel() }}</td></tr>
 		<tr><th>Description</th><td>{{ idiolect.getDescription() }}</td></tr>
 	</table>
-
+</article>
 {% endblock %}
 

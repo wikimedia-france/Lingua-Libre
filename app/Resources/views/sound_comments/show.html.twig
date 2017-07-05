@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<table class="nice">
 		<tr><th>Accès</th><td>{{ sc.getAccess() }}</td></tr>
 		<tr><th>Date</th><td>{{ sc.getDatetime() }}</td></tr>
 		<tr><th>Texte</th><td>{{ sc.getText() }}</td></tr>
 		<tr><th>User</th><td>{{ sc.getUser() }}</td></tr>
 	</table>
-
+</article>
 {% endblock %}
 

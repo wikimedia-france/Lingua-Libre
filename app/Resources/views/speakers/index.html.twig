@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Locuteurs</h1>
 
 	{% if speakers|length > 0 %}
@@ -20,6 +21,6 @@
 		<p>Pas de locuteur défini pour le moment.</p>
 		
 	{% endif %}
-
+</article>
 {% endblock %}
 

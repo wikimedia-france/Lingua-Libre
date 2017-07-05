@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<article>
 	{% if error %}
 		<div>Login ou mot de passe incorrect !</div>
 	{% endif %}
@@ -22,5 +22,5 @@
 		</table>
 	</form>
 	<a href="{{ path("usersAdd") }}">S’inscrire</a>
-
+</article>
 {% endblock %}

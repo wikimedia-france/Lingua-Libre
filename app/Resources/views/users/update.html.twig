@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Éditer utilisateur</h1>
 
 	{{ form_start(form) }}
@@ -10,8 +11,6 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th>
 	</table>
 	{{ form_end(form) }}
-
-
-
+</article>
 {% endblock %}
 

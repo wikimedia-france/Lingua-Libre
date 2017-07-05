@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Langues</h1>
-
 
 	<table class="nice">
 		<tr><th>Titre</th><th>Code</th><th>Description</th><th>Is right to left</th></tr>
@@ -17,7 +17,7 @@
 		{% endfor %}
 		<tr><th><a href="{{ path("languagesAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
 	</table>
-
+</article>
 
 {% endblock %}
 

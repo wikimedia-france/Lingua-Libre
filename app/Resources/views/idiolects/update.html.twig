@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	{{ form_start(form) }}
 	<table class="nice">
 		<tr><th>Langue</th><td>{{ form_widget(form.language) }}</td></tr>
@@ -11,6 +12,6 @@
 		<tr><th colspan="2">{{ form_widget(form.save) }}</th></tr>
 	</table>
 	{{ form_end(form) }}
-
+</article>
 {% endblock %}
 

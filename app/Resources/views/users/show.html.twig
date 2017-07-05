@@ -1,40 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>
-	{% if auth and auth.getId() == user.getId() %}
-		Mon compte
-	{% else %}
-		Compte de « {{ user.getUsername()|capitalize }} »
-	{% endif %}
-	</h1>
+	<article>
+		<h1>
+		{% if auth and auth.getId() == user.getId() %}
+			Mon compte
+		{% else %}
+			Compte de « {{ user.getUsername()|capitalize }} »
+		{% endif %}
+		</h1>
 
-	{% if user.editableBy(auth) %}
-	<h2>Paramètres</h2>
-	<table class="nice">
-		<tr><th>E-mail</th><td>{{ user.getEmail() }}</td></tr>
-		<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
-		<tr><th colspan="2" class="tools"><a href="{{ path("usersUpdate", {"id":user.getId()}) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th></tr>
-	</table>
-	<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
-	{% endif %}
+		{% if user.editableBy(auth) %}
+		<h2>Paramètres</h2>
+		<table class="nice">
+			<tr><th>E-mail</th><td>{{ user.getEmail() }}</td></tr>
+			<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
+			<tr><th colspan="2" class="tools"><a href="{{ path("usersUpdate", {"id":user.getId()}) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th></tr>
+		</table>
+		<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
+		{% endif %}
 
-	<h2>Enregistrements</h2>
-	<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
+		<h2>Enregistrements</h2>
+		<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
 
-	<h2>Locuteurs</h2>
-	{% if user.getSpeakers()|length > 0 %}
+		<h2>Locuteurs</h2>
+		{% if user.getSpeakers()|length > 0 %}
 
-	{% else %}
-		<p>Pas de locuteur défini pour le moment.
-		{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
-		</p>
-	{% endif %}
+		{% else %}
+			<p>Pas de locuteur défini pour le moment.
+			{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
+			</p>
+		{% endif %}
 
-	{% if user.getSpeakers()|length > 0 %}
-		<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
-	{% else %}	
-		<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
-	{% endif %}
+		{% if user.getSpeakers()|length > 0 %}
+			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
+		{% else %}	
+			<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
+		{% endif %}
+	</article>
 {% endblock %}
 

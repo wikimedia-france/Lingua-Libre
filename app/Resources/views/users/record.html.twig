@@ -23,13 +23,15 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Studio d’enregistrement</h1>
-	<div id="container">
-		<table>
-			<tr>
-				<th id="addSpeaker"><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter un locuteur"/></a></th>
-			</tr>
-		</table>
-	</div>
+	<article>
+		<h1>Studio d’enregistrement</h1>
+		<div id="container">
+			<table>
+				<tr>
+					<th id="addSpeaker"><a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter un locuteur"/></a></th>
+				</tr>
+			</table>
+		</div>
+	</article>
 {% endblock %}
 

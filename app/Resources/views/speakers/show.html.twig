@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Locuteur</h1>
 
 	<table class="nice">
@@ -43,8 +44,6 @@
 		{% if speaker.editableBy(user) %}<a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">En définir une</a>.{% endif %}
 		</p>
 	{% endif %}
-	
-
-
+</article>	
 {% endblock %}
 

@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Utilisateurs</h1>
-
-
 	<table class="nice">
 		<tr><th>Login</th><th>E-mail</th><th>Inscription</th><th>Admin</th></tr>
 		{% for user in users %}
@@ -21,7 +20,6 @@
 		<tr><th><a href="{{ path("usersAdd") }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>
 
 	</table>
-
-
+</article>
 {% endblock %}
 

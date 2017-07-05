@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<article>
 	<h1>Supprimer enregistrement</h1>
 	
 	<p>Êtes-vous sûr de vouloir supprimer cet enregistrement ?</p>
@@ -12,6 +13,6 @@
 		<tr><td>{{ form_widget(form.save) }} <a href="{{ path("soundsShow", {"id": sound.getId() }) }}">Annuler</a></td></tr>
 	</table>
 	{{ form_end(form) }}
-
+</article>
 {% endblock %}
 
