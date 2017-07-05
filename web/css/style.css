@@ -295,6 +295,10 @@ button.details {
 	background-image: url(../img/details_24.png)
 }
 
+div.sounds {
+	min-height: 800px;
+}
+
 div.sounds td.transcription {
 	width: 350px;
 }
