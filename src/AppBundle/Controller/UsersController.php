@@ -83,6 +83,7 @@ class UsersController extends Controller
 
 		return $this->render('users/show.html.twig', array(
 			"auth" => $this->getUser(),
+			"hasSound" => $em->getRepository('AppBundle:Sound')->findOneBy(array("user" => $id)),
 			"user" => $user,
 		));
 	}

@@ -20,22 +20,17 @@
 		<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
 		{% endif %}
 
+		{% if hasSound %}
 		<h2>Enregistrements</h2>
 		<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
-
+		{% endif %}
+		
 		<h2>Locuteurs</h2>
 		{% if user.getSpeakers()|length > 0 %}
-
-		{% else %}
-			<p>Pas de locuteur défini pour le moment.
-			{% if user.editableBy(auth) %}<a href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">En définir un</a>.{% endif %}	
-			</p>
-		{% endif %}
-
-		{% if user.getSpeakers()|length > 0 %}
 			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
-		{% else %}	
-			<p><a class="lienpart" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Définir un locuteur</a></p>
+		{% else %}
+			<p>Vous devez désormais créer <em>une fiche locuteur</em>. Un profil locuteur permet de renseigner les informations sur une personne dont on va enregistrer la voix.</p>
+			{% if user.editableBy(auth) %}<a class="button" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Étape 2 : Définir un locuteur</a>{% endif %}
 		{% endif %}
 	</article>
 {% endblock %}
