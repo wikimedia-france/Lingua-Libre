@@ -40,8 +40,8 @@
 
 		</table>
 	{% else %}
-		<p>Pas de langue définie pour le moment.
-		{% if speaker.editableBy(user) %}<a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">En définir une</a>.{% endif %}
+		<p>Ce locuteur n’a pas encore de langue définie. Vous allez devoir remplir une fiche d’information pour <em>chaque langue parlée</Em> par cette personne.</p>
+		{% if speaker.editableBy(user) %}<a class="button" href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">Étape 3 : Définir une langue</a>{% endif %}
 		</p>
 	{% endif %}
 </article>	

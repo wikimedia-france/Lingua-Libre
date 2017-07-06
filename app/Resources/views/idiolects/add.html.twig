@@ -2,7 +2,7 @@
 
 {% block body %}
 <article>
-	<h1>Modifier une langue</h1>
+	<h1>Ajouter une langue</h1>
 	{{ form_start(form) }}
 	<table class="nice">
 		<tr><th>Langue</th><td>{{ form_widget(form.language) }}</td></tr>
@@ -10,7 +10,7 @@
 		<tr><th>Lieu d’acquisition</th><td>{{ form_widget(form.country, { 'attr': {'class': 'country'} }) }}{{ form_widget(form.town) }}</td></tr>
 		<tr><th>Profil-type</th><td>{{ form_widget(form.profileType) }}</td></tr>
 		<tr><th>Description</th><td>{{ form_widget(form.description) }}</td></tr>
-		<tr><th colspan="2"><input type="submit" value="Modifier la langue"/></th>
+		<tr><th colspan="2"><input type="submit" value="Créer la langue"/></th>
 	</table>
 	{{ form_end(form) }}
 </article>

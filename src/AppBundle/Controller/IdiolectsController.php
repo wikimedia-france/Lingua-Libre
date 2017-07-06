@@ -49,7 +49,6 @@ class IdiolectsController extends Controller
 			->add('dialect', TextType::class, array("required" => false))
 			->add('town', TextType::class, array("required" => false))
 			->add('country', CountryType::class, array("required" => false))
-			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement 
@@ -87,7 +86,6 @@ class IdiolectsController extends Controller
 			->add('town', TextType::class, array("required" => false))
 			->add('country', CountryType::class, array("required" => false))
 			->add('dialect', TextType::class, array("required" => false))
-			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement 
@@ -101,7 +99,7 @@ class IdiolectsController extends Controller
 		}
 
 		$token = $this->get('security.token_storage')->getToken();
-		return $this->render('idiolects/update.html.twig', array(
+		return $this->render('idiolects/add.html.twig', array(
 			"form" => $form->createView(),
 			"token" => $token
 		));

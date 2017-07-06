@@ -100,7 +100,6 @@ class SpeakersController extends Controller
 			->add('birth', BirthdayType::class, array("format" => "dd/MM/yyyy"))
 			->add('description', TextareaType::class, array("required" => false))
 			->add('signed', CheckboxType::class, array('required' => false, "mapped" => false))
-			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement
