@@ -39,6 +39,8 @@
 			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
 
 		</table>
+		<p><em>Félicitations !</em> Vous pouvez désormais vous lancer dans une <em>session d’enregistrement</em> !</p>
+		<a class="button" href="{{ path('usersRecord', {"id":speaker.getUser().getId() }) }}">Aller dans le Studio d’enregistrement</a>
 	{% else %}
 		<p>Ce locuteur n’a pas encore de langue définie. Vous allez devoir remplir une fiche d’information pour <em>chaque langue parlée</Em> par cette personne.</p>
 		{% if speaker.editableBy(user) %}<a class="button" href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">Étape 3 : Définir une langue</a>{% endif %}
