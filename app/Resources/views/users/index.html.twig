@@ -8,7 +8,7 @@
 		{% for user in users %}
 		<tr>
 			<td><a href="{{ path("usersShow", {"id": user.getId() }) }}">{{ user.getUsername()|capitalize }}</a></td>
-			<td>{{ user.getEmail() }}</td>
+			<td>{% if auth and auth.getIsAdmin() %}{{ user.getEmail() }}{% else %}-{% endif %}</td>
 			<td>{{ user.getCreated()|date("d/m/Y")}}</td>
 			<td>{% if user.getIsAdmin() %}Oui{% else %}Non{% endif %}</td>
 			<th>
