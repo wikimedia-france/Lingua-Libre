@@ -11,6 +11,13 @@ a {
 	cursor: pointer;
 }
 
+hr {
+	border-top: 2px solid #ddd;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+
 li {
 	margin: 7px;
 }
@@ -116,7 +123,7 @@ ul.bar {
 	color: #eee;
 	margin: 0;
 	background-color: #3c3c3c;
-	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), 0px -1px 2px 0px rgba(255, 255, 255, 0.5);
+	border-bottom: 3px solid #aaa;
 }
 
 ul.bar a {
