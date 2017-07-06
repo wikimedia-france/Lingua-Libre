@@ -8,7 +8,7 @@
 	<table class="nice">
 		<tr><th>E-mail</th><td>{{ form_widget(form.email) }}</td></tr>
 		{% if form.isAdmin is defined %}<tr><th>Admin</th><td>{{ form_widget(form.isAdmin) }}</td></tr>{% endif %}
-		<tr><th colspan="2">{{ form_widget(form.save) }}</th>
+		<tr><th colspan="2"><input type="submit" value="Mettre à jour"/></th>
 	</table>
 	{{ form_end(form) }}
 </article>

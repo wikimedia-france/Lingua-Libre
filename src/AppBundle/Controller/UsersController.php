@@ -47,7 +47,6 @@ class UsersController extends Controller
 				'second_options' => array('label' => 'Repeat Password'),
 			))
 			->add('email', EmailType::class)
-			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
 		//Enregistrement
@@ -198,8 +197,7 @@ class UsersController extends Controller
 
 
 		$builder = $this->createFormBuilder($user)
-			->add('email', TextType::class)
-			->add('save', SubmitType::class, array('label' => 'Ok'));
+			->add('email', TextType::class);
 		if ($this->getUser()->getIsAdmin()) $builder->add('isAdmin', ChoiceType::class, array("choices" => array("Oui" => true, "Non" => false)));
 
 		$form = $builder->getForm();
