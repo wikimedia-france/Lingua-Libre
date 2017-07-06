@@ -21,7 +21,7 @@
 	<body>
 		<ul class="bar">
 			<li class="barItem"><a href="{{ path('home') }}"><img src="{{ asset('img/home_60.png') }}" title="Page d’accueil"></a></li>
-			Lingua Libre – <i>l’outil d’enregistrement audio libre</i>
+			Lingua Libre – <i>“Enregistrer les langues du monde village par village”</i>
 			<div class="account barItem">
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a onclick="toggle_visibility(document.getElementById('accountPopup'));">{{ app.user.username|capitalize }}</a>
@@ -39,9 +39,6 @@
 			<li><a href="{{ path("sounds") }}">Sonothèque</a></li>
 			<li><a href="{{ path("about") }}">Lingua Libre</a></li>
 			<!--<li><a href="{{ path("historique") }}">Historique</a></li>-->
-			<li><a href="{{ path("partners") }}">Partenaires</a></li>
-			<li><a href="{{ path("wikimedia") }}">Wikimedia France</a></li>
-			<li><a href="{{ path("contact") }}">Contact</a></li>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<hr/>
@@ -59,6 +56,15 @@
 
 		<div class="page">
 			{% block body %}{% endblock %}
+
+			<footer>
+				<ul>
+					<li><a href="{{ path("partners") }}">Partenaires</a></li>
+					<li><a href="{{ path("wikimedia") }}">Wikimedia France</a></li>
+					<li><a href="{{ path("contact") }}">Contact</a></li>
+				</ul>
+			</footer>
 		</div>
+		
 	</body>
 </html>

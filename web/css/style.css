@@ -45,15 +45,25 @@ article {
 	border: 3px solid #ccc;
 	padding: 25px 40px;
 	margin: 15px 0;
-	width: 1024px;
+	width: 100%;
 }
 
 footer {
-	padding: 15px;
+	padding: 5px 44px;
 	margin: 15px 0;
-	min-width: 1024px;
+	width: 100%;
 	border-top: 3px solid #ddd;
 	background-image:linear-gradient(#e0e0e0, white);
+}
+
+footer ul {
+	padding: 5px;
+	text-align: center;
+}
+
+footer ul > li {
+	display: inline-block;
+	list-style-type: none;
 }
 
 img.icon {
@@ -173,11 +183,9 @@ ul.menu a {
 }
 
 div.page {
-	position: absolute;
-	left: 300px;
-	padding: 10px;
+	padding-left: 300px;
 	margin: 10px;
-	min-width: 1024px;
+	width: 1024px;
 }
 
 input.lang {
