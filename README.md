@@ -108,7 +108,7 @@ Wishlist (secondary) :
 
 **Cost** : US$250 for external audio equipments  + US$300 for optional PC  = 250 ~ 550US$.
 <p align="center">
-  <img src="https://i.stack.imgur.com/baDAd.jpg" alt="Audio hardware" style="width:400px;"/>
+  <a href="https://www.amazon.com/dp/B01E6T54E2/"><img src="https://i.stack.imgur.com/dvreq.jpg" alt="Audio hardware" style="width:400px;"/></a>
 </p>
 
 ## Working process
