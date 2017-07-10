@@ -81,12 +81,12 @@ In order to provide very consistent, app-friendly files, the current functionali
 - [x] auto roll-back / do-again when saturation is detected
 - [x] consistent cut before / after the said words
 - [x] auto equalization for sound's level
+- [x] Download all audios by one speaker [#2](./issues/2)
 
 Wishlist ([primary](https://github.com/wikimedia-france/Lingua-Libre/issues?q=is%3Aissue+is%3Aopen+label%3Aimportant)) :
 - [ ] English UI [#13](./issues/13)
 - [ ] OAuth login [#31](./issues/31)
 - [ ] Auto-upload to commons [#33](./issues/33)
-- [ ] Batch download [#2](./issues/2)
 
 Wishlist (secondary) :
 - [ ] Noise reduction [#29](./issues/29)
