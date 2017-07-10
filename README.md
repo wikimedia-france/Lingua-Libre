@@ -107,6 +107,9 @@ Wishlist (secondary) :
 - Internet connexion
 
 **Cost** : US$250 for external audio equipments  + US$300 for optional PC  = 250 ~ 550US$.
+<p align="center">
+  <img src="https://i.stack.imgur.com/baDAd.jpg" alt="Audio hardware" style="width:400px;"/>
+</p>
 
 ## Working process
 1. Data gathering : prepare a text file with a list of words/sentences, one by line.
