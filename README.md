@@ -1,4 +1,4 @@
-# Lingua-Libre 
+# Lingua-Libre for Firefox
 [LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
 webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is 
 designed from the start to ease the creation of consistent datasets of audio files. We believe it is the best tool 
@@ -81,12 +81,12 @@ In order to provide very consistent, app-friendly files, the current functionali
 - [x] auto roll-back / do-again when saturation is detected
 - [x] consistent cut before / after the said words
 - [x] auto equalization for sound's level
+- [x] Download all audios by one speaker [#2](./issues/2)
 
 Wishlist ([primary](https://github.com/wikimedia-france/Lingua-Libre/issues?q=is%3Aissue+is%3Aopen+label%3Aimportant)) :
 - [ ] English UI [#13](./issues/13)
 - [ ] OAuth login [#31](./issues/31)
 - [ ] Auto-upload to commons [#33](./issues/33)
-- [ ] Batch download [#2](./issues/2)
 
 Wishlist (secondary) :
 - [ ] Noise reduction [#29](./issues/29)
@@ -107,6 +107,9 @@ Wishlist (secondary) :
 - Internet connexion
 
 **Cost** : US$250 for external audio equipments  + US$300 for optional PC  = 250 ~ 550US$.
+<p align="center">
+  <a href="https://www.amazon.com/dp/B01E6T54E2/"><img src="https://i.stack.imgur.com/dvreq.jpg" alt="Audio hardware" style="width:400px;"/></a>
+</p>
 
 ## Working process
 1. Data gathering : prepare a text file with a list of words/sentences, one by line.
