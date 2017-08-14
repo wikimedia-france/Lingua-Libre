@@ -41,7 +41,7 @@ class LanguagesController extends Controller
 			->add('title', TextType::class)
 			->add('code', TextType::class)
 			->add('description', TextareaType::class, array("required" => false))
-			->add('isRtl', CheckboxType::class)
+            		->add('isRtl', CheckboxType::class, array("required" => false))
 			->add('save', SubmitType::class, array('label' => 'Ok'))
 			->getForm();
 
