@@ -1,7 +1,7 @@
 var Recorder = function(stream) {
 	this.buffers = new Buffers(44100);
 	this.audioContext = new window.AudioContext();
-	this.bufferLen = 4096;
+	this.bufferLen = 2048;
 	this.stream = null;
 	this.state = false;
 	this.initStream(stream);
@@ -10,7 +10,8 @@ var Recorder = function(stream) {
 Recorder.prototype.onaudioprocess = function(e) {
 	if (!this.state) return;
 
-	var samples = e.inputBuffer.getChannelData(0);
+	//Copy the samples in a new Float32Array, to avoid strange memory dealocation on chrome
+	var samples = new Float32Array(e.inputBuffer.getChannelData(0));
 	var buffer = new Buffer(samples);
 	this.buffers.push(buffer);
 	this.changed(buffer);
@@ -30,7 +31,6 @@ Recorder.prototype.initStream = function(stream) {
 	this.node.onaudioprocess = function(e) {
 		recorder.onaudioprocess(e);
 	};
-	this.node.connect(this.audioContext.destination);
 };
 
 Recorder.prototype.clear = function() {
@@ -47,10 +47,12 @@ Recorder.prototype.start = function() {
 	this.clear();
 	this.setState(true);
 	this.audioInput.connect(this.node);
+	this.node.connect(this.audioContext.destination);
 };
 
 Recorder.prototype.stop = function() {
 	this.audioInput.disconnect(this.node);
+	this.node.disconnect(this.audioContext.destination);
 	this.setState(false);
 };
 
