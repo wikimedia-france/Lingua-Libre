@@ -1,7 +1,7 @@
 var Recorder = function(stream) {
 	this.buffers = new Buffers(44100);
 	this.audioContext = new window.AudioContext();
-	this.bufferLen = 2048;
+	this.bufferLen = 4096;
 	this.stream = null;
 	this.state = false;
 	this.initStream(stream);
@@ -24,12 +24,13 @@ Recorder.prototype.initStream = function(stream) {
 	this.audioInput = this.audioContext.createMediaStreamSource(stream);
 	this.buffers.setSamplerate(this.audioContext.sampleRate);
 
-	this.node = this.audioContext.createScriptProcessor(this.bufferLen, 1, 0);
+	this.node = this.audioContext.createScriptProcessor(this.bufferLen, 1, 1);
 
 	var recorder = this;
 	this.node.onaudioprocess = function(e) {
 		recorder.onaudioprocess(e);
 	};
+	this.node.connect(this.audioContext.destination);
 };
 
 Recorder.prototype.clear = function() {
