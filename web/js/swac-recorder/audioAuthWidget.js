@@ -39,27 +39,45 @@ AudioAuthWidget.prototype.enabled = function(stream) {
 	if ("onenabled" in this) this.onenabled(stream);
 };
 
+AudioAuthWidget.prototype.onGetUserMediaSuccess = function(localMediaStream) {
+	this.enabled(localMediaStream);
+	this.setEnabled(true);
+};
+
+AudioAuthWidget.prototype.onGetUserMediaFail = function(err) {
+	console.log("The following error occured: " + err);
+	this.setEnabled(false);
+};
+
 AudioAuthWidget.prototype.initAudio = function() {
 	var self = this;
 
-	navigator.getUserMediaFct = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-	if (!navigator.getUserMediaFct) {
-		self.setEnabled(false);
-		return;
+	// Current best practice to get the audio stream
+	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+		navigator.mediaDevices.getUserMedia({audio: true, video:false})
+		.then(function(localMediaStream) {
+			self.onGetUserMediaSuccess(localMediaStream);
+		} ).catch(function(err) {
+			self.onGetUserMediaFail(err);
+		} );
 	}
-
-	navigator.getUserMediaFct(
-		{"audio": true, "video": false},
-
-		function(localMediaStream) {
-			self.enabled(localMediaStream);
-			self.setEnabled(true);
-		},
-
-		function(err) {
-			console.log("The following error occured: " + err);
+	// Legacy methods, kept to support old browsers
+	else {
+		navigator.getUserMediaFct = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+		if (!navigator.getUserMediaFct) {
 			self.setEnabled(false);
+			return;
 		}
-	);
+
+		navigator.getUserMediaFct(
+			{"audio": true, "video": false},
+			function(localMediaStream) {
+				self.onGetUserMediaSuccess(localMediaStream);
+			},
+			function(err) {
+				self.onGetUserMediaFail(err);
+			}
+		);
+	}
 };
 

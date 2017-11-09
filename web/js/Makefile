@@ -4,7 +4,7 @@ SWAC_RECORDER_FILES = $(wildcard swac-recorder/*.js)
 ENTITIES_FILES = $(wildcard entities/*.js)
 FILES = $(LIB_FILES) $(WIDGETS_FILES) $(ENTITIES_FILES) $(SWAC_RECORDER_FILES) 
 
-all: common.min.js
+all: common.js
 
 #.INTERMEDIATE: common.js
 
