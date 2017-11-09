@@ -1,4 +1,4 @@
-# Lingua-Libre for Firefox
+# Lingua-Libre
 [LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
 webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is 
 designed from the start to ease the creation of consistent datasets of audio files. We believe it is the best tool 
