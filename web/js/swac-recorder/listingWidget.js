@@ -205,7 +205,7 @@ ListingWidgetItem.prototype.setCurrent = function(state) {
 };
 
 ListingWidgetItem.prototype.getClassName = function() {
-	return "item" + (this.current ? " current" : "") + (this.success === true ? " sent" : "") + (this.sucess === false ? " error" : "") + (this.sending ? " sending" : "");
+	return "item" + (this.current ? " current" : "") + (this.success === true ? " sent" : "") + (this.success === false ? " error" : "") + (this.sending ? " sending" : "");
 };
 
 ListingWidgetItem.prototype.getY = function() {
