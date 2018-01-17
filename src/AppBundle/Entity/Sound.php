@@ -172,11 +172,13 @@ class Sound implements \JsonSerializable
 	public function getVirtualFilename($ext = "ogg")
 	{
 		$text = $this->getText();
-		$maxsize = 32;
-		if (strlen($text) > $maxsize) {
-			$text = substr($text, 0, $maxsize)."…";
-		}
-		return $this->getIdiolect()->getLanguage()->getCode()."-".$this->getIdiolect()->getSpeaker()->getName()."-".$text."-LL".$this->getId().".".$ext;
+		//$maxsize = 32;
+		//if (strlen($text) > $maxsize) {
+		//	$text = substr($text, 0, $maxsize)."…";
+		//}
+		
+		$localname = $this->getIdiolect()->getLanguage()->getCode()."-".$this->getIdiolect()->getSpeaker()->getName()."-".$text.".".$ext;
+		return $localname;//iconv("UTF-8","CP862",basename($localname));
 	}
 
 	/**
