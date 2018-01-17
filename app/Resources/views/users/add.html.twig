@@ -6,11 +6,11 @@
 		{{ form_start(form) }}
 		{{ form_errors(form) }}
 		<table class="nice">
-			<tr><th>Identifiant</th><td>{{ form_widget(form.username) }}{{ form_errors(form.username) }}</td></tr>
-			<tr><th>Mot de passe</th><td>{{ form_widget(form.plainPassword.first) }}</td></tr>
-			<tr><th>Confirmer mot de passe</th><td>{{ form_widget(form.plainPassword.second) }}</td></tr>
+			<tr><th>login</th><td>{{ form_widget(form.username) }}{{ form_errors(form.username) }}</td></tr>
+			<tr><th>Password</th><td>{{ form_widget(form.plainPassword.first) }}</td></tr>
+			<tr><th>Confirm password</th><td>{{ form_widget(form.plainPassword.second) }}</td></tr>
 			<tr><th>E-mail</th><td>{{ form_widget(form.email) }}{{ form_errors(form.email) }}</td></tr>
-			<tr><th colspan="2"><input type="submit" value="Étape 1 : Créer le compte"/></th>
+			<tr><th colspan="2"><input type="submit" value="Step 1: Create the account"/></th>
 		</table>
 		{{ form_end(form) }}
 

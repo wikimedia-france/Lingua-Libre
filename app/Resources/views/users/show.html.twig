@@ -4,33 +4,33 @@
 	<article>
 		<h1>
 		{% if auth and auth.getId() == user.getId() %}
-			Mon compte
+			My Account
 		{% else %}
-			Compte de « {{ user.getUsername()|capitalize }} »
+			Account of « {{ user.getUsername()|capitalize }} »
 		{% endif %}
 		</h1>
 
 		{% if user.editableBy(auth) %}
-		<h2>Paramètres</h2>
+		<h2>Settings</h2>
 		<table class="nice">
 			<tr><th>E-mail</th><td>{{ user.getEmail() }}</td></tr>
 			<tr><th>Inscription</th><td>{{ user.getCreated()|date("d/m/Y") }}</td></tr>
 			<tr><th colspan="2" class="tools"><a href="{{ path("usersUpdate", {"id":user.getId()}) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a></th></tr>
 		</table>
-		<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Définir un nouveau mot de passe</a></p>
+		<p><a href="{{ path("usersUpdatePassword", {"id":user.getId()}) }}">Set a new password</a></p>
 		{% endif %}
 
 		{% if hasSound %}
-		<h2>Enregistrements</h2>
+		<h2>Recordings</h2>
 		<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
 		{% endif %}
 		
-		<h2>Locuteurs</h2>
+		<h2>Speakers</h2>
 		{% if user.getSpeakers()|length > 0 %}
-			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">Voir les locuteurs</a></p>
+			<p><a class="lienpart" href="{{ path('usersSpeakers', {"id": user.getId()}) }}">See speakers</a></p>
 		{% else %}
-			<p>Vous devez désormais créer <em>une fiche locuteur</em>. Un profil locuteur permet de renseigner les informations sur une personne dont on va enregistrer la voix.</p>
-			{% if user.editableBy(auth) %}<a class="button" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Étape 2 : Définir un locuteur</a>{% endif %}
+			<p>You must now create <em>a speaker card</em>. A speaker profile is used to enter information about a person whose voice will be recorded.</p>
+			{% if user.editableBy(auth) %}<a class="button" href="{{ path("usersAddSpeaker", {"id": user.getId() }) }}">Step 2 : Define a speaker</a>{% endif %}
 		{% endif %}
 	</article>
 {% endblock %}
