@@ -21,9 +21,9 @@
 		<table class="nice">
 		<tr>
 			<th></th>
-			<th>Variante</th>
-			<th>Lieu d’acquisition</th>
-			<th>Niveau</th>
+			<th>Dialect</th>
+			<th>Place</th>
+			<th>Level</th>
 			<th>Description</th>
 		</tr>
 		{% for idiolect in speaker.getIdiolects() %}
@@ -39,8 +39,8 @@
 			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
 
 		</table>
-		<p><em>Félicitations !</em> Vous pouvez désormais vous lancer dans une <em>session d’enregistrement</em> !</p>
-		<a class="button" href="{{ path('usersRecord', {"id":speaker.getUser().getId() }) }}">Aller dans le Studio d’enregistrement</a>
+		<p><em>Congratulations!</em> You can now start a <em>recording session</em> !</p>
+		<a class="button" href="{{ path('usersRecord', {"id":speaker.getUser().getId() }) }}">Go to the recording Studio</a>
 	{% else %}
 		<p>This speaker does not have a defined language yet. You will need to fill out an information sheet for <em> each spoken language </Em> by this person.</p>
 		{% if speaker.editableBy(user) %}<a class="button" href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">Step 3 : Define a language</a>{% endif %}
