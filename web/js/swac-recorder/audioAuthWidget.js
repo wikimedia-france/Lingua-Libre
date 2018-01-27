@@ -10,7 +10,7 @@ AudioAuthWidget.prototype.init = function() {
 	this.node.className = "audioAuth";
 
 	var p = document.createElement("p");
-	p.appendChild(document.createTextNode("Impossible d’accèder à l’interface audio ! Peut-être n’avez-vous pas branché de microphone…"));
+	p.appendChild(document.createTextNode("Can not access the audio interface! Maybe you have not plugged in a microphone ..."));
 	p.className = "error";
 	this.nodeDisabled.appendChild(p);
 
@@ -21,7 +21,7 @@ AudioAuthWidget.prototype.init = function() {
 	spinner.className = "spinner";
 	p.appendChild(spinner);
 
-	p.appendChild(document.createTextNode("Vous devez autoriser l’accès à votre carte son…"));
+	p.appendChild(document.createTextNode("You must allow access to your sound card ..."));
 	
 	this.node.appendChild(p);
 };

@@ -20,9 +20,9 @@
 
 {% block body %}
 	<article>
-		<h1>{% if auth and auth.getId() == user.getId() %}Mes enregistrements{% else %}Enregistrements de « {{ user.getUsername()|capitalize }} »{% endif %}</h1>
+		<h1>{% if auth and auth.getId() == user.getId() %}My recordings{% else %}Recordings of « {{ user.getUsername()|capitalize }} »{% endif %}</h1>
 		<div id="container"></div>
-		<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Télécharger</a>
+		<a href="{{ path("soundsDownload", {"userId": user.getId() }) }}"><img class="icon" src="{{ asset("img/download.png") }}"/> Download</a>
 	</article>
 {% endblock %}
 

@@ -41,6 +41,6 @@ RecorderWidget.prototype.onclick = function() {
 
 RecorderWidget.prototype.setState = function(value) {
 	this.state = value;
-	this.nodeButton.firstChild.nodeValue = value ? "Stop" : "Démarrer";
+	this.nodeButton.firstChild.nodeValue = value ? "Stop" : "Start";
 }
 

@@ -2,11 +2,11 @@
 
 {% block body %}
 <article>
-	<h1>Enregistrement :</h1>
+	<h1>Recording :</h1>
 
 	<table class="nice">
-		<tr><th>Locuteur</th><td>{% if sound.getIdiolect().getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getIdiolect().getSpeaker().getId()}) }}'>{{ sound.getIdiolect().getSpeaker().getName() }}</a>{% else %}-{% endif %}</td></tr>
-		<tr><th>Langue</th><td>{{ sound.getIdiolect().getLanguage().getTitle() }}</td></tr>
+		<tr><th>Speaker</th><td>{% if sound.getIdiolect().getSpeaker() %}<a href='{{ path('speakersShow', {'id': sound.getIdiolect().getSpeaker().getId()}) }}'>{{ sound.getIdiolect().getSpeaker().getName() }}</a>{% else %}-{% endif %}</td></tr>
+		<tr><th>Language</th><td>{{ sound.getIdiolect().getLanguage().getTitle() }}</td></tr>
 		<tr><th>Transcription</th><td>{{ sound.getText() }}</td></tr>
 		<tr><th>Date</th><td>{{ sound.getCreated()|date("d/m/Y")}}</td></tr>
 		{% if sound.getDescription() %}<tr><th>Description</th><td>{{ sound.getDescription() }}</td></tr>{% endif %}
@@ -15,10 +15,10 @@
 		{% if sound.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("soundsUpdate", {"id": sound.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("soundsDelete", {"id": sound.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
 	</table>
 	
-	<h2>Commentaires</h2>
+	<h2>Comments</h2>
 	
 	{% if comments|length==0 %}
-		<p>Aucun commentaire à afficher.</p>
+		<p>ANo comments to display.</p>
 	{% endif %}
 	
 	{% if comments|length>0 or user != null %}

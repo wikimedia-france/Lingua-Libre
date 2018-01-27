@@ -19,12 +19,12 @@ MultiRecorderWidget.prototype.createMenu = function() {
 	ul.className = "tabs";
 
 	var li = document.createElement("li");
-	li.appendChild(document.createTextNode("Enregistrement manuel"));
+	li.appendChild(document.createTextNode("Manual registration"));
 	li.onclick = function() { self.setContent(self.recorderWidget.node) };
 	ul.appendChild(li);
 
 	var li = document.createElement("li");
-	li.appendChild(document.createTextNode("Enregistrement par listing"));
+	li.appendChild(document.createTextNode("Registration by listing"));
 	li.onclick = function() { self.setContent(self.listingEditor.node) };
 	ul.appendChild(li);
 

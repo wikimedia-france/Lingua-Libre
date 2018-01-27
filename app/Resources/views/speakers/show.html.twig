@@ -2,28 +2,28 @@
 
 {% block body %}
 <article>
-	<h1>Locuteur</h1>
+	<h1>Speaker</h1>
 
 	<table class="nice">
-		<tr><th>Nom</th><td>{{ speaker.getName() }}</td></tr>
-		<tr><th>Sexe</th><td>{{ speaker.getSexSymbol() }} ({{ speaker.getSexTitle() }})</td></tr>
+		<tr><th>Name</th><td>{{ speaker.getName() }}</td></tr>
+		<tr><th>Sex</th><td>{{ speaker.getSexSymbol() }} ({{ speaker.getSexTitle() }})</td></tr>
 		<tr><th>Habitation</th><td>{{ speaker.getLivingCity() }} ({{ speaker.getLivingCountry() }})</td></tr>
-		<tr><th>Naissance</th><td>{{ speaker.getBirth()|date("d/m/Y") }}</td></tr>
+		<tr><th>Birth</th><td>{{ speaker.getBirth()|date("d/m/Y") }}</td></tr>
 		{% if speaker.getDescription() %}<tr><th>Description</th><td>{{ speaker.getDescription() }}</td></tr>{% endif %}
-		<tr><th>Licence</th><td>{% if speaker.getSignedDate() %}<a href="https://creativecommons.org/licenses/by-sa/4.0/"><span class="creativeCommons">CC-BY-SA 4.0</span></a> signée le {{ speaker.getSignedDate()|date("d/m/Y") }}{% else %}<a href="{{ path("speakersLicense", {"id": speaker.getId() }) }}">Non signée</a>{% endif %}</td></tr>
-		<tr><th>Utilisateur</th><td>{% if speaker.getUser() %}<a href="{{ path("usersShow", {"id": speaker.getUser().getId() }) }}">{{ speaker.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
+		<tr><th>License</th><td>{% if speaker.getSignedDate() %}<a href="https://creativecommons.org/licenses/by-sa/4.0/"><span class="creativeCommons">CC-BY-SA 4.0</span></a> signée le {{ speaker.getSignedDate()|date("d/m/Y") }}{% else %}<a href="{{ path("speakersLicense", {"id": speaker.getId() }) }}">Non signée</a>{% endif %}</td></tr>
+		<tr><th>User</th><td>{% if speaker.getUser() %}<a href="{{ path("usersShow", {"id": speaker.getUser().getId() }) }}">{{ speaker.getUser().getUsername()|capitalize }}</a>{% else %}-{% endif %}</td></tr>
 		{% if speaker.editableBy(user) %}<tr><th colspan="2" class="tools"><a href="{{ path("speakersUpdate", {"id": speaker.getId() }) }}"><img src="{{ asset("img/edit_24.png") }}" title="Modifier"/></a> <a href="{{ path("speakersDelete", {"id": speaker.getId() }) }}"><img src="{{ asset("img/delete_24.png") }}" title="Supprimer"/></a></th></tr>{% endif %}
 	</table>
 
-	<h2>Langues</h2>
+	<h2>Languages</h2>
 
 	{% if speaker.getIdiolects()|length > 0 %}
 		<table class="nice">
 		<tr>
 			<th></th>
-			<th>Variante</th>
-			<th>Lieu d’acquisition</th>
-			<th>Niveau</th>
+			<th>Dialect</th>
+			<th>Place</th>
+			<th>Level</th>
 			<th>Description</th>
 		</tr>
 		{% for idiolect in speaker.getIdiolects() %}
@@ -39,11 +39,11 @@
 			{% if speaker.editableBy(user) %}<tr><th><a href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}"><img src="{{ asset("img/add_24.png") }}" title="Ajouter"/></a></th></tr>{% endif %}
 
 		</table>
-		<p><em>Félicitations !</em> Vous pouvez désormais vous lancer dans une <em>session d’enregistrement</em> !</p>
-		<a class="button" href="{{ path('usersRecord', {"id":speaker.getUser().getId() }) }}">Aller dans le Studio d’enregistrement</a>
+		<p><em>Congratulations!</em> You can now start a <em>recording session</em> !</p>
+		<a class="button" href="{{ path('usersRecord', {"id":speaker.getUser().getId() }) }}">Go to the recording Studio</a>
 	{% else %}
-		<p>Ce locuteur n’a pas encore de langue définie. Vous allez devoir remplir une fiche d’information pour <em>chaque langue parlée</Em> par cette personne.</p>
-		{% if speaker.editableBy(user) %}<a class="button" href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">Étape 3 : Définir une langue</a>{% endif %}
+		<p>This speaker does not have a defined language yet. You will need to fill out an information sheet for <em> each spoken language </Em> by this person.</p>
+		{% if speaker.editableBy(user) %}<a class="button" href="{{ path("idiolectsAdd", {"id": speaker.getId() }) }}">Step 3 : Define a language</a>{% endif %}
 		</p>
 	{% endif %}
 </article>	

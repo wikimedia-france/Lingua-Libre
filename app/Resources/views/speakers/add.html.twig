@@ -2,25 +2,25 @@
 
 {% block body %}
 <article>
-	<h1>Nouveau locuteur :</h1>
+	<h1>New Speaker :</h1>
 
 	{{ form_start(form) }}
 	<table class="nice">
-		<tr><th>Nom</th><td>{{ form_widget(form.name) }}</td></tr>
-		<tr><th>Sexe</th><td>{{ form_widget(form.sex) }}</td></tr>
-		<tr><th>Naissance</th><td>{{ form_widget(form.birth) }}</td></tr>
+		<tr><th>Name</th><td>{{ form_widget(form.name) }}</td></tr>
+		<tr><th>Sex</th><td>{{ form_widget(form.sex) }}</td></tr>
+		<tr><th>Birth</th><td>{{ form_widget(form.birth) }}</td></tr>
 		<tr><th>Habitation</th><td>{{ form_widget(form.livingCountry, { 'attr': {'class': 'country'} }) }}{{ form_widget(form.livingCity) }}</td></tr>
 		<tr><th>Description</th><td>{{ form_widget(form.description) }}</td></tr>
-		<tr><th>Licence</th><td class="licence">
-			<div class="licenceHeader">Les sons enregistrés grâce au projet <span class="linguaLibre">Lingua Libre</span> seront publié sous une <a href="">licence libre</a>. Merci de prendre le temps de la lire.</div>
+		<tr><th>License</th><td class="licence">
+			<div class="licenceHeader">The sounds recorded by the <span class="linguaLibre">Lingua Libre</span> project will be published under a <a href="">free license</a>. Thank you for taking time to read it.</div>
 			<div class="licenceBloc">
 				{% include 'speakers/license.html.inc.twig' %}
-				<div><big>J’accepte la licence</big>{{ form_widget(form.signed) }}
-				<p><small>*Vous pouvez approuver la licence plus tard, mais vous devez le faire avant de commencer les enregistrements.</small></p>
+				<div><big>I accept the license</big>{{ form_widget(form.signed) }}
+				<p><small>*You can approve the license later, but you must do it before starting the recordings.</small></p>
 				</div>
 			</div>
 		</td></tr>
-		<tr><th colspan="2"><input type="submit" value="Créer le locuteur"/></th>
+		<tr><th colspan="2"><input type="submit" value="Create the speaker"/></th>
 	</table>
 	{{ form_end(form) }}
 </article>
