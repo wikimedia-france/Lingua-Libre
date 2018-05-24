@@ -1,5 +1,5 @@
 
-> (DEPRECATED) This page is for the 2016-2017 project
+> (DEPRECATED) This page is for the 2016-2017 project<br>
 > NEXT VERSION is on https://github.com/Lingua-Libre/
 
 # Lingua-Libre
