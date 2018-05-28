@@ -1,6 +1,6 @@
 
-> (DEPRECATED) This page is for the 2016-2017 project<br>
-> NEXT VERSION is on https://github.com/Lingua-Libre/
+# (DEPRECATED) This project is the (now archived) 2016-2017 version
+You can find the current version on https://github.com/Lingua-Libre/
 
 # Lingua-Libre
 [LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
