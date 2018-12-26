@@ -1,6 +1,6 @@
 
 # (DEPRECATED) This project is the (now archived) 2016-2017 version
-You can find the current version on https://github.com/Lingua-Libre/
+You can find the current version on https://github.com/Lingua-Libre/ and [LinguaLibre.fr](https://lingualibre.fr).
 
 # Lingua-Libre
 [LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
@@ -85,16 +85,6 @@ In order to provide very consistent, app-friendly files, the current functionali
 - [x] auto roll-back / do-again when saturation is detected
 - [x] consistent cut before / after the said words
 - [x] auto equalization for sound's level
-- [x] Download all audios by one speaker [#2](./issues/2)
-
-Wishlist ([primary](https://github.com/wikimedia-france/Lingua-Libre/issues?q=is%3Aissue+is%3Aopen+label%3Aimportant)) :
-- [ ] English UI [#13](./issues/13)
-- [ ] OAuth login [#31](./issues/31)
-- [ ] Auto-upload to commons [#33](./issues/33)
-
-Wishlist (secondary) :
-- [ ] Noise reduction [#29](./issues/29)
-- [ ] Fade-in / fade-out [#40](./issues/40)
 
 ## Equipment (recommendation)
 - Silent room / Recording studio
