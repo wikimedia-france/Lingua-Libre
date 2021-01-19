@@ -1,7 +1,7 @@
 ```diff
 ! ===========================================================================================
 ! DEPRECATED: This project is the (now archived) 2016-2017 version                           
-! You can find the current version on https://github.com/Lingua-Libre/ and [LinguaLibre.fr](https://lingualibre.fr).
+! You can find the current version on https://github.com/orgs/Lingua-Libre/ and [LinguaLibre.org](https://lingualibre.org).
 ! ===========================================================================================
 ```
 # Lingua-Libre
