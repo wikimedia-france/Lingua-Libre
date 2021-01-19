@@ -1,7 +1,9 @@
-
-# (DEPRECATED) This project is the (now archived) 2016-2017 version
-You can find the current version on https://github.com/Lingua-Libre/ and [LinguaLibre.fr](https://lingualibre.fr).
-
+```diff
+! ===========================================================================================
+! DEPRECATED: This project is the (now archived) 2016-2017 version                           
+! You can find the current version on https://github.com/Lingua-Libre/ and [LinguaLibre.fr](https://lingualibre.fr).
+! ===========================================================================================
+```
 # Lingua-Libre
 [LinguaLibre.fr](https://lingualibre.fr) – Massive Open Audio Recording is an opensource platform and 
 webapps created to ease mass recording of texts into clean, well cut, well named and apps friendly audio files. It is 
